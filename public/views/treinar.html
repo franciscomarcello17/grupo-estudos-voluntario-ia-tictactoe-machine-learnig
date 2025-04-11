@@ -1,0 +1,39 @@
+<div class="game-container">
+    <div>
+        <h2>Treinar IA</h2>
+        <p class="status-message">{{vm.mensagem}}</p>
+        
+        <div class="board">
+            <div class="cell" 
+                 ng-class="{'x': vm.tabuleiro[$index] === 'X', 'o': vm.tabuleiro[$index] === 'O'}" 
+                 ng-repeat="celula in vm.tabuleiro track by $index" 
+                 ng-click="vm.jogar($index)">
+                {{celula}}
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" ng-click="vm.resetarJogo()">
+            <i class="fas fa-redo"></i> Reiniciar Jogo
+        </button>
+    </div>
+    
+    <div class="control-panel">
+        <h3>Controles de Treinamento</h3>
+        <p>Jogador atual: <strong>{{vm.jogadorAtual}}</strong></p>
+        
+        <button class="btn btn-danger" ng-click="vm.limparIA()">
+            <i class="fas fa-trash"></i> Limpar IA
+        </button>
+        
+        <h3 style="margin-top: 2rem;">Jogadas Aprendidas</h3>
+        <p>Total: {{vm.jogadasAprendidas.length}}</p>
+        
+        <div ng-if="vm.jogadasAprendidas.length > 0" class="learned-moves">
+            <div ng-repeat="jogada in vm.jogadasAprendidas | limitTo:5" class="learned-move">
+                <div ng-bind-html="vm.formatarTabuleiro(jogada.EstadoTabuleiro)"></div>
+                <p>Posição: {{jogada.PosicaoEscolhida}}</p>
+                <p>Resultado: {{jogada.Resultado}}</p>
+            </div>
+        </div>
+    </div>
+</div>

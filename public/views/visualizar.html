@@ -1,0 +1,35 @@
+<div>
+    <h2>Dados de Aprendizado da IA</h2>
+    <p>Visualização completa de todas as jogadas aprendidas pela IA</p>
+    
+    <div ng-if="vm.carregando" class="loading">
+        <i class="fas fa-spinner fa-spin"></i> Carregando dados...
+    </div>
+    
+    <div ng-if="!vm.carregando && vm.jogadas.length === 0" class="no-data">
+        <i class="fas fa-database"></i>
+        <p>Nenhum dado de aprendizado disponível ainda.</p>
+        <p>Treine a IA na aba "Treinar IA" para começar.</p>
+    </div>
+    
+    <div ng-if="vm.jogadas.length > 0" class="data-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tabuleiro</th>
+                    <th>Posição Escolhida</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="jogada in vm.jogadas">
+                    <td>{{jogada.Id}}</td>
+                    <td ng-bind-html="vm.formatarTabuleiro(jogada.EstadoTabuleiro)"></td>
+                    <td>{{jogada.PosicaoEscolhida}}</td>
+                    <td>{{jogada.Resultado}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

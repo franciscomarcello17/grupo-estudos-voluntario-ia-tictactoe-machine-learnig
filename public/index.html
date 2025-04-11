@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="jogoDaVelhaApp" ng-controller="MainController as vm">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha IA - Aprendizado por Reforço</title>
+    
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="routes.js"></script>
+    <script src="controllers/TreinarController.js"></script>
+    <script src="controllers/JogarController.js"></script>
+    <script src="controllers/VisualizarController.js"></script>
+    <script src="services/ApiService.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>Jogo da Velha IA</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="#!/treinar" ng-class="{active: vm.isActive('/treinar')}">
+                    <i class="fas fa-graduation-cap"></i> Treinar IA
+                </a>
+                <a href="#!/jogar" ng-class="{active: vm.isActive('/jogar')}">
+                    <i class="fas fa-gamepad"></i> Jogar
+                </a>
+                <a href="#!/visualizar" ng-class="{active: vm.isActive('/visualizar')}">
+                    <i class="fas fa-database"></i> Visualizar Dados
+                </a>
+            </nav>
+        </header>
+
+        <main class="app-main" ng-view></main>
+
+        <footer class="app-footer">
+            <p>Sistema de Aprendizado por Reforço - © 2023</p>
+        </footer>
+    </div>
+</body>
+</html>

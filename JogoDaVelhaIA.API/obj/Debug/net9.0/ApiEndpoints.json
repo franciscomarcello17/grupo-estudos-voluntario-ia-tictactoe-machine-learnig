@@ -1,0 +1,64 @@
+[
+  {
+    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
+    "Method": "Get",
+    "RelativePath": "api/Aprendizado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
+    "Method": "Delete",
+    "RelativePath": "api/Aprendizado",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
+    "Method": "Post",
+    "RelativePath": "api/Aprendizado/treinar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jogada",
+        "Type": "JogoDaVelhaIA.DTOs.JogadaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhaIA.Controllers.BaseController",
+    "Method": "Get",
+    "RelativePath": "api/Base/jogadas-base",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhaIA.Controllers.BaseController",
+    "Method": "Post",
+    "RelativePath": "api/Base/jogar-com-base",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jogada",
+        "Type": "JogoDaVelhaIA.DTOs.JogadaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
