@@ -263,3 +263,376 @@ body {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
+
+.current-player {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.current-player.human {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.current-player.ia {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.cell.ai-move {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.cell:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+/* Estilos para a nova interface */
+.game-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.game-board {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.control-panel {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-gap: 8px;
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    border: 2px solid #e9ecef;
+}
+
+.cell:hover:not(.disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: #e9ecef;
+}
+
+.cell.x {
+    color: #4285f4;
+    border-color: #4285f4;
+}
+
+.cell.o {
+    color: #ea4335;
+    border-color: #ea4335;
+}
+
+.cell.win-cell {
+    background-color: rgba(52, 168, 83, 0.2);
+}
+
+.move-indicator {
+    position: absolute;
+    font-size: 3rem;
+}
+
+.player-turn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    font-weight: 500;
+    text-align: center;
+}
+
+.human-turn {
+    background-color: #e6f0fd;
+    color: #4285f4;
+    border-left: 4px solid #4285f4;
+}
+
+.ai-turn {
+    background-color: #fde8e6;
+    color: #ea4335;
+    border-left: 4px solid #ea4335;
+}
+
+.game-status {
+    float: right;
+    font-size: 1rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: normal;
+}
+
+.game-status.win {
+    background-color: #e6f4ea;
+    color: #34a853;
+}
+
+.game-status.lose {
+    background-color: #fce8e6;
+    color: #ea4335;
+}
+
+.game-status.draw {
+    background-color: #fef7e0;
+    color: #fbbc05;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #4285f4;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #f1f3f4;
+    color: #3c4043;
+}
+
+.btn-danger {
+    background-color: #ea4335;
+    color: white;
+}
+
+.btn-info {
+    background-color: #34a853;
+    color: white;
+}
+
+.btn:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Estilos para o painel de controle */
+.panel-header {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 1.5rem;
+}
+
+.stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #5f6368;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #202124;
+}
+
+.panel-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.learned-moves-container {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.learned-move {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #e9ecef;
+}
+
+.learned-move.win {
+    border-left-color: #34a853;
+    background-color: #e6f4ea;
+}
+
+.learned-move.lose {
+    border-left-color: #ea4335;
+    background-color: #fce8e6;
+}
+
+.learned-move.draw {
+    border-left-color: #fbbc05;
+    background-color: #fef7e0;
+}
+
+.move-board {
+    min-width: 100px;
+}
+
+.move-info {
+    flex: 1;
+}
+
+.move-info p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #5f6368;
+}
+
+.empty-state i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.data-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.data-filters input, .data-filters select {
+    padding: 0.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.game-tips {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #4285f4;
+}
+
+.game-tips h4 {
+    margin-bottom: 0.5rem;
+    color: #4285f4;
+}
+
+.game-tips ul {
+    padding-left: 1.2rem;
+}
+
+.game-tips li {
+    margin-bottom: 0.5rem;
+}
+
+/* Mini tabuleiro para visualização */
+.mini-tabuleiro {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 20px);
+    grid-gap: 2px;
+    font-size: 0.8rem;
+}
+
+.mini-celula {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.mini-celula.x {
+    color: #4285f4;
+}
+
+.mini-celula.o {
+    color: #ea4335;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+    }
+    
+    .control-panel {
+        max-width: 100%;
+    }
+    
+    .board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .cell {
+        width: 100%;
+        height: 80px;
+    }
+}

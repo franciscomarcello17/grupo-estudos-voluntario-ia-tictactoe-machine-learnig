@@ -1,44 +1,65 @@
+// Substitua todo o conteúdo do JogarController por:
 angular.module('jogoDaVelhaApp').controller('JogarController', 
-    ['$scope', 'ApiService', function($scope, ApiService) {
+    ['$scope', '$timeout', 'ApiService', function($scope, $timeout, ApiService) {
         var vm = this;
         
         vm.tabuleiro = ["", "", "", "", "", "", "", "", ""];
-        vm.jogadorAtual = "X";
+        vm.jogadorAtual = "X"; // Humano começa
         vm.mensagem = "";
         vm.carregando = false;
         
         vm.jogar = function(posicao) {
-            if (vm.tabuleiro[posicao] !== "" || vm.carregando) return;
+            if (vm.tabuleiro[posicao] !== "" || vm.carregando || vm.jogadorAtual !== 'X') return;
             
             // Jogada do humano
-            vm.tabuleiro[posicao] = vm.jogadorAtual;
+            vm.tabuleiro[posicao] = 'X';
             
             if (verificarFimDeJogo()) {
                 vm.mensagem = "Você venceu!";
-                setTimeout(vm.resetarJogo, 2000);
+                $timeout(vm.resetarJogo, 2000);
                 return;
             }
             
+            if (verificarEmpate()) {
+                vm.mensagem = "Empate!";
+                $timeout(vm.resetarJogo, 2000);
+                return;
+            }
+            
+            // Troca para IA
+            vm.jogadorAtual = 'O';
             vm.carregando = true;
             
-            // Jogada da IA
+            // IA joga após um delay
+            $timeout(function() {
+                jogadaIA();
+            }, 800);
+        };
+        
+        function jogadaIA() {
             ApiService.postJogarComBase(vm.tabuleiro.join(",")).then(function(response) {
                 var posicaoIA = response.data.PosicaoEscolhida;
                 
                 if (posicaoIA !== -1 && vm.tabuleiro[posicaoIA] === "") {
-                    vm.tabuleiro[posicaoIA] = "O";
+                    vm.tabuleiro[posicaoIA] = 'O';
                     
                     if (verificarFimDeJogo()) {
                         vm.mensagem = "A IA venceu!";
-                        setTimeout(vm.resetarJogo, 2000);
+                        $timeout(vm.resetarJogo, 2000);
+                    } else if (verificarEmpate()) {
+                        vm.mensagem = "Empate!";
+                        $timeout(vm.resetarJogo, 2000);
+                    } else {
+                        vm.jogadorAtual = 'X'; // Volta para o humano
                     }
                 }
             }).catch(function(error) {
-                vm.mensagem = "Erro ao jogar contra a IA: " + error.data;
+                console.error("Erro na IA:", error);
+                vm.mensagem = "A IA está com problemas. Tente novamente.";
             }).finally(function() {
                 vm.carregando = false;
             });
-        };
+        }
         
         function verificarFimDeJogo() {
             var linhas = [
@@ -53,8 +74,11 @@ angular.module('jogoDaVelhaApp').controller('JogarController',
                     return true;
                 }
             }
-            
-            return !vm.tabuleiro.includes("");
+            return false;
+        }
+        
+        function verificarEmpate() {
+            return !vm.tabuleiro.includes("") && !verificarFimDeJogo();
         }
         
         vm.resetarJogo = function() {

@@ -1,5 +1,5 @@
 angular.module('jogoDaVelhaApp').controller('TreinarController', 
-    ['$scope', '$interval', 'ApiService', function($scope, $interval, ApiService) {
+    ['$scope', '$timeout', 'ApiService', function($scope, $timeout, ApiService) {
         var vm = this;
         
         // Estado inicial
@@ -8,98 +8,148 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
         vm.jogadasAprendidas = [];
         vm.carregando = false;
         vm.mensagem = "";
+        vm.mostrarDicas = false;
+        vm.filtroTabuleiro = '';
+        vm.filtroResultado = '';
         
-        // Inicialização
         vm.init = function() {
             carregarJogadas();
-            // Atualizar a cada 5 segundos
-            $interval(carregarJogadas, 5000);
         };
         
         function carregarJogadas() {
+            vm.carregandoJogadas = true;
             ApiService.getAprendizado().then(function(response) {
-                vm.jogadasAprendidas = response.data;
+                vm.jogadasAprendidas = response.data || [];
+                console.log("Jogadas carregadas:", vm.jogadasAprendidas); // Para debug
+            }).catch(function(error) {
+                console.error("Erro ao carregar jogadas:", error);
+                vm.mensagem = "Erro ao carregar histórico de jogadas";
+                vm.jogadasAprendidas = [];
+            }).finally(function() {
+                vm.carregandoJogadas = false;
             });
         }
-        
-        // Lógica do jogo
+            
         vm.jogar = function(posicao) {
-            if (vm.tabuleiro[posicao] !== "" || vm.carregando) return;
+            // Validações mais simples
+            if (vm.carregando || vm.tabuleiro[posicao] !== "") return;
             
             // Jogada do humano
-            vm.tabuleiro[posicao] = vm.jogadorAtual;
+            vm.tabuleiro[posicao] = 'X';
             
-            // Verificar fim de jogo
-            if (verificarFimDeJogo()) {
+            // Verificar vitória ou empate
+            if (verificarVitoria('X')) {
                 registrarJogada("Vitoria");
                 return;
             }
             
-            // Trocar jogador
-            vm.jogadorAtual = vm.jogadorAtual === "X" ? "O" : "X";
-            vm.carregando = true;
+            if (verificarEmpate()) {
+                registrarJogada("Empate");
+                return;
+            }
             
-            // Jogada da IA
-            ApiService.postTreinar({
-                EstadoTabuleiro: vm.tabuleiro.join(","),
-                PosicaoEscolhida: posicao,
-                Resultado: ""
-            }).then(function() {
-                // IA faz sua jogada
-                return ApiService.postJogarComBase(vm.tabuleiro.join(","));
-            }).then(function(response) {
-                var posicaoIA = response.data.PosicaoEscolhida;
-                
-                if (posicaoIA !== -1 && vm.tabuleiro[posicaoIA] === "") {
-                    vm.tabuleiro[posicaoIA] = vm.jogadorAtual;
-                    
-                    if (verificarFimDeJogo()) {
-                        registrarJogada("Derrota");
-                    }
-                }
-                
-                vm.jogadorAtual = vm.jogadorAtual === "X" ? "O" : "X";
-            }).catch(function(error) {
-                vm.mensagem = "Erro ao comunicar com a IA: " + error.data;
-            }).finally(function() {
-                vm.carregando = false;
-            });
+            // Passar vez para IA
+            vm.carregando = true;
+            realizarJogadaIA();
         };
         
-        function verificarFimDeJogo() {
-            // Lógica de verificação de vitória/empate
+        function realizarJogadaIA() {
+            // Pequeno delay para melhor experiência
+            $timeout(function() {
+                ApiService.postJogarComBase(vm.tabuleiro.join(","))
+                    .then(function(response) {
+                        var posicaoIA = response.data.PosicaoEscolhida;
+                        
+                        // Fallback para jogada aleatória se necessário
+                        if (posicaoIA === -1 || vm.tabuleiro[posicaoIA] !== "") {
+                            posicaoIA = escolherJogadaAleatoria();
+                        }
+                        
+                        // Aplicar jogada da IA
+                        if (posicaoIA !== -1) {
+                            vm.tabuleiro[posicaoIA] = 'O';
+                            
+                            // Verificar resultado após jogada da IA
+                            if (verificarVitoria('O')) {
+                                registrarJogada("Derrota");
+                            } else if (verificarEmpate()) {
+                                registrarJogada("Empate");
+                            }
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error("Erro na IA:", error);
+                        // Jogada aleatória em caso de erro
+                        var posicaoIA = escolherJogadaAleatoria();
+                        if (posicaoIA !== -1) {
+                            vm.tabuleiro[posicaoIA] = 'O';
+                        }
+                    })
+                    .finally(function() {
+                        vm.carregando = false;
+                        $scope.$apply();
+                    });
+            }, 500);
+        }
+        
+        function escolherJogadaAleatoria() {
+            var posicoesVazias = [];
+            for (var i = 0; i < 9; i++) {
+                if (vm.tabuleiro[i] === "") {
+                    posicoesVazias.push(i);
+                }
+            }
+            return posicoesVazias.length > 0 ? 
+                posicoesVazias[Math.floor(Math.random() * posicoesVazias.length)] : 
+                -1;
+        }
+        
+        function verificarVitoria(jogador) {
             var linhas = [
                 [0, 1, 2], [3, 4, 5], [6, 7, 8], // linhas
                 [0, 3, 6], [1, 4, 7], [2, 5, 8], // colunas
                 [0, 4, 8], [2, 4, 6]             // diagonais
             ];
             
-            for (var i = 0; i < linhas.length; i++) {
-                var [a, b, c] = linhas[i];
-                if (vm.tabuleiro[a] && vm.tabuleiro[a] === vm.tabuleiro[b] && vm.tabuleiro[a] === vm.tabuleiro[c]) {
-                    return true;
-                }
-            }
-            
-            return !vm.tabuleiro.includes("");
-        }
-        
-        function registrarJogada(resultado) {
-            var jogada = {
-                EstadoTabuleiro: vm.tabuleiro.join(","),
-                PosicaoEscolhida: -1,
-                Resultado: resultado
-            };
-            
-            ApiService.postTreinar(jogada).then(function() {
-                vm.mensagem = "Jogo finalizado! Resultado: " + resultado;
-                setTimeout(function() {
-                    vm.resetarJogo();
-                    $scope.$apply();
-                }, 2000);
+            return linhas.some(function(linha) {
+                return linha.every(function(posicao) {
+                    return vm.tabuleiro[posicao] === jogador;
+                });
             });
         }
         
+        function verificarEmpate() {
+            return !vm.tabuleiro.includes("") && !verificarVitoria('X') && !verificarVitoria('O');
+        }
+        
+        function registrarJogada(resultado) {
+            ApiService.postTreinar({
+                EstadoTabuleiro: vm.tabuleiro.join(","),
+                PosicaoEscolhida: -1,
+                Resultado: resultado
+            }).then(function() {
+                vm.mensagem = "Jogo finalizado! Resultado: " + resultado;
+                carregarJogadas();
+                $timeout(vm.resetarJogo, 2000);
+            });
+        }
+        
+        vm.formatarTabuleiro = function(estado) {
+            if (!estado) return '';
+            var celulas = estado.split(',');
+            var html = '<div class="mini-tabuleiro">';
+            
+            for (var i = 0; i < 9; i++) {
+                var valor = celulas[i] || '&nbsp;';
+                var classe = celulas[i] === 'X' ? 'x' : (celulas[i] === 'O' ? 'o' : '');
+                html += `<div class="mini-celula ${classe}">${valor}</div>`;
+                if ((i + 1) % 3 === 0 && i < 8) html += '<br>';
+            }
+            
+            html += '</div>';
+            return html;
+        };
+    
         vm.resetarJogo = function() {
             vm.tabuleiro = ["", "", "", "", "", "", "", "", ""];
             vm.jogadorAtual = "X";

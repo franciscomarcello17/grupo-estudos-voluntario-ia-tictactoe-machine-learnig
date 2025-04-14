@@ -11,7 +11,10 @@
                 {{celula}}
             </div>
         </div>
-        
+        <div class="current-player" ng-class="{'human': vm.jogadorAtual === 'X', 'ia': vm.jogadorAtual === 'O'}">
+            <span ng-if="vm.jogadorAtual === 'X'">Sua vez (X)</span>
+            <span ng-if="vm.jogadorAtual === 'O'">IA pensando (O)...</span>
+        </div>
         <button class="btn btn-primary" ng-click="vm.resetarJogo()">
             <i class="fas fa-redo"></i> Reiniciar Jogo
         </button>
