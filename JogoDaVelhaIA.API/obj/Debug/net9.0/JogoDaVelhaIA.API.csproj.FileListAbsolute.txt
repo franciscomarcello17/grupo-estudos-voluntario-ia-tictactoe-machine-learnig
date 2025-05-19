@@ -62,10 +62,10 @@ C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\J
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.JogoDaVelhaIA.API.props
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.JogoDaVelhaIA.API.props
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\staticwebassets.pack.json
-C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\JogoDaVe.ECF01DCF.Up2Date
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\JogoDaVelhaIA.API.dll
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\refint\JogoDaVelhaIA.API.dll
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\JogoDaVelhaIA.API.pdb
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\JogoDaVelhaIA.API.genruntimeconfig.cache
 C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\ref\JogoDaVelhaIA.API.dll
+C:\Users\franc\Documents\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\JogoDaVelhaIA.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
