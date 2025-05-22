@@ -34,7 +34,7 @@
                 <tbody>
                     <tr ng-repeat="jogada in vm.jogadas | filter:searchText | orderBy:'-Id' | limitTo:100">
                         <td>{{jogada.id}}</td>
-                        <td ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></td>
+                        <td class="center-content" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></td>
                         <td>{{jogada.posicaoEscolhida}}</td>
                         <td>
                             <span class="result-badge" ng-class="{
