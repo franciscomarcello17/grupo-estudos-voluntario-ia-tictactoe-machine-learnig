@@ -29,8 +29,8 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 - [ ] Design responsivo para mobile/desktop
 
 ### 📊 Visualização de Dados
-- [ ] Estatísticas de vitórias/derrotas/empates
-- [ ] Visualização da tabela Q (simplificada)
+- [X] Visualização da tabela de jogadas aprendidas
+- [X] Filtros gerais
 
 ### 🛠️ Infraestrutura
 - [X] Controle de versão (GitHub)
