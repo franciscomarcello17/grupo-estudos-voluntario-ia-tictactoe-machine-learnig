@@ -13,10 +13,9 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 
 ### 🤖 Sistema de IA
 - [ ] Implementação do algoritmo de aprendizado por reforço
-- [ ] Tabela no banco para armazenar estados e recompensas
+- [X] Tabela no banco para armazenar estados e recompensas
 - [ ] Mecanismo de exploração vs explotação
-- [ ] Função de recompensa adequada
-- [ ] Persistência do modelo aprendido (localStorage)
+- [X] Persistência do modelo aprendido (localStorage)
 - [X] Botão para resetar o conhecimento da IA
 
 ### 🌐 Interface
