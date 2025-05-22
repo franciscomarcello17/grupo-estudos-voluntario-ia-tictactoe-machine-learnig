@@ -24,6 +24,6 @@ angular.module('jogoDaVelhaApp').config(['$routeProvider', function($routeProvid
             controllerAs: 'vm'
         })
         .otherwise({
-            redirectTo: '/sobre'
+            redirectTo: '/treinar'
         });
 }]);
