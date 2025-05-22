@@ -5,74 +5,55 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 ## ✅ Checklist de Funcionalidades
 
 ### � Componentes do Jogo
-- [ ] Tabuleiro 3x3 renderizado corretamente
+- [X] Tabuleiro 3x3 renderizado corretamente
 - [ ] Lógica básica do jogo da velha (turnos, vitória/empate)
-- [ ] Indicador de turno (jogador vs IA)
-- [ ] Feedback visual para jogadas válidas/inválidas
+- [X] Indicador de turno (jogador vs IA)
 - [ ] Animação de transição entre jogadas
 - [ ] Modal de fim de jogo (vitória/empate)
 
 ### 🤖 Sistema de IA
-- [ ] Implementação do algoritmo Q-Learning
-- [ ] Tabela Q para armazenar estados e recompensas
-- [ ] Mecanismo de exploração vs explotação (ε-greedy)
+- [ ] Implementação do algoritmo de aprendizado por reforço
+- [ ] Tabela no banco para armazenar estados e recompensas
+- [ ] Mecanismo de exploração vs explotação
 - [ ] Função de recompensa adequada
 - [ ] Persistência do modelo aprendido (localStorage)
-- [ ] Botão para resetar o conhecimento da IA
+- [X] Botão para resetar o conhecimento da IA
 
 ### 🌐 Interface
-- [ ] Página "Sobre o Projeto" com explicações
-- [ ] Página "Sobre o GEPIA" com informações do grupo
-- [ ] Menu de navegação funcional
+- [X] Página "Jogar" para jogar com a IA
+- [X] Página "Visualização de Dados" para visualização de jogadas armazenadas
+- [X] Página "Sobre o Projeto" com explicações
+- [X] Página "Sobre o GEPIA" com informações do grupo
+- [X] Menu de navegação funcional
+- [ ] Personalização com fotos e logos do GEPIA
 - [ ] Design responsivo para mobile/desktop
-- [ ] Temas claro/escuro (opcional)
 
 ### 📊 Visualização de Dados
-- [ ] Gráfico de aprendizado ao longo do tempo
 - [ ] Estatísticas de vitórias/derrotas/empates
 - [ ] Visualização da tabela Q (simplificada)
 
 ### 🛠️ Infraestrutura
-- [ ] Controle de versão (Git)
-- [ ] Hospedagem em GitHub Pages
-- [ ] Documentação básica
-- [ ] Licença aberta
-
-## 🚀 Como Executar
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/gepia-univille/jogo-da-velha-ia.git
-```
-
-2. Abra o arquivo `index.html` no seu navegador.
-
-## 🧠 Sobre a IA
-
-A IA utiliza **Aprendizado por Reforço** com os seguintes parâmetros:
-- Taxa de aprendizado (α): 0.3
-- Fator de desconto (γ): 0.9
-- Probabilidade de exploração (ε): 0.2 (decai com o tempo)
-
-```javascript
-// Exemplo da estrutura da tabela Q
-{
-  "state": "X--------",
-  "actions": {
-    "0": 0.5, // Posição 0 com valor Q atual
-    "1": 0.3,
-    // ...
-  }
-}
-```
+- [X] Controle de versão (GitHub)
+- [ ] Hospedagem
+- [X] Documentação básica
+- [X] Licença aberta (MIT)
 
 ## 🛠️ Tecnologias Utilizadas
 
-- AngularJS (para estrutura MVC)
-- JavaScript (lógica do jogo e IA)
-- HTML5/CSS3 (interface)
-- Chart.js (visualização de dados)
-- Git/GitHub (controle de versão)
+### Backend
+- **ASP.NET Core 9** — Framework robusto para desenvolvimento do backend.
+- **Entity Framework Core 9** — ORM para acesso e manipulação do banco de dados.
+- **SQL Server** — Banco de dados relacional para armazenamento dos modelos de IA e dados do sistema.
+- **Swagger** — Ferramenta para documentação e testes das APIs REST.
+
+### Frontend
+- **AngularJS** — Framework MVC para construção da interface web dinâmica.
+- **JavaScript** — Implementação da lógica do jogo e da inteligência artificial.
+- **HTML5 & CSS3** — Estrutura e estilo da interface do usuário.
+- **Chart.js** — Biblioteca para visualização gráfica dos dados.
+
+### Controle de Versão
+- **Git / GitHub** — Gestão do código-fonte e versionamento colaborativo.
 
 ## 🤝 Como Contribuir
 
@@ -85,7 +66,7 @@ A IA utiliza **Aprendizado por Reforço** com os seguintes parâmetros:
 ## 📧 Contato
 
 Grupo de Estudos para Inteligência Artificial - Univille  
-Email: gepia@univille.edu.br  
+Email: gepia.univille01gmail.com
 GitHub: [github.com/gepia-univille](https://github.com/gepia-univille)
 
 ## 📄 Licença
@@ -95,4 +76,3 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 ---
 
 Desenvolvido com ❤️ pelo GEPIA - 2025
-```
