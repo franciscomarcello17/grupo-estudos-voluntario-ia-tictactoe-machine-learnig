@@ -1,5 +1,5 @@
 angular.module('jogoDaVelhaApp').factory('ApiService', ['$http', function($http) {
-    const baseUrl = 'https://localhost:7193/api';
+    const baseUrl = 'https://backend-jogodavelhaia-dbbwbcfbgwhjcvgd.brazilsouth-01.azurewebsites.net/api';
     
     return {
         getAprendizado: function() {
