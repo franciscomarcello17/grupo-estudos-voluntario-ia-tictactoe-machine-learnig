@@ -118,6 +118,10 @@
           "resultado": {
             "type": "string",
             "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

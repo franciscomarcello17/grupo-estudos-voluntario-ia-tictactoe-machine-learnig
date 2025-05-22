@@ -1,5 +1,5 @@
 angular.module('jogoDaVelhaApp').factory('ApiService', ['$http', function($http) {
-    const baseUrl = 'https://localhost:7193/api'; // Substitua pela sua URL
+    const baseUrl = 'https://localhost:7193/api';
     
     return {
         getAprendizado: function() {

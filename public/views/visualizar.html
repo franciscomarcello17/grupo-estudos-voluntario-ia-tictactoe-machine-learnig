@@ -1,6 +1,6 @@
-<div>
-    <h2>Dados de Aprendizado da IA</h2>
-    <p>Visualização completa de todas as jogadas aprendidas pela IA</p>
+<div class="data-view">
+    <h2><i class="fas fa-database"></i> Dados de Aprendizado da IA</h2>
+    <p class="subtitle">Visualização completa de todas as jogadas aprendidas pela IA</p>
     
     <div ng-if="vm.carregando" class="loading">
         <i class="fas fa-spinner fa-spin"></i> Carregando dados...
@@ -12,24 +12,47 @@
         <p>Treine a IA na aba "Treinar IA" para começar.</p>
     </div>
     
-    <div ng-if="vm.jogadas.length > 0" class="data-container">
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tabuleiro</th>
-                    <th>Posição Escolhida</th>
-                    <th>Resultado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="jogada in vm.jogadas">
-                    <td>{{jogada.Id}}</td>
-                    <td ng-bind-html="vm.formatarTabuleiro(jogada.EstadoTabuleiro)"></td>
-                    <td>{{jogada.PosicaoEscolhida}}</td>
-                    <td>{{jogada.Resultado}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div ng-if="!vm.carregando && vm.jogadas.length > 0">
+        <div class="data-controls">
+            <input type="text" ng-model="searchText" placeholder="Filtrar jogadas...">
+            <span class="refresh-info">
+                <i class="fas fa-sync-alt"></i> Atualizando automaticamente
+            </span>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tabuleiro</th>
+                        <th>Posição</th>
+                        <th>Resultado</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="jogada in vm.jogadas | filter:searchText | orderBy:'-Id' | limitTo:100">
+                        <td>{{jogada.id}}</td>
+                        <td ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></td>
+                        <td>{{jogada.posicaoEscolhida}}</td>
+                        <td>
+                            <span class="result-badge" ng-class="{
+                                'win': jogada.resultado === 'Vitoria',
+                                'lose': jogada.resultado === 'Derrota',
+                                'draw': jogada.resultado === 'Empate'
+                            }">
+                                {{jogada.resultado}}
+                            </span>
+                        </td>
+                        <td>{{jogada.data | brasiliaDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="data-footer">
+            <p>Total de {{vm.jogadas.length}} jogadas registradas</p>
+        </div>
     </div>
 </div>

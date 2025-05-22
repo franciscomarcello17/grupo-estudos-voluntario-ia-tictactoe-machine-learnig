@@ -1,34 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\",
+  "WorkspaceRootPath": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\repositories\\jogadarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\repositories\\jogadarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\repositories\\ijogadarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\repositories\\ijogadarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\services\\jogadaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\services\\jogadaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\services\\jogadaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\controllers\\aprendizadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\controllers\\aprendizadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\controllers\\aprendizadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\repositories\\jogadarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\repositories\\jogadarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\dtos\\jogadarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\dtos\\jogadarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\dtos\\jogadaresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\dtos\\jogadaresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\models\\jogadaaprendida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\models\\jogadaaprendida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|c:\\users\\franc\\documents\\github\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\jogodavelhaia.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3335F182-C360-474D-8020-2AEAF6120598}|JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj|solutionrelative:jogodavelhaia.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 217,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,91 +74,145 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "JogoDaVelhaIA.API\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-14T18:33:39.288Z",
+              "DocumentIndex": 5,
+              "Title": "JogadaResponse.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\DTOs\\JogadaResponse.cs",
+              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\DTOs\\JogadaResponse.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\DTOs\\JogadaResponse.cs",
+              "RelativeToolTip": "JogoDaVelhaIA.API\\DTOs\\JogadaResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T03:13:33.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "JogadaAprendida.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Models\\JogadaAprendida.cs",
+              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Models\\JogadaAprendida.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Models\\JogadaAprendida.cs",
+              "RelativeToolTip": "JogoDaVelhaIA.API\\Models\\JogadaAprendida.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T03:07:26.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "JogadaRequest.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\DTOs\\JogadaRequest.cs",
+              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\DTOs\\JogadaRequest.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\DTOs\\JogadaRequest.cs",
+              "RelativeToolTip": "JogoDaVelhaIA.API\\DTOs\\JogadaRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T02:23:30.083Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "IJogadaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\IJogadaRepository.cs",
+              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Repositories\\IJogadaRepository.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\IJogadaRepository.cs",
+              "RelativeToolTip": "JogoDaVelhaIA.API\\Repositories\\IJogadaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T02:22:11.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JogadaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
+              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
+              "RelativeToolTip": "JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAcwBcAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T02:22:20.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "JogoDaVelhaIA.API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-14T18:33:39.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\appsettings.json",
               "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\appsettings.json",
               "RelativeToolTip": "JogoDaVelhaIA.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-04-14T18:33:31.347Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Program.cs",
               "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Program.cs",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Program.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Program.cs",
               "RelativeToolTip": "JogoDaVelhaIA.API\\Program.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAQwFAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAUwCwAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-14T18:33:26.764Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "JogadaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
-              "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
-              "RelativeToolTip": "JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T14:34:18.077Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "JogadaService.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Services\\JogadaService.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Services\\JogadaService.cs",
               "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Services\\JogadaService.cs",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Services\\JogadaService.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Services\\JogadaService.cs",
               "RelativeToolTip": "JogoDaVelhaIA.API\\Services\\JogadaService.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAgwCMAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAmwB8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-14T14:21:54.89Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "BaseController.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
               "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
               "RelativeToolTip": "JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T14:21:24.468Z"
+              "WhenOpened": "2025-04-14T14:21:24.468Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "AprendizadoController.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
               "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
-              "ToolTip": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
+              "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
               "RelativeToolTip": "JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAuwAwAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAADwvx4AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T14:14:43.275Z"
+              "WhenOpened": "2025-04-14T14:14:43.275Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -150,6 +220,14 @@
           "DockedHeight": 217,
           "SelectedChildIndex": -1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:24:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
@@ -162,11 +240,11 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         },

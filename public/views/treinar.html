@@ -27,8 +27,8 @@
                      ng-click="vm.jogar($index)"
                      ng-disabled="vm.carregando || vm.jogadorAtual !== 'X'">
                     {{celula}}
-                    <span class="move-indicator" ng-if="celula === 'X'">×</span>
-                    <span class="move-indicator" ng-if="celula === 'O'">○</span>
+                    <!-- <span class="move-indicator" ng-if="celula === 'X'">×</span>
+                    <span class="move-indicator" ng-if="celula === 'O'">○</span> -->
                 </div>
             </div>
         </div>
@@ -94,12 +94,12 @@
                 
                 <div ng-repeat="jogada in vm.jogadasAprendidas | filter:vm.filtroTabuleiro | filter:vm.filtroResultado | limitTo:5" 
                      class="learned-move" 
-                     ng-class="{'win': jogada.Resultado === 'Vitoria', 'lose': jogada.Resultado === 'Derrota', 'draw': jogada.Resultado === 'Empate'}">
-                    <div class="move-board" ng-bind-html="vm.formatarTabuleiro(jogada.EstadoTabuleiro)"></div>
+                     ng-class="{'win': jogada.resultado === 'Vitoria', 'lose': jogada.resultado === 'Derrota', 'draw': jogada.resultado === 'Empate'}">
+                    <div class="move-board" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></div>
                     <div class="move-info">
-                        <p><strong>Posição:</strong> {{jogada.PosicaoEscolhida}}</p>
-                        <p><strong>Resultado:</strong> {{jogada.Resultado}}</p>
-                        <p><strong>Data:</strong> {{jogada.Data | date:'short'}}</p>
+                        <p><strong>Posição:</strong> {{jogada.posicaoEscolhida}}</p>
+                        <p><strong>Resultado:</strong> {{jogada.resultado}}</p>
+                        <p><strong>Data:</strong> {{ jogada.data | brasiliaDate }}</p>
                     </div>
                 </div>
             </div>

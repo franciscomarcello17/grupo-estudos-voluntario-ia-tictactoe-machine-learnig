@@ -6,5 +6,6 @@
         public string EstadoTabuleiro { get; set; } = string.Empty;
         public int PosicaoEscolhida { get; set; }
         public string Resultado { get; set; } = string.Empty; // "Vitoria", "Derrota", "Empate"
+        public DateTime Data { get; set; }
     }
 }

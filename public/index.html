@@ -13,6 +13,7 @@
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.2/i18n/angular-locale_pt-br.js"></script>
     <script src="app.js"></script>
     <script src="routes.js"></script>
     <script src="controllers/TreinarController.js"></script>
@@ -29,10 +30,13 @@
             </div>
             <nav class="main-nav">
                 <a href="#!/treinar" ng-class="{active: vm.isActive('/treinar')}">
-                    <i class="fas fa-graduation-cap"></i> Treinar IA
-                </a>
-                <a href="#!/jogar" ng-class="{active: vm.isActive('/jogar')}">
                     <i class="fas fa-gamepad"></i> Jogar
+                </a>
+                <a href="#!/sobre" ng-class="{active: vm.isActive('/sobre')}">
+                    <i class="fas fa-info-circle"></i> Sobre o Projeto
+                </a>
+                <a href="#!/grupo" ng-class="{active: vm.isActive('/grupo')}">
+                    <i class="fas fa-users"></i> GEPIA
                 </a>
                 <a href="#!/visualizar" ng-class="{active: vm.isActive('/visualizar')}">
                     <i class="fas fa-database"></i> Visualizar Dados
@@ -43,7 +47,7 @@
         <main class="app-main" ng-view></main>
 
         <footer class="app-footer">
-            <p>Sistema de Aprendizado por Reforço - © 2023</p>
+            <p>Sistema de Aprendizado por Reforço - GEPIA 2025</p>
         </footer>
     </div>
 </body>

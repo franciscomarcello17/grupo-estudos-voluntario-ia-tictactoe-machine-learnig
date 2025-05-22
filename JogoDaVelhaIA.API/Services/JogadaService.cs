@@ -25,7 +25,8 @@ namespace JogoDaVelhaIA.Services
             {
                 EstadoTabuleiro = jogada.EstadoTabuleiro,
                 PosicaoEscolhida = jogada.PosicaoEscolhida,
-                Resultado = jogada.Resultado
+                Resultado = jogada.Resultado,
+                Data = jogada.Data
             };
 
             _repository.AddAprendida(novaJogada);
