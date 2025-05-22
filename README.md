@@ -25,6 +25,7 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 - [X] Página "Sobre o Projeto" com explicações
 - [X] Página "Sobre o GEPIA" com informações do grupo
 - [X] Menu de navegação funcional
+- [ ] Personalização com fotos e logos do GEPIA
 - [ ] Design responsivo para mobile/desktop
 
 ### 📊 Visualização de Dados
