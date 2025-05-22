@@ -67,7 +67,7 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 
 Grupo de Estudos para Inteligência Artificial - Univille  
 Email: gepia.univille01gmail.com
-GitHub: [github.com/gepia-univille](https://github.com/gepia-univille)
+GitHub: [github.com/gepia-univille](https://github.com/GepiaUniville)
 
 ## 📄 Licença
 
