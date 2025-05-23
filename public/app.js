@@ -22,11 +22,16 @@ angular.module('jogoDaVelhaApp', [
 .controller('MainController', ['$location', function($location) {
     var vm = this;
 
-    // Verifica se a rota atual corresponde à viewLocation
+    vm.menuAberto = false;
+
+    vm.toggleMenu = function () {
+        vm.menuAberto = !vm.menuAberto;
+    };
+
+        // Verifica se a rota atual corresponde à viewLocation
     vm.isActive = function(viewLocation) {
         return viewLocation === $location.path();
     };
-
     // Inicialização do controller
     vm.init = function() {
     };

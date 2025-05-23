@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="jogada in vm.jogadas | filter:searchText | orderBy:'-Id' | limitTo:100">
+                    <tr ng-repeat="jogada in vm.jogadas | filter:searchText | orderBy:'-data' | limitTo:100">
                         <td>{{jogada.id}}</td>
                         <td class="center-content" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></td>
                         <td>{{jogada.posicaoEscolhida}}</td>

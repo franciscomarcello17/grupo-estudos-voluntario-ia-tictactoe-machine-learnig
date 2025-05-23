@@ -82,8 +82,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\DTOs\\JogadaResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T03:13:33.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T03:13:33.585Z"
             },
             {
               "$type": "Document",
@@ -95,8 +94,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\Models\\JogadaAprendida.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T03:07:26.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T03:07:26.492Z"
             },
             {
               "$type": "Document",
@@ -108,8 +106,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\DTOs\\JogadaRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T02:23:30.083Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T02:23:30.083Z"
             },
             {
               "$type": "Document",
@@ -121,8 +118,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\Repositories\\IJogadaRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T02:22:11.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T02:22:11.466Z"
             },
             {
               "$type": "Document",
@@ -132,7 +128,7 @@
               "RelativeDocumentMoniker": "JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
               "ToolTip": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
               "RelativeToolTip": "JogoDaVelhaIA.API\\Repositories\\JogadaRepository.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAcwBcAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAIwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-22T02:22:20.251Z",
               "EditorCaption": ""
@@ -159,8 +155,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-14T18:33:31.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T18:33:31.347Z"
             },
             {
               "$type": "Document",
@@ -172,8 +167,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\Program.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAUwCwAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T18:33:26.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T18:33:26.764Z"
             },
             {
               "$type": "Document",
@@ -185,8 +179,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\Services\\JogadaService.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAmwB8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T14:21:54.89Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T14:21:54.89Z"
             },
             {
               "$type": "Document",
@@ -198,8 +191,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\Controllers\\BaseController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T14:21:24.468Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T14:21:24.468Z"
             },
             {
               "$type": "Document",
@@ -211,8 +203,7 @@
               "RelativeToolTip": "JogoDaVelhaIA.API\\Controllers\\AprendizadoController.cs",
               "ViewState": "AgIAABIAAAAAAAAAAADwvx4AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T14:14:43.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T14:14:43.275Z"
             }
           ]
         },

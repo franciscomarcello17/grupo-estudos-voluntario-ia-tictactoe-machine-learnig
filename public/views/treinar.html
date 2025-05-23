@@ -27,8 +27,6 @@
                      ng-click="vm.jogar($index)"
                      ng-disabled="vm.carregando || vm.jogadorAtual !== 'X'">
                     {{celula}}
-                    <!-- <span class="move-indicator" ng-if="celula === 'X'">×</span>
-                    <span class="move-indicator" ng-if="celula === 'O'">○</span> -->
                 </div>
             </div>
         </div>
@@ -54,25 +52,6 @@
     </div>
     
     <div class="control-panel">
-        <div class="panel-header">
-            <h3><i class="fas fa-cogs"></i> Controles de Treinamento</h3>
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-label">Jogadas aprendidas:</span>
-                    <span class="stat-value">{{vm.jogadasAprendidas.length}}</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="panel-actions">
-            <button class="btn btn-danger" ng-click="vm.limparIA()" ng-disabled="vm.carregando">
-                <i class="fas fa-trash"></i> Limpar Memória da IA
-            </button>
-            <button class="btn btn-info" ng-click="vm.exportarDados()">
-                <i class="fas fa-download"></i> Exportar Dados
-            </button>
-        </div>
-        
         <div class="learned-data">
             <h4><i class="fas fa-history"></i> Últimas Jogadas Aprendidas</h4>
             
@@ -92,7 +71,7 @@
                     <p>Nenhuma jogada aprendida ainda</p>
                 </div>
                 
-                <div ng-repeat="jogada in vm.jogadasAprendidas | filter:vm.filtroTabuleiro | filter:vm.filtroResultado | limitTo:5" 
+                <div ng-repeat="jogada in vm.jogadasAprendidas | filter:vm.filtroTabuleiro | orderBy:'-data' | filter:vm.filtroResultado | limitTo:5" 
                      class="learned-move" 
                      ng-class="{'win': jogada.resultado === 'Vitoria', 'lose': jogada.resultado === 'Derrota', 'draw': jogada.resultado === 'Empate'}">
                     <div class="move-board" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></div>
