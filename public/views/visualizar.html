@@ -14,10 +14,14 @@
     
     <div ng-if="!vm.carregando && vm.jogadas.length > 0">
         <div class="data-controls">
-            <input type="text" ng-model="searchText" placeholder="Filtrar jogadas...">
-            <span class="refresh-info">
+            <input type="text" ng-model="vm.searchText" ng-change="vm.paginaAtual = 1" placeholder="Filtrar jogadas...">
+            <!-- <span class="refresh-info">
                 <i class="fas fa-sync-alt"></i> Atualizando automaticamente
-            </span>
+            </span> -->
+            <div>
+                <label for="itensPorPagina">Itens por página: </label>
+                <select id="itensPorPagina" ng-model="vm.itensPorPagina" ng-options="op for op in vm.opcoesPorPagina" ng-change="vm.paginaAtual = 1"></select>
+            </div>
         </div>
         
         <div class="table-responsive">
@@ -32,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="jogada in vm.jogadas | filter:searchText | orderBy:'-data' | limitTo:100">
+                    <tr ng-repeat="jogada in vm.getJogadasPaginadas() | filter:searchText | orderBy:'-data'">
                         <td>{{jogada.id}}</td>
                         <td class="center-content" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></td>
                         <td>{{jogada.posicaoEscolhida}}</td>
@@ -54,5 +58,20 @@
         <div class="data-footer">
             <p>Total de {{vm.jogadas.length}} jogadas registradas</p>
         </div>
+<div class="pagination-controls">
+    <button ng-click="vm.paginaAnterior()" ng-disabled="vm.paginaAtual === 1">
+        &laquo; Anterior
+    </button>
+
+    <button ng-repeat="n in [].constructor(vm.totalPaginas()) track by $index"
+            ng-click="vm.irParaPagina($index + 1)"
+            ng-class="{'active-page': vm.paginaAtual === ($index + 1)}">
+        {{$index + 1}}
+    </button>
+
+    <button ng-click="vm.proximaPagina()" ng-disabled="vm.paginaAtual === vm.totalPaginas()">
+        Próxima &raquo;
+    </button>
+</div>
     </div>
 </div>
