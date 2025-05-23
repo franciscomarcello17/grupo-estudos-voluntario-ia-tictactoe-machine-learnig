@@ -21,29 +21,29 @@
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/treinar.css">
-    <link rel="stylesheet" href="css/infosPages.css">
-    <link rel="stylesheet" href="css/visualizar.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/treinar.css">
+    <link rel="stylesheet" href="/css/infosPages.css">
+    <link rel="stylesheet" href="/css/visualizar.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
     <script src="https://code.angularjs.org/1.8.2/i18n/angular-locale_pt-br.js"></script>
-    <script src="app.js"></script>
-    <script src="routes.js"></script>
-    <script src="controllers/TreinarController.js"></script>
-    <script src="controllers/JogarController.js"></script>
-    <script src="controllers/VisualizarController.js"></script>
-    <script src="services/ApiService.js"></script>
+    <script src="/app.js"></script>
+    <script src="/routes.js"></script>
+    <script src="/controllers/TreinarController.js"></script>
+    <script src="/controllers/JogarController.js"></script>
+    <script src="/controllers/VisualizarController.js"></script>
+    <script src="/services/ApiService.js"></script>
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
             <div class="logo">
-                <a href="#!/treinar">
-                <img src="assets/images/logo_cropped.png" alt="Logo Jogo da Velh-IA">
+                <a href="/treinar">
+                <img src="/assets/images/logo_cropped.png" alt="Logo Jogo da Velh-IA">
                 <h1>Jogo da Velh-IA</h1>
                 </a>
             </div>
@@ -51,16 +51,16 @@
                 <i class="fas fa-bars"></i>
             </div>
             <nav class="main-nav main-nav-desktop" ng-class="{active: vm.menuAberto}">
-                <a href="#!/treinar" ng-class="{active: vm.isActive('/treinar')}">
+                <a href="/treinar" ng-class="{active: vm.isActive('/treinar')}">
                     <i class="fas fa-gamepad"></i> Jogar
                 </a>
-                <a href="#!/sobre" ng-class="{active: vm.isActive('/sobre')}">
+                <a href="/sobre" ng-class="{active: vm.isActive('/sobre')}">
                     <i class="fas fa-info-circle"></i> Sobre o Projeto
                 </a>
-                <a href="#!/grupo" ng-class="{active: vm.isActive('/grupo')}">
+                <a href="/grupo" ng-class="{active: vm.isActive('/grupo')}">
                     <i class="fas fa-users"></i> GEPIA
                 </a>
-                <a href="#!/visualizar" ng-class="{active: vm.isActive('/visualizar')}">
+                <a href="/visualizar" ng-class="{active: vm.isActive('/visualizar')}">
                     <i class="fas fa-database"></i> Visualizar Dados
                 </a>
             </nav>
