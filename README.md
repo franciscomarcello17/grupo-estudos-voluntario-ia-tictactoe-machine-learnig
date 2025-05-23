@@ -1,4 +1,6 @@
-# Jogo da Velha com IA - Aprendizado por Reforço
+# Jogo da Velh-IA - Aprendizado por Reforço
+
+![Logo](public/assets/images/repository_image.png)  
 
 Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille) demonstrando Aprendizado por Reforço em um jogo da velha.
 
