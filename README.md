@@ -64,6 +64,46 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 4. Push para a branch (`git push origin feature/nova-feature`)
 5. Abra um Pull Request
 
+## Como Rodar a Aplicação Localmente
+
+### Rodar o Front-end (AngularJS)
+
+1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado.
+2. Instale o `live-server` globalmente para servir os arquivos estáticos:
+
+   ```bash
+   npm install -g live-server
+    ```
+
+3. Navegue até a pasta do front-end (exemplo: `public`):
+
+   ```bash
+   cd public
+   ```
+
+4. Execute o `live-server`, garantindo que a SPA funcione corretamente usando o arquivo de entrada `index.html`:
+
+   ```bash
+   live-server --entry-file=index.html
+   ```
+
+5. O front-end estará disponível normalmente em `http://127.0.0.1:8080` (ou outra porta que o live-server escolher).
+
+### Rodar o Back-end (API)
+
+1. Abra o terminal na pasta do projeto do back-end.
+
+2. Certifique-se de ter o [.NET 9 SDK](https://dotnet.microsoft.com/download) instalado.
+
+3. Restaure as dependências e rode o projeto:
+
+   ```bash
+   dotnet restore
+   dotnet run
+   ```
+
+4. A API estará disponível no endereço configurado (exemplo: `https://localhost:5001`).
+
 ## 📧 Contato
 
 Grupo de Estudos para Inteligência Artificial - Univille  
