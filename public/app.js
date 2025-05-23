@@ -3,11 +3,10 @@ angular.module('jogoDaVelhaApp', [
     'ngRoute'
 ])
 
-// Configuração para usar HTML5 Mode (URL sem hashbang)
-.config(['$locationProvider', '$sceProvider', function($locationProvider, $sceProvider) {
-    $locationProvider.html5Mode(true);
+// Configuração para desativar SCE (Strict Contextual Escaping)
+.config(function($sceProvider) {
     $sceProvider.enabled(false);
-}])
+})
 
 // Filtro personalizado para ajustar a data para o fuso de Brasília
 .filter('brasiliaDate', function($filter) {
@@ -29,11 +28,10 @@ angular.module('jogoDaVelhaApp', [
         vm.menuAberto = !vm.menuAberto;
     };
 
-    // Verifica se a rota atual corresponde à viewLocation
+        // Verifica se a rota atual corresponde à viewLocation
     vm.isActive = function(viewLocation) {
         return viewLocation === $location.path();
     };
-
     // Inicialização do controller
     vm.init = function() {
     };
