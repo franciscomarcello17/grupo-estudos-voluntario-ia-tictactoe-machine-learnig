@@ -34,10 +34,10 @@ body {
     color: var(--dark-color);
     line-height: 1.6;
     background: linear-gradient(135deg, #89f7fe, #66a6ff);
-    /* background-image: url('/background.jpg');
+    background-image: url('/assets/images/site_background.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; */
+    background-attachment: fixed;
 }
 
 .app-container {
