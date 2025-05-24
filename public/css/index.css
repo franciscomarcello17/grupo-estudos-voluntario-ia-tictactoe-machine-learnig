@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #4285f4;
+    --primary-color: #46B5B7;
     --secondary-color: #34a853;
     --danger-color: #ea4335;
     --warning-color: #fbbc05;
@@ -33,7 +33,7 @@ body {
     font-family: 'Roboto', sans-serif;
     color: var(--dark-color);
     line-height: 1.6;
-    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    /* background: linear-gradient(135deg, #89f7fe, #66a6ff); */
     background-image: url('/assets/images/site_background.png');
     background-size: cover;
     background-position: center;
@@ -78,10 +78,26 @@ body {
     gap: 0.5rem;
 }
 
-.logo h1 {
-    margin: 0;
+.logo-text {
     font-size: 1.5rem;
-    font-weight: 600;
+     font-weight: 600;
+     margin: 0;
+}
+
+.logo .velh,
+.logo .ia {
+    font-family: 'Fredoka One', cursive;
+    display: inline-block;
+    text-shadow: 1px 1px 2px #111918;
+    color: inherit;                     /* mantém o preenchimento personalizado */
+}
+
+.logo .velh {
+     color: #ffdf8e;
+}
+
+.logo .ia {
+  color: #46B5B7;
 }
 
 .main-nav {

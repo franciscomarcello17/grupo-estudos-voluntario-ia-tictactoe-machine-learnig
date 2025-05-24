@@ -26,6 +26,7 @@
 }
 
 .board {
+    font-family: 'Fredoka One', cursive;
     display: grid;
     grid-template-columns: repeat(3, 80px);
     grid-gap: 8px;
@@ -128,7 +129,7 @@
 }
 
 .btn-primary {
-    background-color: #4285f4;
+    background-color: var(--primary-color);
     color: white;
 }
 
@@ -276,12 +277,12 @@
     padding: 1rem;
     background-color: #f8f9fa;
     border-radius: 8px;
-    border-left: 4px solid #4285f4;
+    border-left: 4px solid var(--primary-color);
 }
 
 .game-tips h4 {
     margin-bottom: 0.5rem;
-    color: #4285f4;
+    color: var(--primary-color);
 }
 
 .game-tips ul {
@@ -294,6 +295,7 @@
 
 /* Mini tabuleiro para visualização */
 .mini-tabuleiro {
+    font-family: 'Fredoka One', cursive;
     display: grid;
     grid-template-columns: repeat(3, 20px); /* 3 colunas de 20px cada */
     grid-template-rows: repeat(3, 20px);    /* 3 linhas de 20px cada */
@@ -307,6 +309,8 @@
     width: 20px;
     height: 20px;
     border: 1px solid #ccc;
+        border-radius: 3px;
+
     font-weight: bold;
     font-size: 14px;
     user-select: none;

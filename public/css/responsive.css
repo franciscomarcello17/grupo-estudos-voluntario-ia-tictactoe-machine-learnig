@@ -1,49 +1,52 @@
-/* Responsividade */
-@media (max-width: 768px) {    
-    .control-panel {
-        max-width: 100%;
-    }
-    
-    .board {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
+    /* Responsividade */
+    @media (max-width: 768px) {    
+        .control-panel {
+            max-width: 100%;
+        }
+        
+        .board {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .game-board {
+            min-height: 504px;
+        }
 
-    .metrics-grid, .join-methods, .team-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .info-card {
-        padding: 1rem;
-    }
+        .metrics-grid, .join-methods, .team-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .info-card {
+            padding: 1rem;
+        }
 
-    .main-nav {
-        flex-direction: column;
-        transition: all 0.3s ease-in-out;
-        background-color: white;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        display: none; /* começa escondido */
-        padding: 1rem;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        z-index: 9999; /* <- ADICIONE ESTA LINHA */
-    }
+        .main-nav {
+            flex-direction: column;
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            display: none; /* começa escondido */
+            padding: 1rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999; /* <- ADICIONE ESTA LINHA */
+        }
 
-    .main-nav.active {
-        display: flex; /* aparece quando ativada */
-    }
+        .main-nav.active {
+            display: flex; /* aparece quando ativada */
+        }
 
-    .menu-toggle {
-        display: block;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: var(--dark-color);
-    }
+        .menu-toggle {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
 
-    /* Esconde a navegação padrão em mobile */
-    .main-nav-desktop {
-        display: none;
+        /* Esconde a navegação padrão em mobile */
+        .main-nav-desktop {
+            display: none;
+        }
     }
-}
