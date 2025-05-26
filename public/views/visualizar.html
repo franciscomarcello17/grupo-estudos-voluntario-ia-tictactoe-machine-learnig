@@ -58,20 +58,21 @@
         <div class="data-footer">
             <p>Total de {{vm.jogadas.length}} jogadas registradas</p>
         </div>
-<div class="pagination-controls">
-    <button ng-click="vm.paginaAnterior()" ng-disabled="vm.paginaAtual === 1">
-        &laquo; Anterior
-    </button>
+        <div class="pagination-controls">
+            <button ng-click="vm.paginaAnterior()" ng-disabled="vm.paginaAtual === 1">
+                &laquo;
+            </button>
 
-    <button ng-repeat="n in [].constructor(vm.totalPaginas()) track by $index"
-            ng-click="vm.irParaPagina($index + 1)"
-            ng-class="{'active-page': vm.paginaAtual === ($index + 1)}">
-        {{$index + 1}}
-    </button>
+            <button ng-repeat="pagina in vm.paginasVisiveis() track by $index"
+                    ng-click="pagina !== '...' && vm.irParaPagina(pagina)"
+                    ng-disabled="pagina === '...'"
+                    ng-class="{'active-page': vm.paginaAtual === pagina}">
+                {{pagina}}
+            </button>
 
-    <button ng-click="vm.proximaPagina()" ng-disabled="vm.paginaAtual === vm.totalPaginas()">
-        Próxima &raquo;
-    </button>
-</div>
+            <button ng-click="vm.proximaPagina()" ng-disabled="vm.paginaAtual === vm.totalPaginas()">
+                &raquo;
+            </button>
+        </div>
     </div>
 </div>

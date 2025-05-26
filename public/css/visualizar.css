@@ -153,3 +153,10 @@
     background-color: var(--secondary-color);
     font-weight: bold;
 }
+
+.pagination-controls button.active-page {
+    background-color: var(--secondary-color);
+    color: #000;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}

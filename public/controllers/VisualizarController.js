@@ -15,6 +15,12 @@ angular.module('jogoDaVelhaApp').controller('VisualizarController',
             vm.intervalPromise = $interval(carregarJogadas, 5000);
         };
         
+        vm.eMobile = window.innerWidth <= 768;
+
+        window.addEventListener('resize', function() {
+            vm.eMobile = window.innerWidth <= 768;
+        });
+
         function carregarJogadas() {
             ApiService.getAprendizado().then(function(response) {
                 vm.jogadas = response.data;
@@ -40,6 +46,47 @@ vm.getJogadasFiltradas = function() {
         var texto = JSON.stringify(jogada).toLowerCase();
         return texto.includes(vm.searchText.toLowerCase());
     });
+};
+
+vm.paginasVisiveis = function() {
+    var total = vm.totalPaginas();
+    var paginaAtual = vm.paginaAtual;
+    var maxPaginas = vm.eMobile ? 1 : 10;
+    var paginas = [];
+
+    if (total <= maxPaginas) {
+        for (var i = 1; i <= total; i++) {
+            paginas.push(i);
+        }
+    } else {
+        var inicio = Math.max(1, paginaAtual - Math.floor(maxPaginas / 2));
+        var fim = inicio + maxPaginas - 1;
+
+        if (fim > total) {
+            fim = total;
+            inicio = fim - maxPaginas + 1;
+        }
+
+        for (var i = inicio; i <= fim; i++) {
+            paginas.push(i);
+        }
+
+        if (inicio > 2) {
+            paginas.unshift('...');
+            paginas.unshift(1);
+        } else if (inicio === 2) {
+            paginas.unshift(1);
+        }
+
+        if (fim < total - 1) {
+            paginas.push('...');
+            paginas.push(total);
+        } else if (fim === total - 1) {
+            paginas.push(total);
+        }
+    }
+
+    return paginas;
 };
 
 vm.totalPaginas = function() {

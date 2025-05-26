@@ -75,4 +75,20 @@
     .main-nav-desktop {
         display: none;
     }
+    
+    .pagination-controls button[disabled] {
+        background-color: #eee;
+        color: #888;
+        cursor: default;
+    }
+
+        .pagination-controls {
+        flex-wrap: wrap;
+    }
+
+    .pagination-controls button {
+        font-size: 12px;
+        padding: 10px;
+    }
+
 }
