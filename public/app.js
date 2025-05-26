@@ -19,14 +19,24 @@ angular.module('jogoDaVelhaApp', [
     };
 })
 
-// Controller principal para funcionalidades compartilhadas
-.controller('MainController', ['$location', function($location) {
+.controller('MainController', ['$location', '$document', '$scope', function($location, $document, $scope) {
     var vm = this;
 
     vm.menuAberto = false;
 
-    vm.toggleMenu = function () {
-        vm.menuAberto = !vm.menuAberto;
+    // Alterna o estado do menu ou força fechar
+    vm.toggleMenu = function(forceClose) {
+        if (typeof forceClose === 'boolean') {
+            vm.menuAberto = forceClose;
+        } else {
+            vm.menuAberto = !vm.menuAberto;
+        }
+    };
+
+    // Fecha o menu ao navegar (quando um item é clicado)
+    vm.navigate = function() {
+        vm.toggleMenu(false); // Fecha o menu
+        // A navegação em si já será tratada pelo ng-href/ng-click
     };
 
     // Verifica se a rota atual corresponde à viewLocation
@@ -34,9 +44,25 @@ angular.module('jogoDaVelhaApp', [
         return viewLocation === $location.path();
     };
 
-    // Inicialização do controller
+    // Fecha o menu se clicar fora
+    function handleClickOutside(event) {
+        var menuToggle = angular.element(document.querySelector('.menu-toggle'))[0];
+        var mainNav = angular.element(document.querySelector('.main-nav'))[0];
+        
+        if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
+            $scope.$apply(function() {
+                vm.toggleMenu(false);
+            });
+        }
+    }
+
     vm.init = function() {
+        $document.on('click', handleClickOutside);
     };
+
+    $scope.$on('$destroy', function() {
+        $document.off('click', handleClickOutside);
+    });
 
     vm.init();
 }]);
