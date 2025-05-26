@@ -1,52 +1,78 @@
-    /* Responsividade */
-    @media (max-width: 768px) {    
-        .control-panel {
-            max-width: 100%;
-        }
-        
-        .board {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        
-        .game-board {
-            min-height: 504px;
-        }
-
-        .metrics-grid, .join-methods, .team-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .info-card {
-            padding: 1rem;
-        }
-
-        .main-nav {
-            flex-direction: column;
-            transition: all 0.3s ease-in-out;
-            background-color: white;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            display: none; /* começa escondido */
-            padding: 1rem;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            z-index: 9999; /* <- ADICIONE ESTA LINHA */
-        }
-
-        .main-nav.active {
-            display: flex; /* aparece quando ativada */
-        }
-
-        .menu-toggle {
-            display: block;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark-color);
-        }
-
-        /* Esconde a navegação padrão em mobile */
-        .main-nav-desktop {
-            display: none;
-        }
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+    .control-panel {
+        max-width: 100%;
     }
+
+    .board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .game-board {
+        min-height: 504px;
+    }
+
+    .metrics-grid,
+    .join-methods,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        padding: 1rem;
+    }
+
+    /* Navegação responsiva */
+    .main-nav {
+        flex-direction: column;
+        background-color: var(--light-color);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        display: none;
+        padding: 1rem 2rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .main-nav.active {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .main-nav a {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        background-color: transparent;
+        color: var(--gray-color);
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+
+    /* Botão de menu hamburguer */
+    .menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--dark-color);
+        transition: color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        color: var(--primary-color);
+    }
+
+    /* Oculta navegação padrão em telas pequenas */
+    .main-nav-desktop {
+        display: none;
+    }
+}
