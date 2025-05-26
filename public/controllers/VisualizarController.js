@@ -11,8 +11,8 @@ angular.module('jogoDaVelhaApp').controller('VisualizarController',
 
         vm.init = function() {
             carregarJogadas();
-            // Atualiza a cada 5 segundos (reduzido de 2 para melhor performance)
-            vm.intervalPromise = $interval(carregarJogadas, 5000);
+            // Atualiza a cada 60 segundos (se deixar menos, pode exceder limites do banco de dados)
+            vm.intervalPromise = $interval(carregarJogadas, 60000);
         };
         
         vm.eMobile = window.innerWidth <= 768;
