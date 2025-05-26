@@ -1,7 +1,7 @@
-/* Estilos para as páginas de informação (sobre/grupo)*/
+/* Estilo base para páginas de informação (sobre/grupo) */
 .content-page {
     padding: 2rem;
-    background: white;
+    background: var(--light-color);
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     margin: 2rem auto;
@@ -45,11 +45,18 @@
     gap: 0.5rem;
 }
 
-.info-card p, .info-card li {
+.info-card p,
+.info-card li {
     margin-bottom: 0.5rem;
     line-height: 1.6;
 }
 
+.info-card ul {
+    margin-left: 2rem;
+    list-style: disc;
+}
+
+/* Grid de métricas */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -77,6 +84,7 @@
     color: var(--gray-color);
 }
 
+/* Stack de tecnologias */
 .tech-stack {
     display: flex;
     flex-wrap: wrap;
@@ -96,6 +104,7 @@
     color: var(--gray-color);
 }
 
+/* Métodos de participação */
 .join-methods {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -131,6 +140,7 @@
     background: white;
 }
 
+/* Equipe */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -166,8 +176,4 @@
     color: var(--gray-color);
     font-size: 0.9rem;
     margin-bottom: 0.3rem;
-}
-
-.info-card ul {
-    margin-left: 30px; /* ou padding-left: 20px; */
 }
