@@ -23,7 +23,9 @@ angular.module('jogoDaVelhaApp').controller('VisualizarController',
 
         function carregarJogadas() {
             ApiService.getAprendizado().then(function(response) {
-                vm.jogadas = response.data;
+                vm.jogadas = response.data.sort(function(a, b) {
+                    return new Date(b.data) - new Date(a.data);
+                });
                 vm.carregando = false;
             }).catch(function(error) {
                 console.error("Erro ao carregar jogadas:", error);
