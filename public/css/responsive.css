@@ -82,8 +82,29 @@
         cursor: default;
     }
 
-        .pagination-controls {
+    .pagination-controls {
         flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .data-table th, .data-table td {
+        padding: 0.3rem;
+        font-size: 0.7rem;
+        white-space: normal;
+    }
+
+    .data-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }   
+
+    .data-controls input,
+    .data-controls select {
+        width: 100%;
     }
 
     .pagination-controls button {
