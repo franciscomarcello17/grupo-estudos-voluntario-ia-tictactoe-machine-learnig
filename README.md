@@ -11,14 +11,13 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 - [ ] Lógica básica do jogo da velha (turnos, vitória/empate)
 - [X] Indicador de turno (jogador vs IA)
 - [ ] Animação de transição entre jogadas
-- [ ] Modal de fim de jogo (vitória/empate)
+- [ ] Animações de fim de jogo (vitória/empate/derrota)
 
 ### 🤖 Sistema de IA
 - [ ] Implementação do algoritmo de aprendizado por reforço
 - [X] Tabela no banco para armazenar estados e recompensas
 - [ ] Mecanismo de exploração vs explotação
 - [X] Persistência do modelo aprendido (localStorage)
-- [X] Botão para resetar o conhecimento da IA
 
 ### 🌐 Interface
 - [X] Página "Jogar" para jogar com a IA
@@ -26,16 +25,17 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 - [X] Página "Sobre o Projeto" com explicações
 - [X] Página "Sobre o GEPIA" com informações do grupo
 - [X] Menu de navegação funcional
-- [ ] Personalização com fotos e logos do GEPIA
-- [ ] Design responsivo para mobile/desktop
+- [X] Personalização gráfica do jogo
+- [X] Design responsivo para mobile/desktop
 
 ### 📊 Visualização de Dados
 - [X] Visualização da tabela de jogadas aprendidas
 - [X] Filtros gerais
+- [X] Paginação
 
 ### 🛠️ Infraestrutura
 - [X] Controle de versão (GitHub)
-- [ ] Hospedagem
+- [X] Hospedagem
 - [X] Documentação básica
 - [X] Licença aberta (MIT)
 
@@ -51,7 +51,6 @@ Um projeto do GEPIA (Grupo de Estudos para Inteligência Artificial da Univille)
 - **AngularJS** — Framework MVC para construção da interface web dinâmica.
 - **JavaScript** — Implementação da lógica do jogo e da inteligência artificial.
 - **HTML5 & CSS3** — Estrutura e estilo da interface do usuário.
-- **Chart.js** — Biblioteca para visualização gráfica dos dados.
 
 ### Controle de Versão
 - **Git / GitHub** — Gestão do código-fonte e versionamento colaborativo.
