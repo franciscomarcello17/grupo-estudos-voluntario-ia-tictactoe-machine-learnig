@@ -39,16 +39,15 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
             
             // Faz a jogada do humano
             vm.tabuleiro[posicao] = 'X';
-            vm.ultimaJogada = posicao;
             // Verifica se o humano venceu
             if (verificarVitoria('X')) {
-                finalizarJogo("Vitoria");
+                finalizarJogo("Vitoria", posicao);
                 return;
             }
             
             // Verifica empate
             if (verificarEmpate()) {
-                finalizarJogo("Empate");
+                finalizarJogo("Empate", posicao);
                 return;
             }
             
@@ -63,8 +62,8 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
             $timeout(function() {
                 ApiService.postJogarComBase(vm.tabuleiro.join(","))
                     .then(function(response) {
-                        var posicaoIA = response.data.PosicaoEscolhida;
-                        
+                        var posicaoIA = response.data.posicaoEscolhida;
+                        console.log("Jogada da IA:", posicaoIA);
                         // Fallback para jogada aleatória se necessário
                         if (posicaoIA === -1 || vm.tabuleiro[posicaoIA] !== "") {
                             posicaoIA = escolherJogadaAleatoria();
@@ -76,9 +75,9 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
                             
                             // Verifica o resultado após jogada da IA
                             if (verificarVitoria('O')) {
-                                finalizarJogo("Derrota");
+                                finalizarJogo("Derrota", posicaoIA);
                             } else if (verificarEmpate()) {
-                                finalizarJogo("Empate");
+                                finalizarJogo("Empate", posicaoIA);
                             } else {
                                 vm.jogadorAtual = 'X';
                             }
@@ -93,9 +92,9 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
 
                             // Verifica o resultado após jogada da IA
                             if (verificarVitoria('O')) {
-                                finalizarJogo("Derrota");
+                                finalizarJogo("Derrota", posicaoIA);
                             } else if (verificarEmpate()) {
-                                finalizarJogo("Empate");
+                                finalizarJogo("Empate", posicaoIA);
                             } else {
                                 vm.jogadorAtual = 'X';
                             }
@@ -142,11 +141,8 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
         }
         
         // Finaliza o jogo e registra o resultado
-        function finalizarJogo(resultado) {
-            if (vm.jogadorAtual === 'X') {
-            } else if (vm.jogadorAtual === 'O') {
-                vm.ultimaJogada = vm.tabuleiro[posicaoIA];}
-
+        function finalizarJogo(resultado, posicao) {
+            vm.ultimaJogada = posicao;
             vm.mensagem = resultado === "Vitoria" ? "Você venceu!" : 
                           resultado === "Derrota" ? "IA venceu!" : "Empate!";
             
