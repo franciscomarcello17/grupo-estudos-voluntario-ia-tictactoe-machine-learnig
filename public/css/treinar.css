@@ -46,10 +46,25 @@
     border: 2px solid #e9ecef;
 }
 
-.cell:hover:not(.disabled) {
+/* Hover para células normais */
+.cell:hover:not(.disabled):not(.win-cell):not(.lose-cell) {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     background-color: #e9ecef;
+}
+
+/* Hover para células de vitória */
+.cell.win-cell:hover:not(.disabled) {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 5px 15px rgba(33, 241, 89, 0.3);
+    background-color: rgba(33, 241, 89, 0.4);
+}
+
+/* Hover para células de derrota */
+.cell.lose-cell:hover:not(.disabled) {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+    background-color: rgba(255, 0, 0, 0.4);
 }
 
 .cell.x {
@@ -63,7 +78,18 @@
 }
 
 .cell.win-cell {
-    background-color: rgba(52, 168, 83, 0.2);
+    background-color: rgba(107, 238, 142, 0.351);
+    animation: pulse 0.5s ease infinite;
+}
+
+.cell.lose-cell {
+    background-color: rgba(255, 0, 0, 0.351);
+    animation: pulse 0.5s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .player-turn {

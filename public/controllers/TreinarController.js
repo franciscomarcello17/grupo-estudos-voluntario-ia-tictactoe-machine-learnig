@@ -4,6 +4,8 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
         
         // Estado inicial do jogo
         vm.tabuleiro = ["", "", "", "", "", "", "", "", ""];
+        vm.celulasVencedoras = [];
+        vm.ultimaJogada = null;
         vm.jogadorAtual = "X";
         vm.jogadasAprendidas = [];
         vm.carregando = false;
@@ -63,7 +65,6 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
                 ApiService.postJogarComBase(vm.tabuleiro.join(","))
                     .then(function(response) {
                         var posicaoIA = response.data.posicaoEscolhida;
-                        console.log("Jogada da IA:", posicaoIA);
                         // Fallback para jogada aleatória se necessário
                         if (posicaoIA === -1 || vm.tabuleiro[posicaoIA] !== "") {
                             posicaoIA = escolherJogadaAleatoria();
@@ -104,7 +105,7 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
                     .finally(function() {
                         vm.carregando = false;
                     });
-            }, 500); // Delay para melhor experiência
+            }, 750); // Delay para melhor experiência
         }
         
         // Escolhe uma jogada aleatória para a IA
@@ -127,12 +128,18 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
                 [0, 3, 6], [1, 4, 7], [2, 5, 8], // colunas
                 [0, 4, 8], [2, 4, 6]             // diagonais
             ];
-            
             return linhas.some(function(linha) {
-                return linha.every(function(posicao) {
+                var linhaCompleta = linha.every(function(posicao) {
                     return vm.tabuleiro[posicao] === jogador;
                 });
-            });
+                
+                if (linhaCompleta) {
+                    vm.celulasVencedoras = linha;
+                    vm.jogadorVencedor = jogador;
+                }
+                
+                return linhaCompleta;
+            });            
         }
         
         // Verifica se o jogo terminou em empate
@@ -369,6 +376,8 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
         // Reinicia o jogo
         vm.resetarJogo = function() {
             vm.tabuleiro = ["", "", "", "", "", "", "", "", ""];
+            vm.celulasVencedoras = [];
+            vm.ultimaJogada = null;
             vm.jogadorAtual = "X";
             vm.mensagem = "";
             vm.carregando = false;

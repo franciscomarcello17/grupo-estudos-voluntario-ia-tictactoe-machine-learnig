@@ -22,12 +22,15 @@
         <div class="board-container">
             <div class="board">
                 <div class="cell" 
-                     ng-class="{'x': vm.tabuleiro[$index] === 'X', 'o': vm.tabuleiro[$index] === 'O', 'win-cell': vm.celulaVencedora($index)}"
+                     ng-class="{'x': vm.tabuleiro[$index] === 'X',
+                                'o': vm.tabuleiro[$index] === 'O',
+                                'win-cell': vm.celulasVencedoras && vm.celulasVencedoras.includes($index) && vm.jogadorVencedor === 'X',
+                                'lose-cell': vm.celulasVencedoras && vm.celulasVencedoras.includes($index) && vm.jogadorVencedor === 'O'}"
                      ng-repeat="celula in vm.tabuleiro track by $index" 
                      ng-click="vm.jogar($index)"
                      ng-disabled="vm.carregando || vm.jogadorAtual !== 'X'">
                     {{celula}}
-                </div>
+                </div>  
             </div>
         </div>
         
