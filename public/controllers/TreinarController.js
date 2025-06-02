@@ -156,6 +156,8 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
             // Disparar confetes se o jogador vencer
             if (resultado === "Vitoria") {
                 dispararConfetes();
+            } else if (resultado === "Derrota") {
+                chuvaDeEmojisTristes();
             }
             
             registrarJogada(resultado);
@@ -344,7 +346,42 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
             }
             
             frame();
-        }        
+        }
+        
+        // Função para chuva de emojis tristes
+        function chuvaDeEmojisTristes() {
+            const emojis = ["😞", "😔", "😢", "😭", "☹️"];
+            const quantidade = 100;
+            const duracaoAnimacao = 3000; // duração da queda em ms (5 segundos)
+
+            for (let i = 0; i < quantidade; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.position = 'fixed';
+                    emoji.style.left = Math.random() * 100 + 'vw';  // espalha em toda a largura da tela
+                    emoji.style.top = '-2em';
+                    emoji.style.fontSize = `${Math.random() * 24 + 24}px`;
+                    emoji.style.opacity = Math.random() * 0.5 + 0.5; // entre 0.5 e 1
+                    emoji.style.zIndex = 9999;
+                    emoji.style.pointerEvents = 'none';
+                    emoji.style.transition = `transform ${duracaoAnimacao}ms ease-in`;
+
+                    document.body.appendChild(emoji);
+
+                    // Força o reflow antes de aplicar a animação
+                    void emoji.offsetWidth;
+
+                    emoji.style.transform = `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`;
+
+                    // Remove o emoji após a animação
+                    setTimeout(() => {
+                        emoji.remove();
+                    }, duracaoAnimacao);
+                }, i * 30);  // espaça a criação de cada emoji em 150ms
+            }
+        }
+        
         // Registra a jogada no backend
         function registrarJogada(resultado) {
             ApiService.postTreinar({
