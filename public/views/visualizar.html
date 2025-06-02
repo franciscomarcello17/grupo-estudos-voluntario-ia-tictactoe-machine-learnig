@@ -36,7 +36,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="jogada in vm.getJogadasPaginadas() | filter:searchText">
+                    <tr ng-class="{
+                                'win': jogada.resultado === 'Vitoria',
+                                'lose': jogada.resultado === 'Derrota',
+                                'draw': jogada.resultado === 'Empate'
+                            }"
+                        ng-repeat="jogada in vm.getJogadasPaginadas() | filter:searchText">
                         <td>{{jogada.id}}</td>
                         <td class="center-content" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></td>
                         <td>{{jogada.posicaoEscolhida}}</td>
