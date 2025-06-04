@@ -15,6 +15,7 @@
     .metrics-grid,
     .join-methods,
     .team-grid {
+        display:block;
         grid-template-columns: 1fr;
     }
 

@@ -23,6 +23,11 @@ angular.module('jogoDaVelhaApp').config(['$routeProvider', function($routeProvid
             controller: 'VisualizarController',
             controllerAs: 'vm'
         })
+        .when('/sobre', {
+            templateUrl: 'views/sobre.html',
+            controller: 'SobreController',
+            controllerAs: 'vm'
+        })
         .otherwise({
             redirectTo: '/treinar'
         });
