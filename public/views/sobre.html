@@ -101,55 +101,182 @@
             </div>
         </div>
         
-        <!-- Seção Padronização de Dados -->
-        <div class="info-section" ng-show="vm.isActiveSection('data')">
-            <div class="info-card">
-                <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
-                <p>Para otimizar o aprendizado, padronizamos a representação do tabuleiro:</p>
-                
-                <ul>
-                    <li>Usamos 1 para representar o jogador atual (X)</li>
-                    <li>-1 para representar o oponente (O)</li>
-                    <li>0 para representar espaços vazios</li>
-                </ul>
-                
-                <p>Essa representação numérica facilita os cálculos matemáticos e comparações durante o aprendizado.</p>
+<!-- Seção Padronização de Dados -->
+<div class="info-section" ng-show="vm.isActiveSection('data')">
+    <div class="info-card">
+        <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
+        <p>Para otimizar o aprendizado, padronizamos a representação do tabuleiro:</p>
+        
+        <ul>
+            <li>Usamos <strong>1</strong> para representar o jogador atual (X)</li>
+            <li><strong>-1</strong> para representar o oponente (O)</li>
+            <li><strong>0</strong> para representar espaços vazios</li>
+        </ul>
+        
+        <div class="conversion-example">
+            <h3><i class="fas fa-exchange-alt"></i> Exemplo de Conversão</h3>
+            <div class="conversion-grid">
+                <div>
+                    <p>Tabuleiro Original:</p>
+                    <div class="mini-tabuleiro">
+                        <div class="mini-celula x">X</div>
+                        <div class="mini-celula"></div>
+                        <div class="mini-celula o">O</div>
+                        <div class="mini-celula"></div>
+                        <div class="mini-celula x">X</div>
+                        <div class="mini-celula"></div>
+                        <div class="mini-celula o">O</div>
+                        <div class="mini-celula"></div>
+                        <div class="mini-celula x">X</div>
+                    </div>
+                </div>
+                <div class="arrow">→</div>
+                <div>
+                    <p>Representação Numérica:</p>
+                    <pre class="numeric-board">[
+  [1, 0, -1],
+  [0, 1, 0],
+  [-1, 0, 1]
+]</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="fas fa-sync-alt"></i> Rotação e Espelhamento</h2>
+        <p>Para reduzir o espaço de estados, consideramos equivalentes todas as variações por rotação ou espelhamento:</p>
+        
+        <div class="transformations-grid">
+            <div class="transformation-group">
+                <h3>Original</h3>
+                <div class="mini-tabuleiro">
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula"></div>
+                </div>
+                <pre class="numeric-board">[
+  [1, 0, 0],
+  [-1, 1, 0],
+  [0, -1, 0]
+]</pre>
             </div>
             
-            <div class="info-card">
-                <h2><i class="fas fa-sync-alt"></i> Rotação e Espelhamento</h2>
-                <p>Para reduzir o espaço de estados e acelerar o aprendizado, implementamos:</p>
-                
-                <ul>
-                    <li><strong>Rotações:</strong> Consideramos equivalentes tabuleiros rotacionados em 90°, 180° e 270°</li>
-                    <li><strong>Espelhamento:</strong> Tabuleiros espelhados horizontal ou verticalmente são tratados como equivalentes</li>
-                </ul>
-                
-                <p>Isso reduz significativamente o número de estados únicos que a IA precisa aprender, de 26.830 para aproximadamente 1.500 estados essenciais.</p>
-                
-                <div class="info-card" style="background: #eef7ff;">
-                    <h3><i class="fas fa-lightbulb"></i> Exemplo de Equivalência</h3>
-                    <p>Os seguintes tabuleiros são considerados equivalentes:</p>
-                    <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 1rem;">
-                        <div>
-                            <p>Original:</p>
-                            <pre style="background: white; padding: 0.5rem; border-radius: 5px;">
-[1, 0, 0]
-[0, -1, 0]
-[0, 0, 0]</pre>
+            <div class="transformation-group">
+                <h3>Rotações</h3>
+                <div class="rotation-examples">
+                    <div>
+                        <p>90°</p>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
                         </div>
-                        <div>
-                            <p>Rotacionado 90°:</p>
-                            <pre style="background: white; padding: 0.5rem; border-radius: 5px;">
-[0, 0, 1]
-[0, -1, 0]
-[0, 0, 0]</pre>
+                    </div>
+                    <div>
+                        <p>180°</p>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>270°</p>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <div class="transformation-group">
+                <h3>Espelhamentos</h3>
+                <div class="mirror-examples">
+                    <div>
+                        <p>Horizontal</p>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Vertical</p>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="transformation-group canonical">
+                <h3>Estado Canônico</h3>
+                <p>O sistema converte automaticamente para a forma canônica:</p>
+                <div class="mini-tabuleiro">
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula"></div>
+                </div>
+                <pre class="numeric-board">[
+  [1, 0, 0],
+  [0, 1, -1],
+  [0, -1, 0]
+]</pre>
+                <p class="note">(Menor valor hash entre todas as transformações possíveis)</p>
+            </div>
         </div>
         
+        <p class="summary">Esta abordagem reduz o número de estados únicos de 26.830 para aproximadamente 1.500 estados essenciais, acelerando significativamente o aprendizado.</p>
+    </div>
+</div>
+   
         <!-- Seção Tecnologias -->
         <div class="info-section" ng-show="vm.isActiveSection('tech')">
             <div class="info-card">
@@ -227,7 +354,7 @@
                         </div>
                         <h3>Francisco Marcello Ribeiro Lima</h3>
                         <p>Desenvolvedor Full-Stack</p>
-                        <p>Back, Front, IA e Infra</p>
+                        <p>Desenvolvedor do Projeto</p>
                     </div>
                     
                     <div class="team-member">
@@ -288,10 +415,6 @@
         color: white;
     }
     
-    .info-section {
-        /* display: none; */
-    }
-
     .info-section.active {
         display: block;
     }    
@@ -323,4 +446,77 @@
             grid-template-columns: repeat(2, 1fr);
         }
     }
-</style>
+.conversion-example {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.conversion-grid {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.arrow {
+    font-size: 24px;
+    color: #666;
+}
+
+.numeric-board {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    margin: 10px 0;
+    white-space: pre-wrap;
+}
+
+.transformations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.transformation-group {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.rotation-examples, .mirror-examples {
+    display: flex;
+    gap: 15px;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.transformation-group h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.transformation-group.canonical {
+    grid-column: span 2;
+    background: #e8f4fd;
+    border: 1px solid #cce0f5;
+}
+
+.note {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.summary {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e8f5e9;
+    border-radius: 5px;
+    border-left: 4px solid #4caf50;
+}
+</style>     
