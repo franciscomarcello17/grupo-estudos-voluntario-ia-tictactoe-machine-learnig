@@ -1,56 +1,326 @@
-<div class="content-page">
+<div class="content-page" ng-controller="SobreController as vm">
     <div class="page-header">
-        <h1><i class="fas fa-info-circle"></i> Sobre o Projeto</h1>
-        <p>Conheça a ideia por trás do projeto Jogo da Velh-IA</p>
+        <h1><i class="fas fa-info-circle"></i> Sobre o Projeto Jogo da Velh-IA</h1>
+        <p>Um projeto do Grupo de IA da Univille demonstrando Aprendizado por Reforço na prática</p>
     </div>
     
+    <!-- Menu de navegação -->
+    <div class="info-nav">
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('idea')}" 
+                ng-click="vm.setActiveSection('idea')">
+            <i class="fas fa-lightbulb"></i> Ideia do Projeto
+        </button>
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('rl')}" 
+                ng-click="vm.setActiveSection('rl')">
+            <i class="fas fa-brain"></i> Aprendizado por Reforço
+        </button>
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('data')}" 
+                ng-click="vm.setActiveSection('data')">
+            <i class="fas fa-database"></i> Padronização de Dados
+        </button>
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('tech')}" 
+                ng-click="vm.setActiveSection('tech')">
+            <i class="fas fa-code"></i> Tecnologias
+        </button>
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('team')}" 
+                ng-click="vm.setActiveSection('team')">
+            <i class="fas fa-users"></i> Equipe
+        </button>
+    </div>
+    
+    <!-- Conteúdo das seções -->
     <div class="page-content">
-        <div class="info-card">
-            <h2><i class="fas fa-lightbulb"></i> A Ideia</h2>
-            <p>Este projeto foi desenvolvido para demonstrar na prática os conceitos de Aprendizado por Reforço, 
-            uma técnica de Machine Learning onde um agente (neste caso, a IA do jogo da velha) aprende a tomar 
-            decisões através de tentativa e erro, recebendo recompensas por jogadas bem-sucedidas.</p>
+        <!-- Seção Ideia do Projeto -->
+        <div class="info-section" ng-show="vm.isActiveSection('idea')">
+            <div class="info-card">
+                <h2><i class="fas fa-university"></i> O Grupo de IA da Univille</h2>
+                <p>Este projeto foi desenvolvido pelo Grupo de Inteligência Artificial da Univille, um coletivo de estudantes e pesquisadores dedicados ao estudo e aplicação prática de técnicas de IA. Nosso objetivo é tornar conceitos complexos acessíveis através de implementações práticas e interativas.</p>
+            </div>
             
-            <p>O objetivo é criar uma IA que possa aprender estratégias vencedoras no jogo da velha apenas 
-            jogando repetidamente e aprendendo com seus acertos e erros.</p>
+            <div class="info-card">
+                <h2><i class="fas fa-lightbulb"></i> A Ideia do Projeto</h2>
+                <p>O Jogo da Velh-IA foi concebido como uma demonstração prática dos conceitos de Aprendizado por Reforço, uma técnica de Machine Learning onde um agente (neste caso, a IA do jogo da velha) aprende a tomar decisões através de tentativa e erro, recebendo recompensas por jogadas bem-sucedidas.</p>
+                
+                <p>Escolhemos o jogo da velha por ser um ambiente controlado e de complexidade moderada, ideal para ilustrar os princípios do aprendizado por reforço sem a sobrecarga de problemas mais complexos.</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-value">9!</div>
+                        <div class="metric-label">Estados possíveis</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">255.168</div>
+                        <div class="metric-label">Jogos válidos</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">26.830</div>
+                        <div class="metric-label">Jogos únicos</div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <div class="info-card">
-            <h2><i class="fas fa-cogs"></i> Como Funciona</h2>
-            <p>A IA utiliza um método de aprendizado por reforço sem modelo.</p>
-            
-            <p>O processo de aprendizado ocorre em três etapas principais:</p>
-            <ul>
-                <li><strong>Exploração:</strong> A IA experimenta jogadas aleatórias para descobrir novas estratégias</li>
-                <li><strong>Explotação:</strong> A IA utiliza o conhecimento acumulado para fazer as melhores jogadas</li>
-                <li><strong>Atualização:</strong> A cada partida, a IA ajusta seus valores com base nos resultados</li>
-            </ul>
-        </div>
+        <!-- Seção Aprendizado por Reforço -->
+        <div class="info-section" ng-show="vm.isActiveSection('rl')">
+            <div class="info-card">
+                <h2><i class="fas fa-history"></i> História do Aprendizado por Reforço</h2>
+                <p>O Aprendizado por Reforço (RL) tem suas raízes na psicologia comportamental e na teoria dos jogos. Os fundamentos matemáticos foram estabelecidos na década de 1980, com Richard Sutton e Andrew Barto sendo considerados os pais do RL moderno.</p>
                 
-        <div class="info-card">
-            <h2><i class="fas fa-code-branch"></i> Tecnologias Utilizadas</h2>
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <i class="fab fa-angular"></i>
-                    <span>AngularJS</span>
+                <p>O Q-Learning, algoritmo utilizado neste projeto, foi introduzido por Chris Watkins em 1989 como uma forma de aprendizado por diferença temporal que pode aprender políticas ótimas sem um modelo do ambiente.</p>
+            </div>
+            
+            <div class="info-card">
+                <h2><i class="fas fa-cogs"></i> Conceitos Técnicos</h2>
+                <p>O Aprendizado por Reforço é baseado em quatro elementos principais:</p>
+                <ul>
+                    <li><strong>Agente:</strong> A entidade que toma decisões (neste caso, a IA do jogo)</li>
+                    <li><strong>Ambiente:</strong> O mundo com o qual o agente interage (o tabuleiro do jogo da velha)</li>
+                    <li><strong>Ações:</strong> O conjunto de movimentos possíveis (colocar X ou O em posições vazias)</li>
+                    <li><strong>Recompensas:</strong> Sinais numéricos que indicam o quão boa foi uma ação</li>
+                </ul>
+                
+                <p>O Q-Learning funciona através de uma tabela Q que armazena a qualidade esperada de tomar uma ação específica em um estado específico.</p>
+            </div>
+            
+            <div class="info-card">
+                <h2><i class="fas fa-chess"></i> Aplicação no Jogo da Velh-IA</h2>
+                <p>No nosso projeto, implementamos o Q-Learning da seguinte forma:</p>
+                
+                <ul>
+                    <li><strong>Estado:</strong> Representação do tabuleiro em um dado momento</li>
+                    <li><strong>Ação:</strong> Colocar um símbolo em uma posição vazia</li>
+                    <li><strong>Recompensa:</strong> +1 por vitória, -1 por derrota, 0 por empate ou jogada neutra</li>
+                    <li><strong>Fator de desconto (γ):</strong> 0.9 (valoriza recompensas imediatas)</li>
+                    <li><strong>Taxa de aprendizado (α):</strong> 0.1 (controla a velocidade de aprendizado)</li>
+                </ul>
+                
+                <p>A equação do Q-Learning aplicada é:</p>
+                <p style="background: #f0f0f0; padding: 1rem; border-radius: 5px; font-family: monospace;">
+                    Q(s,a) ← Q(s,a) + α[r + γ·max(Q(s',a')) - Q(s,a)]
+                </p>
+            </div>
+        </div>
+        
+        <!-- Seção Padronização de Dados -->
+        <div class="info-section" ng-show="vm.isActiveSection('data')">
+            <div class="info-card">
+                <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
+                <p>Para otimizar o aprendizado, padronizamos a representação do tabuleiro:</p>
+                
+                <ul>
+                    <li>Usamos 1 para representar o jogador atual (X)</li>
+                    <li>-1 para representar o oponente (O)</li>
+                    <li>0 para representar espaços vazios</li>
+                </ul>
+                
+                <p>Essa representação numérica facilita os cálculos matemáticos e comparações durante o aprendizado.</p>
+            </div>
+            
+            <div class="info-card">
+                <h2><i class="fas fa-sync-alt"></i> Rotação e Espelhamento</h2>
+                <p>Para reduzir o espaço de estados e acelerar o aprendizado, implementamos:</p>
+                
+                <ul>
+                    <li><strong>Rotações:</strong> Consideramos equivalentes tabuleiros rotacionados em 90°, 180° e 270°</li>
+                    <li><strong>Espelhamento:</strong> Tabuleiros espelhados horizontal ou verticalmente são tratados como equivalentes</li>
+                </ul>
+                
+                <p>Isso reduz significativamente o número de estados únicos que a IA precisa aprender, de 26.830 para aproximadamente 1.500 estados essenciais.</p>
+                
+                <div class="info-card" style="background: #eef7ff;">
+                    <h3><i class="fas fa-lightbulb"></i> Exemplo de Equivalência</h3>
+                    <p>Os seguintes tabuleiros são considerados equivalentes:</p>
+                    <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 1rem;">
+                        <div>
+                            <p>Original:</p>
+                            <pre style="background: white; padding: 0.5rem; border-radius: 5px;">
+[1, 0, 0]
+[0, -1, 0]
+[0, 0, 0]</pre>
+                        </div>
+                        <div>
+                            <p>Rotacionado 90°:</p>
+                            <pre style="background: white; padding: 0.5rem; border-radius: 5px;">
+[0, 0, 1]
+[0, -1, 0]
+[0, 0, 0]</pre>
+                        </div>
+                    </div>
                 </div>
-                <div class="tech-item">
-                    <i class="fab fa-js"></i>
-                    <span>JavaScript</span>
+            </div>
+        </div>
+        
+        <!-- Seção Tecnologias -->
+        <div class="info-section" ng-show="vm.isActiveSection('tech')">
+            <div class="info-card">
+                <h2><i class="fas fa-code-branch"></i> Tecnologias Utilizadas</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <i class="fab fa-angular"></i>
+                        <span>AngularJS</span>
+                        <small>Framework front-end</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                        <small>Lógica do jogo e IA</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-brain"></i>
+                        <span>Q-Learning</span>
+                        <small>Algoritmo de RL</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                        <small>Estrutura da página</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                        <small>Estilização</small>
+                    </div>
                 </div>
-                <div class="tech-item">
-                    <i class="fas fa-brain"></i>
-                    <span>Aprendizado por reforço</span>
+            </div>
+            
+            <div class="info-card">
+                <h2><i class="fas fa-project-diagram"></i> Arquitetura do Sistema</h2>
+                <p>O projeto foi desenvolvido com uma arquitetura modular:</p>
+                
+                <ul>
+                    <li><strong>Módulo de Jogo:</strong> Gerencia as regras e estado do jogo</li>
+                    <li><strong>Módulo de IA:</strong> Implementa o Q-Learning e toma decisões</li>
+                    <li><strong>Interface:</strong> Visualização do tabuleiro e interação com o usuário</li>
+                    <li><strong>Treinamento:</strong> Sistema de treino automático da IA</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Seção Equipe -->
+        <div class="info-section" ng-show="vm.isActiveSection('team')">
+            <div class="info-card">
+                <h2><i class="fas fa-users"></i> Nossa Equipe</h2>
+                <p>O projeto foi desenvolvido por estudantes e professores do Grupo de IA da Univille:</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Prof. Dr. Edson Wilson Torrens</h3>
+                        <p>Orientador</p>
+                        <p>Inteligência Artificial</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Prof. Dr. Laurindo Dumba</h3>
+                        <p>Orientador</p>
+                        <p>Inteligência Artificial</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Francisco Marcello Ribeiro Lima</h3>
+                        <p>Desenvolvedor Full-Stack</p>
+                        <p>Back, Front, IA e Infra</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Estudante 2</h3>
+                        <p>Desenvolvedor</p>
+                        <p>Interface do usuário</p>
+                    </div>
                 </div>
-                <div class="tech-item">
-                    <i class="fab fa-html5"></i>
-                    <span>HTML5</span>
-                </div>
-                <div class="tech-item">
-                    <i class="fab fa-css3-alt"></i>
-                    <span>CSS3</span>
-                </div>
+            </div>
+            
+            <div class="info-card">
+                <h2><i class="fas fa-graduation-cap"></i> Colaboração Acadêmica</h2>
+                <p>Este projeto faz parte das iniciativas de pesquisa aplicada do Departamento de Computação da Univille, com o objetivo de:</p>
+                
+                <ul>
+                    <li>Popularizar conceitos de IA entre estudantes</li>
+                    <li>Criar material didático interativo</li>
+                    <li>Explorar aplicações práticas de aprendizado por reforço</li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* Estilos para a navegação por botões */
+    .info-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 1rem;
+    }
+    
+    .nav-btn {
+        background: #f8f9fa;
+        border: none;
+        padding: 0.8rem 1.2rem;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .nav-btn:hover {
+        background: #e9ecef;
+    }
+    
+    .nav-btn.active {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .info-section {
+        /* display: none; */
+    }
+
+    .info-section.active {
+        display: block;
+    }    
+    .info-section:first-child {
+        display: block;
+    }
+    
+    /* Melhorias nos cards */
+    .info-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .info-nav {
+            flex-direction: column;
+        }
+        
+        .metrics-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .team-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
