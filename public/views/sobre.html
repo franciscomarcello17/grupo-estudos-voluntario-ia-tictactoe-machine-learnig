@@ -1,9 +1,12 @@
 <div class="content-page" ng-controller="SobreController as vm">
     <div class="page-header">
+        <div class="header-logos">
+            <img src="assets/images/GEPIA_logo.png" alt="Logo GEPIA" class="gepia-logo">
+            <img src="assets/images/logo_cropped.png" alt="Logo Univille IA" class="univille-logo">
+        </div>
         <h1><i class="fas fa-info-circle"></i> Sobre o Projeto Jogo da Velh-IA</h1>
         <p>Um projeto do Grupo de IA da Univille demonstrando Aprendizado por Reforço na prática</p>
-    </div>
-    
+    </div>    
     <!-- Menu de navegação -->
     <div class="info-nav">
         <button class="nav-btn" ng-class="{'active': vm.isActiveSection('idea')}" 
@@ -325,198 +328,71 @@
         
         <!-- Seção Equipe -->
         <div class="info-section" ng-show="vm.isActiveSection('team')">
-            <div class="info-card">
-                <h2><i class="fas fa-users"></i> Nossa Equipe</h2>
-                <p>O projeto foi desenvolvido por estudantes e professores do Grupo de IA da Univille:</p>
-                
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Prof. Dr. Edson Wilson Torrens</h3>
-                        <p>Orientador</p>
-                        <p>Inteligência Artificial</p>
+    <div class="info-card">
+        <h2><i class="fas fa-users"></i> Nossa Equipe</h2>
+        <p>O projeto foi desenvolvido por estudantes e professores do Grupo de IA da Univille:</p>
+
+            <div class="team-grid">
+                <!-- Professor Torrens -->
+                <div    class="team-member" 
+                    ng-click="vm.openProfile('torrens')"
+                    tooltip="Clique para ver o currículo Lattes do Professor Torrens"
+                    tooltip-placement="top">
+                    <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('torrens')}">
+                        <img ng-src="assets/images/professor_edson.gif" 
+                            onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'" 
+                            alt="Prof. Dr. Edson Wilson Torrens">
+                        <i class="fas fa-external-link-alt link-icon"></i>
                     </div>
-                    
-                    <div class="team-member">
-                        <div class="member-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Prof. Dr. Laurindo Dumba</h3>
-                        <p>Orientador</p>
-                        <p>Inteligência Artificial</p>
+                    <h3>Prof. Dr. Edson Wilson Torrens</h3>
+                    <p class="role">Coordenador</p>
+                    <p class="member-bio">Doutor em Ciências Contábeis e Administração pela Universidade Regional de Blumenau</p>
+                </div>
+
+                <!-- Professor Dumba -->
+                <div class="team-member" 
+                    ng-click="vm.openProfile('dumba')"
+                    tooltip="Clique para ver o currículo Lattes do Professor Dumba"
+                    tooltip-placement="top">
+                    <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('dumba')}">
+                        <img ng-src="assets/images/professor_laurindo.png" 
+                            onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'" 
+                            alt="Prof. Msc. Laurindo Dumba">
+                        <i class="fas fa-external-link-alt link-icon"></i>
                     </div>
-                    
-                    <div class="team-member">
-                        <div class="member-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Francisco Marcello Ribeiro Lima</h3>
-                        <p>Desenvolvedor Full-Stack</p>
-                        <p>Desenvolvedor do Projeto</p>
+                    <h3>Prof. Laurindo Vilonga Dumba</h3>
+                    <p class="role">Coordenador</p>
+                    <p class="member-bio">Mestrando em Ciência da Computação</p>
+                </div>
+
+                <!-- Desenvolvedor Francisco -->
+                <div class="team-member" 
+                    ng-click="vm.openProfile('lima')"
+                    tooltip="Clique para ver o perfil no LinkedIn do Francisco"
+                    tooltip-placement="top">
+                    <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('lima')}">
+                        <img ng-src="assets/images/dev_francisco.jpg" 
+                            onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'" 
+                            alt="Francisco Marcello Ribeiro Lima">
+                        <i class="fas fa-external-link-alt link-icon"></i>
                     </div>
-                    
-                    <div class="team-member">
-                        <div class="member-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Estudante 2</h3>
-                        <p>Desenvolvedor</p>
-                        <p>Interface do usuário</p>
-                    </div>
+                    <h3>Francisco Marcello Ribeiro Lima</h3>
+                    <p class="role">Desenvolvedor do Projeto</p>
+                    <p class="member-bio">Estudante de Engenharia de Software e pesquisador em IA</p>
                 </div>
             </div>
             
-            <div class="info-card">
                 <h2><i class="fas fa-graduation-cap"></i> Colaboração Acadêmica</h2>
-                <p>Este projeto faz parte das iniciativas de pesquisa aplicada do Departamento de Computação da Univille, com o objetivo de:</p>
+                <p>Este projeto faz parte das iniciativas do Departamento de Informática da Universidade da Região de Joinville, com o objetivo de:</p>
                 
                 <ul>
-                    <li>Popularizar conceitos de IA entre estudantes</li>
+                    <li>Popularizar conceitos de IA entre estudantes e entusiastas</li>
                     <li>Criar material didático interativo</li>
-                    <li>Explorar aplicações práticas de aprendizado por reforço</li>
+                    <li>Fomentar o interesse por Aprendizado por Reforço</li>
+                    <li>Contribuir para a formação de profissionais capacitados na área de IA</li>
+                    <li>Desenvolver soluções práticas e inovadoras</li>
+                    <li>Estimular a criatividade e inovação no uso de tecnologias de IA</li>
                 </ul>
-            </div>
         </div>
     </div>
 </div>
-
-<style>
-    /* Estilos para a navegação por botões */
-    .info-nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #e9ecef;
-        padding-bottom: 1rem;
-    }
-    
-    .nav-btn {
-        background: #f8f9fa;
-        border: none;
-        padding: 0.8rem 1.2rem;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s ease;
-        font-weight: 500;
-    }
-    
-    .nav-btn:hover {
-        background: #e9ecef;
-    }
-    
-    .nav-btn.active {
-        background: var(--primary-color);
-        color: white;
-    }
-    
-    .info-section.active {
-        display: block;
-    }    
-    .info-section:first-child {
-        display: block;
-    }
-    
-    /* Melhorias nos cards */
-    .info-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .info-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    }
-    
-    /* Responsividade */
-    @media (max-width: 768px) {
-        .info-nav {
-            flex-direction: column;
-        }
-        
-        .metrics-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .team-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-.conversion-example {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.conversion-grid {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.arrow {
-    font-size: 24px;
-    color: #666;
-}
-
-.numeric-board {
-    background: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-family: monospace;
-    margin: 10px 0;
-    white-space: pre-wrap;
-}
-
-.transformations-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.transformation-group {
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.rotation-examples, .mirror-examples {
-    display: flex;
-    gap: 15px;
-    justify-content: space-around;
-    margin: 10px 0;
-}
-
-.transformation-group h3 {
-    margin-top: 0;
-    color: #2c3e50;
-}
-
-.transformation-group.canonical {
-    grid-column: span 2;
-    background: #e8f4fd;
-    border: 1px solid #cce0f5;
-}
-
-.note {
-    font-size: 0.9em;
-    color: #666;
-    font-style: italic;
-    margin-top: 5px;
-}
-
-.summary {
-    margin-top: 20px;
-    padding: 10px;
-    background: #e8f5e9;
-    border-radius: 5px;
-    border-left: 4px solid #4caf50;
-}
-</style>     
