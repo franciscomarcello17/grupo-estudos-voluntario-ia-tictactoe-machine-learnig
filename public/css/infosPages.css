@@ -393,36 +393,6 @@
     line-height: 1.5;
 }
 
-/* Mini tabuleiro para exemplos */
-.mini-tabuleiro {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    width: 150px;
-    margin: 10px auto;
-}
-
-.mini-celula {
-    width: 50px;
-    height: 50px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.mini-celula.x {
-    color: var(--primary-color);
-}
-
-.mini-celula.o {
-    color: #e74c3c;
-}
-
 /* Transformações */
 .transformations-grid {
     display: grid;

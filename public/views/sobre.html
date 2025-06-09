@@ -106,177 +106,203 @@
         
 <!-- Seção Padronização de Dados -->
 <div class="info-section" ng-show="vm.isActiveSection('data')">
-    <div class="info-card">
-        <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
-        <p>Para otimizar o aprendizado, padronizamos a representação do tabuleiro:</p>
-        
-        <ul>
-            <li>Usamos <strong>1</strong> para representar o jogador atual (X)</li>
-            <li><strong>-1</strong> para representar o oponente (O)</li>
-            <li><strong>0</strong> para representar espaços vazios</li>
-        </ul>
-        
-        <div class="conversion-example">
-            <h3><i class="fas fa-exchange-alt"></i> Exemplo de Conversão</h3>
-            <div class="conversion-grid">
-                <div>
-                    <p>Tabuleiro Original:</p>
-                    <div class="mini-tabuleiro">
-                        <div class="mini-celula x">X</div>
-                        <div class="mini-celula"></div>
-                        <div class="mini-celula o">O</div>
-                        <div class="mini-celula"></div>
-                        <div class="mini-celula x">X</div>
-                        <div class="mini-celula"></div>
-                        <div class="mini-celula o">O</div>
-                        <div class="mini-celula"></div>
-                        <div class="mini-celula x">X</div>
-                    </div>
-                </div>
-                <div class="arrow">→</div>
-                <div>
-                    <p>Representação Numérica:</p>
-                    <pre class="numeric-board">[
-  [1, 0, -1],
-  [0, 1, 0],
-  [-1, 0, 1]
-]</pre>
+<div class="info-card">
+    <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
+    <p>Para otimizar o aprendizado, todas as partidas vitoriosas são armazenadas como se o jogador vencedor fosse o <strong>O</strong>. Isso padroniza os dados e reduz a complexidade do aprendizado.</p>
+
+    <div class="conversion-example">
+        <h3><i class="fas fa-exchange-alt"></i> Exemplo de Conversão</h3>
+        <p>Veja abaixo dois tabuleiros idênticos: o primeiro com vitória para o <strong>X</strong> e o segundo com vitória para o <strong>O</strong>. Ambos são armazenados da mesma forma no banco:</p>
+
+        <div class="conversion-grid">
+            <div>
+                <p>Vitória para X:</p>
+                <div class="mini-tabuleiro">
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
                 </div>
             </div>
+            <div class="arrow">=</div>
+            <div>
+                <p>Vitória para O (espelhada):</p>
+                <div class="mini-tabuleiro">
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula o">O</div>
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula x">X</div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                    <div class="mini-celula"></div>
+                </div>
+            </div>
+        </div>
+
+        <p>Ambas são armazenadas no banco como:</p>
+        <pre class="numeric-board">
+"state": "O,O,O,X,X,,,"
+</pre>
+    </div>
+</div>
+    
+<div class="info-card">
+    <h2><i class="fas fa-sync-alt"></i> Redução de Estados por Transformações</h2>
+    <p>Para otimizar o aprendizado, o sistema considera equivalentes todas as variações por rotação ou espelhamento de um estado.</p>
+
+    <div class="transformations-grid">
+        <!-- Linha 1: Estado Inicial -->
+        <div class="transformation-group">
+            <h3>Estado Inicial</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <!-- Linha 2: Rotações -->
+        <div class="transformation-group">
+            <h3>Rotação 90°</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <div class="transformation-group">
+            <h3>Rotação 180°</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+            </div>
+        </div>
+
+        <div class="transformation-group">
+            <h3>Rotação 270°</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <!-- Linha 3: Espelhamentos -->
+        <div class="transformation-group">
+            <h3>Espelhamento Horizontal</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <div class="transformation-group">
+            <h3>Espelhamento Vertical</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <div class="transformation-group">
+            <h3>Espelhamento Diagonal Principal</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <div class="transformation-group">
+            <h3>Espelhamento Diagonal Secundária</h3>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+            </div>
+        </div>
+
+        <!-- Linha 4: Estado Canônico -->
+        <div class="transformation-group canonical">
+            <h3>Estado Canônico</h3>
+            <p>O sistema seleciona automaticamente a versão com menor valor hash.</p>
+            <div class="mini-tabuleiro">
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula x">X</div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+                <div class="mini-celula o">O</div>
+                <div class="mini-celula"></div>
+            </div>
+            <p class="note">(Forma canônica armazenada no banco de dados)</p>
         </div>
     </div>
-    
-    <div class="info-card">
-        <h2><i class="fas fa-sync-alt"></i> Rotação e Espelhamento</h2>
-        <p>Para reduzir o espaço de estados, consideramos equivalentes todas as variações por rotação ou espelhamento:</p>
-        
-        <div class="transformations-grid">
-            <div class="transformation-group">
-                <h3>Original</h3>
-                <div class="mini-tabuleiro">
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula"></div>
-                </div>
-                <pre class="numeric-board">[
-  [1, 0, 0],
-  [-1, 1, 0],
-  [0, -1, 0]
-]</pre>
-            </div>
-            
-            <div class="transformation-group">
-                <h3>Rotações</h3>
-                <div class="rotation-examples">
-                    <div>
-                        <p>90°</p>
-                        <div class="mini-tabuleiro">
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <p>180°</p>
-                        <div class="mini-tabuleiro">
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula x">X</div>
-                        </div>
-                    </div>
-                    <div>
-                        <p>270°</p>
-                        <div class="mini-tabuleiro">
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="transformation-group">
-                <h3>Espelhamentos</h3>
-                <div class="mirror-examples">
-                    <div>
-                        <p>Horizontal</p>
-                        <div class="mini-tabuleiro">
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Vertical</p>
-                        <div class="mini-tabuleiro">
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula x">X</div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula"></div>
-                            <div class="mini-celula o">O</div>
-                            <div class="mini-celula"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="transformation-group canonical">
-                <h3>Estado Canônico</h3>
-                <p>O sistema converte automaticamente para a forma canônica:</p>
-                <div class="mini-tabuleiro">
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula"></div>
-                </div>
-                <pre class="numeric-board">[
-  [1, 0, 0],
-  [0, 1, -1],
-  [0, -1, 0]
-]</pre>
-                <p class="note">(Menor valor hash entre todas as transformações possíveis)</p>
-            </div>
-        </div>
-        
-        <p class="summary">Esta abordagem reduz o número de estados únicos de 26.830 para aproximadamente 1.500 estados essenciais, acelerando significativamente o aprendizado.</p>
+
+    <!-- Decisão -->
+    <div class="decision-info">
+        <p><strong>Decisão do algoritmo:</strong> se qualquer uma das transformações já estiver presente no banco, o sistema reutiliza esse estado e atualiza o aprendizado. Caso contrário, o estado canônico é armazenado como novo.</p>
     </div>
 </div>
    
@@ -378,7 +404,7 @@
                     </div>
                     <h3>Francisco Marcello Ribeiro Lima</h3>
                     <p class="role">Desenvolvedor do Projeto</p>
-                    <p class="member-bio">Estudante de Engenharia de Software e pesquisador em IA</p>
+                    <p class="member-bio">Estudante de Engenharia de Software</p>
                 </div>
             </div>
             
