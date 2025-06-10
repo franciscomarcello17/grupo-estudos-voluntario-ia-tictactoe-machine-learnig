@@ -74,8 +74,7 @@
 
                 <p class="reference">
                     Referência:
-                    <a href="/assets/docs/allis1994searching.pdf"
-                        download="Searching_for_Solutions_in_Games_and_AI_Allis_1994.pdf">
+                    <a href="/assets/docs/allis1994searching.pdf" target="_blank" rel="noopener noreferrer">
                         ALLIS, Victor. Searching for solutions in games and artificial intelligence. 1994.
                     </a>
                 </p>
@@ -358,52 +357,52 @@
             <div class="info-card">
                 <h2><i class="fas fa-code-branch"></i> Tecnologias Utilizadas</h2>
                 <div class="tech-stack">
-                    <div class="tech-item">
+                    <div class="tech-item" title="Framework do Google para criar interfaces dinâmicas com JavaScript.">
                         <i class="fab fa-angular"></i>
                         <span>AngularJS</span>
                         <small>Framework front-end</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Linguagem usada para programar comportamentos em páginas web.">
                         <i class="fab fa-js"></i>
                         <span>JavaScript</span>
                         <small>Lógica do jogo e IA</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Técnica de aprendizado por reforço usada para ensinar a máquina por tentativa e erro.">
                         <i class="fas fa-brain"></i>
                         <span>Q-Learning</span>
                         <small>Algoritmo de RL</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Linguagem usada para estruturar o conteúdo da página na web.">
                         <i class="fab fa-html5"></i>
                         <span>HTML5</span>
                         <small>Estrutura da página</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Linguagem usada para deixar o site visualmente agradável e responsivo.">
                         <i class="fab fa-css3-alt"></i>
                         <span>CSS3</span>
                         <small>Estilização</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Linguagem de programação da Microsoft usada no desenvolvimento do servidor.">
                         <i class="fas fa-code"></i>
                         <span>C#</span>
                         <small>Linguagem back-end</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Ferramenta que facilita o uso de bancos de dados no código.">
                         <i class="fas fa-database"></i>
                         <span>Entity Framework</span>
                         <small>ORM para banco de dados</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Sistema de gerenciamento de banco de dados criado pela Microsoft.">
                         <i class="fas fa-server"></i>
                         <span>SQL Server</span>
                         <small>Banco de dados relacional</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Plataforma de nuvem da Microsoft para hospedar e escalar aplicações.">
                         <i class="fab fa-microsoft"></i>
                         <span>Azure</span>
                         <small>Hospedagem na nuvem</small>
                     </div>
-                    <div class="tech-item">
+                    <div class="tech-item" title="Serviço para armazenar, versionar e colaborar em projetos de código-fonte.">
                         <i class="fab fa-github"></i>
                         <span>GitHub</span>
                         <small>Controle de versão</small>
@@ -413,14 +412,39 @@
 
             <div class="info-card">
                 <h2><i class="fas fa-project-diagram"></i> Arquitetura do Sistema</h2>
-                <p>O projeto foi desenvolvido com uma arquitetura modular:</p>
+                <p>O sistema foi desenvolvido com base em uma arquitetura modular e orientada a objetos, com foco na separação clara de responsabilidades e fácil extensibilidade. O diagrama UML abaixo ilustra as principais classes do projeto e suas interações.</p>
 
-                <ul>
-                    <li><strong>Módulo de Jogo:</strong> Gerencia as regras e estado do jogo</li>
-                    <li><strong>Módulo de IA:</strong> Implementa o Q-Learning e toma decisões</li>
-                    <li><strong>Interface:</strong> Visualização do tabuleiro e interação com o usuário</li>
-                    <li><strong>Treinamento:</strong> Sistema de treino automático da IA</li>
-                </ul>
+                <div class="architecture-modules">
+                    <ul>
+                        <li>
+                            <strong><i class="fas fa-chess-board"></i> Classe <code>JogoDaVelha</code></strong>: 
+                            Componente central que representa o estado do tabuleiro e controla o fluxo do jogo. É responsável por alternar entre os jogadores, verificar vitórias ou empates e interagir com a IA.
+                        </li>
+                        <li>
+                            <strong><i class="fas fa-brain"></i> Classe <code>QLearning</code></strong>: 
+                            Implementa o algoritmo de aprendizado por reforço. Gerencia a Q-Table, define a política de decisão ε-greedy e calcula os novos valores de recompensa com base nas jogadas e resultados.
+                        </li>
+                        <li>
+                            <strong><i class="fas fa-users"></i> Interface <code>Jogador</code></strong>: 
+                            Abstração comum para qualquer tipo de jogador. Define o contrato para métodos como <code>fazerJogada()</code> e <code>getSimbolo()</code>, facilitando a inclusão de novos tipos de jogadores no futuro.
+                        </li>
+                        <li>
+                            <strong><i class="fas fa-user"></i> Classe <code>JogadorHumano</code></strong>: 
+                            Implementa a interface <code>Jogador</code> e representa o jogador controlado por interação humana. Recebe a jogada do usuário e a aplica no tabuleiro.
+                        </li>
+                        <li>
+                            <strong><i class="fas fa-robot"></i> Classe <code>JogadorIA</code></strong>: 
+                            Também implementa a interface <code>Jogador</code>, mas usa o módulo <code>QLearning</code> para tomar decisões baseadas na política de aprendizado, podendo atuar tanto em partidas normais quanto em treinos.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="architecture-diagram">
+                    <img src="/assets/images/diagrama_puml.png" alt="Diagrama de Arquitetura do Jogo da Velh-IA" class="diagram-image">
+                    <p class="diagram-caption">
+                        O diagrama UML ilustra a composição do projeto: <code>JogoDaVelha</code> utiliza uma instância de <code>QLearning</code> e mantém dois jogadores (um humano e uma IA), ambos implementando a mesma interface. Essa estrutura facilita o treinamento autônomo e o uso real do jogo.
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -485,8 +509,6 @@
                     <li>Criar material didático interativo</li>
                     <li>Fomentar o interesse por Aprendizado por Reforço</li>
                     <li>Contribuir para a formação de profissionais capacitados na área de IA</li>
-                    <li>Desenvolver soluções práticas e inovadoras</li>
-                    <li>Estimular a criatividade e inovação no uso de tecnologias de IA</li>
                 </ul>
             </div>
         </div>
