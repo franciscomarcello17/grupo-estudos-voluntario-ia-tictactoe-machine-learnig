@@ -3,7 +3,7 @@
     padding: 2rem;
     background: var(--light-color);
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin: 2rem auto;
     max-width: 1200px;
     width: 90%;
@@ -37,13 +37,15 @@
     flex-wrap: wrap;
 }
 
-.gepia-logo, .univille-logo {
+.gepia-logo,
+.univille-logo {
     height: 80px;
     object-fit: contain;
     transition: transform 0.3s ease;
 }
 
-.gepia-logo:hover, .univille-logo:hover {
+.gepia-logo:hover,
+.univille-logo:hover {
     transform: scale(1.05);
 }
 
@@ -64,13 +66,13 @@
     padding: 1.8rem;
     margin-bottom: 2rem;
     border-left: 5px solid var(--primary-color);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }
 
 .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .info-card h2 {
@@ -107,7 +109,7 @@
     padding: 1.2rem;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
     border: 1px solid #e9ecef;
     transition: transform 0.3s ease;
 }
@@ -184,14 +186,14 @@
     padding: 1.8rem;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     border: 1px solid #e9ecef;
     transition: all 0.3s ease;
 }
 
 .method:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .method i {
@@ -225,7 +227,7 @@
     padding: 1.8rem;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid #e9ecef;
     position: relative;
     cursor: pointer;
@@ -245,9 +247,10 @@
     object-fit: contain;
     border-radius: 0;
 }
+
 .team-member:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .member-avatar {
@@ -257,23 +260,26 @@
     margin: 0 auto 1.2rem;
     overflow: hidden;
     border: 4px solid #e9ecef;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    position: relative; /* Adicionado para contexto de posicionamento */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Adicionado para contexto de posicionamento */
 }
 
 .member-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center; /* Foca no centro da imagem */
-    transition: transform 0.3s ease; /* Adiciona transição suave para o zoom */
+    object-position: center center;
+    /* Foca no centro da imagem */
+    transition: transform 0.3s ease;
+    /* Adiciona transição suave para o zoom */
     transform: scale(1.5);
 }
 
 .team-member h3 {
     margin-bottom: 0.6rem;
     color: #2c3e50;
-    font-size: 1.2rem;  
+    font-size: 1.2rem;
 }
 
 .team-member p {
@@ -293,7 +299,7 @@
     bottom: 10px;
     right: 10px;
     color: #fff;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     padding: 5px;
     border-radius: 50%;
     font-size: 12px;
@@ -321,28 +327,40 @@
 .info-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-bottom: 2.5rem;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid #e9ecef;
-    padding-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    justify-content: center;
+    width: 100%;
 }
 
 .nav-btn {
     background: #f8f9fa;
     border: none;
-    padding: 0.9rem 1.5rem;
+    padding: 0.8rem 1.2rem;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.6rem;
     transition: all 0.3s ease;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #555;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    flex: 1 1 auto;
+    min-width: 120px;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
+.nav-btn i {
+    font-size: 1rem;
+}
+
+/* Efeitos de hover e active mantidos */
 .nav-btn:hover {
     background: #e9ecef;
     color: #333;
@@ -351,11 +369,7 @@
 .nav-btn.active {
     background: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.nav-btn i {
-    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Seção de conversão de dados */
@@ -415,7 +429,8 @@
     justify-content: center;
 }
 
-.rotation-examples, .mirror-examples {
+.rotation-examples,
+.mirror-examples {
     display: flex;
     gap: 20px;
     justify-content: space-around;
@@ -476,13 +491,23 @@
         padding: 1.5rem;
         width: 95%;
     }
-    
+
     .transformations-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .transformation-group.canonical {
         grid-column: span 1;
+    }
+
+    .info-nav {
+        justify-content: flex-start;
+    }
+
+    .nav-btn {
+        flex: 0 1 calc(25% - 0.5rem);
+        /* 4 botões por linha */
+        max-width: calc(25% - 0.5rem);
     }
 }
 
@@ -494,24 +519,33 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .conversion-grid {
         flex-direction: column;
         align-items: center;
         gap: 20px;
     }
-    
+
     .arrow {
         transform: rotate(90deg);
         margin: 10px 0;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .nav-btn {
+        flex: 0 1 calc(50% - 0.5rem);
+        /* 2 botões por linha */
+        max-width: calc(50% - 0.5rem);
     }
 }
 
@@ -522,16 +556,31 @@
         align-items: flex-start;
         gap: 0.5rem;
     }
-    
+
     .metrics-grid,
     .team-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .info-card {
         padding: 1.5rem;
     }
+
+    .nav-btn {
+        flex: 1 1 100%;
+        max-width: 100%;
+        padding: 0.8rem;
+    }
 }
+
+@media (max-width: 480px) {
+    .nav-btn {
+        flex: 1 1 100%;
+        max-width: 100%;
+        padding: 0.8rem;
+    }
+}
+
 
 .conversion-result {
     text-align: center;
@@ -584,11 +633,13 @@
     border-top: 1px solid #ddd;
     padding-top: 0.8em;
 }
+
 .reference a {
     color: #007acc;
     text-decoration: none;
     transition: text-decoration 0.3s ease;
 }
+
 .reference a:hover {
     text-decoration: underline;
 }
