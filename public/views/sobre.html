@@ -6,306 +6,348 @@
         </div>
         <h1><i class="fas fa-info-circle"></i> Sobre o Projeto Jogo da Velh-IA</h1>
         <p>Um projeto do Grupo de IA da Univille demonstrando Aprendizado por Reforço na prática</p>
-    </div>    
+    </div>
     <!-- Menu de navegação -->
     <div class="info-nav">
-        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('idea')}" 
-                ng-click="vm.setActiveSection('idea')">
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('idea')}"
+            ng-click="vm.setActiveSection('idea')">
             <i class="fas fa-lightbulb"></i> Ideia do Projeto
         </button>
-        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('rl')}" 
-                ng-click="vm.setActiveSection('rl')">
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('rl')}" ng-click="vm.setActiveSection('rl')">
             <i class="fas fa-brain"></i> Aprendizado por Reforço
         </button>
-        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('data')}" 
-                ng-click="vm.setActiveSection('data')">
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('data')}"
+            ng-click="vm.setActiveSection('data')">
             <i class="fas fa-database"></i> Padronização de Dados
         </button>
-        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('tech')}" 
-                ng-click="vm.setActiveSection('tech')">
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('tech')}"
+            ng-click="vm.setActiveSection('tech')">
             <i class="fas fa-code"></i> Tecnologias
         </button>
-        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('team')}" 
-                ng-click="vm.setActiveSection('team')">
+        <button class="nav-btn" ng-class="{'active': vm.isActiveSection('team')}"
+            ng-click="vm.setActiveSection('team')">
             <i class="fas fa-users"></i> Equipe
         </button>
     </div>
-    
+
     <!-- Conteúdo das seções -->
     <div class="page-content">
         <!-- Seção Ideia do Projeto -->
         <div class="info-section" ng-show="vm.isActiveSection('idea')">
             <div class="info-card">
                 <h2><i class="fas fa-university"></i> O Grupo de IA da Univille</h2>
-                <p>Este projeto foi desenvolvido pelo Grupo de Inteligência Artificial da Univille, um coletivo de estudantes e pesquisadores dedicados ao estudo e aplicação prática de técnicas de IA. Nosso objetivo é tornar conceitos complexos acessíveis através de implementações práticas e interativas.</p>
+                <p>Este projeto foi desenvolvido pelo Grupo de Inteligência Artificial da Univille, um coletivo de
+                    estudantes e pesquisadores dedicados ao estudo e aplicação prática de técnicas de IA. Nosso objetivo
+                    é tornar conceitos complexos acessíveis através de implementações práticas e interativas.</p>
             </div>
-            
+
             <div class="info-card">
                 <h2><i class="fas fa-lightbulb"></i> A Ideia do Projeto</h2>
-                <p>O Jogo da Velh-IA foi concebido como uma demonstração prática dos conceitos de Aprendizado por Reforço, uma técnica de Machine Learning onde um agente (neste caso, a IA do jogo da velha) aprende a tomar decisões através de tentativa e erro, recebendo recompensas por jogadas bem-sucedidas.</p>
-                
-                <p>Escolhemos o jogo da velha por ser um ambiente controlado e de complexidade moderada, ideal para ilustrar os princípios do aprendizado por reforço sem a sobrecarga de problemas mais complexos.</p>
-                
+                <p>O Jogo da Velh-IA foi concebido como uma demonstração prática dos conceitos de Aprendizado por
+                    Reforço, uma técnica de Machine Learning onde um agente (neste caso, a IA do jogo da velha) aprende
+                    a tomar decisões através de tentativa e erro, recebendo recompensas por jogadas bem-sucedidas.</p>
+
+                <p>Escolhemos o jogo da velha por ser um ambiente controlado e de complexidade moderada, ideal para
+                    ilustrar os princípios do aprendizado por reforço sem a sobrecarga de problemas mais complexos.</p>
                 <div class="metrics-grid">
-                    <div class="metric">
-                        <div class="metric-value">9!</div>
-                        <div class="metric-label">Estados possíveis</div>
+                    <div class="metric" title="Número total de configurações possíveis no tabuleiro, sem considerar as regras do jogo">
+                        <div class="metric-value">3⁹ = 19.683</div>
+                        <div class="metric-label">Configurações brutas do tabuleiro</div>
                     </div>
-                    <div class="metric">
+                    <div class="metric" title="Número estimado de posições legais no tabuleiro, considerando as regras básicas do jogo da velha">
+                        <div class="metric-value">~5.478</div>
+                        <div class="metric-label">Estados válidos do tabuleiro</div>
+                    </div>
+                    <div class="metric" title="Número total de partidas possíveis seguindo as regras do jogo, incluindo a ordem das jogadas">
                         <div class="metric-value">255.168</div>
                         <div class="metric-label">Jogos válidos</div>
                     </div>
-                    <div class="metric">
+                    <div class="metric" title="Número de jogos únicos ao considerar rotações e reflexões do tabuleiro, eliminando duplicatas">
                         <div class="metric-value">26.830</div>
-                        <div class="metric-label">Jogos únicos</div>
+                        <div class="metric-label">Jogos únicos com simetria</div>
                     </div>
                 </div>
+
+                <p class="reference">
+                    Referência:  
+                    <a href="/assets/docs/allis1994searching.pdf" download="Searching_for_Solutions_in_Games_and_AI_Allis_1994.pdf">
+                        ALLIS, Victor. Searching for solutions in games and artificial intelligence. 1994.
+                    </a>
+                </p>
             </div>
         </div>
-        
+
         <!-- Seção Aprendizado por Reforço -->
         <div class="info-section" ng-show="vm.isActiveSection('rl')">
             <div class="info-card">
                 <h2><i class="fas fa-history"></i> História do Aprendizado por Reforço</h2>
-                <p>O Aprendizado por Reforço (RL) tem suas raízes na psicologia comportamental e na teoria dos jogos. Os fundamentos matemáticos foram estabelecidos na década de 1980, com Richard Sutton e Andrew Barto sendo considerados os pais do RL moderno.</p>
-                
-                <p>O Q-Learning, algoritmo utilizado neste projeto, foi introduzido por Chris Watkins em 1989 como uma forma de aprendizado por diferença temporal que pode aprender políticas ótimas sem um modelo do ambiente.</p>
+                <p>O Aprendizado por Reforço (RL) tem suas raízes na psicologia comportamental e na teoria dos jogos. Os
+                    fundamentos matemáticos foram estabelecidos na década de 1980, com Richard Sutton e Andrew Barto
+                    sendo considerados os pais do RL moderno.</p>
+
+                <p>O Q-Learning, algoritmo utilizado neste projeto, foi introduzido por Chris Watkins em 1989 como uma
+                    forma de aprendizado por diferença temporal que pode aprender políticas ótimas sem um modelo do
+                    ambiente.</p>
             </div>
-            
+
             <div class="info-card">
                 <h2><i class="fas fa-cogs"></i> Conceitos Técnicos</h2>
                 <p>O Aprendizado por Reforço é baseado em quatro elementos principais:</p>
                 <ul>
                     <li><strong>Agente:</strong> A entidade que toma decisões (neste caso, a IA do jogo)</li>
-                    <li><strong>Ambiente:</strong> O mundo com o qual o agente interage (o tabuleiro do jogo da velha)</li>
-                    <li><strong>Ações:</strong> O conjunto de movimentos possíveis (colocar X ou O em posições vazias)</li>
+                    <li><strong>Ambiente:</strong> O mundo com o qual o agente interage (o tabuleiro do jogo da velha)
+                    </li>
+                    <li><strong>Ações:</strong> O conjunto de movimentos possíveis (colocar X ou O em posições vazias)
+                    </li>
                     <li><strong>Recompensas:</strong> Sinais numéricos que indicam o quão boa foi uma ação</li>
                 </ul>
-                
-                <p>O Q-Learning funciona através de uma tabela Q que armazena a qualidade esperada de tomar uma ação específica em um estado específico.</p>
+
+                <div class="concept-grid">
+                    <div class="concept-item">
+                        <i class="fas fa-dice"></i>
+                        <h4>Política ε-Greedy</h4>
+                        <p>Balanceia exploração (ações aleatórias) e explotação (melhores ações conhecidas)</p>
+                    </div>
+                    <div class="concept-item">
+                        <i class="fas fa-percentage"></i>
+                        <h4>Fator de Desconto (γ)</h4>
+                        <p>Peso das recompensas futuras (γ = 0.9 neste projeto)</p>
+                    </div>
+                    <div class="concept-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h4>Taxa de Aprendizado (α)</h4>
+                        <p>Velocidade de atualização do conhecimento (α = 0.1 aqui)</p>
+                    </div>
+                    <div class="concept-item">
+                        <i class="fas fa-chess-board"></i>
+                        <h4>Ambiente Determinístico</h4>
+                        <p>Ações produzem sempre o mesmo resultado</p>
+                    </div>
+                </div>
             </div>
-            
+
             <div class="info-card">
                 <h2><i class="fas fa-chess"></i> Aplicação no Jogo da Velh-IA</h2>
                 <p>No nosso projeto, implementamos o Q-Learning da seguinte forma:</p>
-                
+
                 <ul>
                     <li><strong>Estado:</strong> Representação do tabuleiro em um dado momento</li>
                     <li><strong>Ação:</strong> Colocar um símbolo em uma posição vazia</li>
                     <li><strong>Recompensa:</strong> +1 por vitória, -1 por derrota, 0 por empate ou jogada neutra</li>
-                    <li><strong>Fator de desconto (γ):</strong> 0.9 (valoriza recompensas imediatas)</li>
-                    <li><strong>Taxa de aprendizado (α):</strong> 0.1 (controla a velocidade de aprendizado)</li>
+                    <li><strong>Episódio:</strong> Uma partida completa até vitória/derrota/empate</li>
                 </ul>
-                
+
                 <p>A equação do Q-Learning aplicada é:</p>
                 <p style="background: #f0f0f0; padding: 1rem; border-radius: 5px; font-family: monospace;">
                     Q(s,a) ← Q(s,a) + α[r + γ·max(Q(s',a')) - Q(s,a)]
                 </p>
             </div>
         </div>
-        
-<!-- Seção Padronização de Dados -->
-<div class="info-section" ng-show="vm.isActiveSection('data')">
-<div class="info-card">
-    <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
-    <p>Para otimizar o aprendizado, todas as partidas vitoriosas são armazenadas como se o jogador vencedor fosse o <strong>O</strong>. Isso padroniza os dados e reduz a complexidade do aprendizado.</p>
+        <!-- Seção Padronização de Dados -->
+        <div class="info-section" ng-show="vm.isActiveSection('data')">
+            <div class="info-card">
+                <h2><i class="fas fa-table"></i> Representação do Tabuleiro</h2>
+                <p>Para otimizar o aprendizado, todas as partidas vitoriosas são armazenadas como se o jogador vencedor
+                    fosse o <strong>O</strong>. Isso padroniza os dados e reduz a complexidade do aprendizado.</p>
 
-    <div class="conversion-example">
-        <h3><i class="fas fa-exchange-alt"></i> Exemplo de Conversão</h3>
-        <p>Veja abaixo dois tabuleiros idênticos: o primeiro com vitória para o <strong>X</strong> e o segundo com vitória para o <strong>O</strong>. Ambos são armazenados da mesma forma no banco:</p>
+                <h3><i class="fas fa-exchange-alt"></i> Exemplo de Conversão</h3>
+                <p>Veja abaixo dois tabuleiros idênticos: o primeiro com vitória para o <strong>X</strong> e o segundo
+                    com vitória para o <strong>O</strong>. Ambos são armazenados da mesma forma no banco:</p>
 
-        <div class="conversion-grid">
-            <div>
-                <p>Vitória para X:</p>
-                <div class="mini-tabuleiro">
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
+                <div class="conversion-grid">
+                    <div class="transformation-group">
+                        <h3>Vitória para X</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+                    <h3 class="arrow">=</h3>
+                    <div class="transformation-group">
+                        <h3>Vitória para O</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="conversion-result">
+                    <p>Ambas são armazenadas no banco como:</p>
+                    <pre class="state">"state": "O,O,O,X,X,,,"</pre>
                 </div>
             </div>
-            <div class="arrow">=</div>
-            <div>
-                <p>Vitória para O (espelhada):</p>
-                <div class="mini-tabuleiro">
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula o">O</div>
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula x">X</div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
-                    <div class="mini-celula"></div>
+
+            <div class="info-card">
+                <h2><i class="fas fa-sync-alt"></i> Redução de Estados por Transformações</h2>
+                <p>Para otimizar o aprendizado, o sistema considera equivalentes todas as variações por rotação ou
+                    espelhamento de um estado.</p>
+
+                <div class="transformations-grid">
+                    <!-- Linha 1: Estado Inicial -->
+                    <div class="transformation-group">
+                        <h3>Estado Inicial 0°</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+
+                    <!-- Linha 2: Rotações -->
+                    <div class="transformation-group">
+                        <h3>Rotação 90°</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                        </div>
+                    </div>
+
+                    <div class="transformation-group">
+                        <h3>Rotação 180°</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+
+                    <div class="transformation-group">
+                        <h3>Rotação 270°</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+
+                    <!-- Linha 3: Espelhamentos -->
+                    <div class="transformation-group">
+                        <h3>Espelhamento Horizontal</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+
+                    <div class="transformation-group">
+                        <h3>Espelhamento Vertical</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                        </div>
+                    </div>
+
+                    <div class="transformation-group">
+                        <h3>Espelhamento Diagonal Principal</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+
+                    <div class="transformation-group">
+                        <h3>Espelhamento Diagonal Secundária</h3>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                        </div>
+                    </div>
+
+                    <!-- Linha 4: Estado Canônico -->
+                    <div class="transformation-group canonical">
+                        <h3>Estado Canônico</h3>
+                        <p>O sistema seleciona automaticamente a versão com menor valor hash.</p>
+                        <div class="mini-tabuleiro">
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula o">O</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula x">X</div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula"></div>
+                            <div class="mini-celula x">X</div>
+                        </div>
+                        <p class="note">(Forma canônica armazenada no banco de dados)</p>
+                    </div>
+                </div>
+
+                <!-- Decisão -->
+                <div class="decision-info">
+                    <p><strong>Decisão do algoritmo:</strong> se qualquer uma das transformações já estiver presente no
+                        banco, o sistema reutiliza esse estado e atualiza o aprendizado. Caso contrário, o estado
+                        canônico é armazenado como novo.</p>
                 </div>
             </div>
         </div>
 
-        <p>Ambas são armazenadas no banco como:</p>
-        <pre class="numeric-board">
-"state": "O,O,O,X,X,,,"
-</pre>
-    </div>
-</div>
-    
-<div class="info-card">
-    <h2><i class="fas fa-sync-alt"></i> Redução de Estados por Transformações</h2>
-    <p>Para otimizar o aprendizado, o sistema considera equivalentes todas as variações por rotação ou espelhamento de um estado.</p>
-
-    <div class="transformations-grid">
-        <!-- Linha 1: Estado Inicial -->
-        <div class="transformation-group">
-            <h3>Estado Inicial</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <!-- Linha 2: Rotações -->
-        <div class="transformation-group">
-            <h3>Rotação 90°</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <div class="transformation-group">
-            <h3>Rotação 180°</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-            </div>
-        </div>
-
-        <div class="transformation-group">
-            <h3>Rotação 270°</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <!-- Linha 3: Espelhamentos -->
-        <div class="transformation-group">
-            <h3>Espelhamento Horizontal</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <div class="transformation-group">
-            <h3>Espelhamento Vertical</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <div class="transformation-group">
-            <h3>Espelhamento Diagonal Principal</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <div class="transformation-group">
-            <h3>Espelhamento Diagonal Secundária</h3>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-            </div>
-        </div>
-
-        <!-- Linha 4: Estado Canônico -->
-        <div class="transformation-group canonical">
-            <h3>Estado Canônico</h3>
-            <p>O sistema seleciona automaticamente a versão com menor valor hash.</p>
-            <div class="mini-tabuleiro">
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula x">X</div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-                <div class="mini-celula o">O</div>
-                <div class="mini-celula"></div>
-            </div>
-            <p class="note">(Forma canônica armazenada no banco de dados)</p>
-        </div>
-    </div>
-
-    <!-- Decisão -->
-    <div class="decision-info">
-        <p><strong>Decisão do algoritmo:</strong> se qualquer uma das transformações já estiver presente no banco, o sistema reutiliza esse estado e atualiza o aprendizado. Caso contrário, o estado canônico é armazenado como novo.</p>
-    </div>
-</div>
-   
         <!-- Seção Tecnologias -->
         <div class="info-section" ng-show="vm.isActiveSection('tech')">
             <div class="info-card">
@@ -336,13 +378,38 @@
                         <span>CSS3</span>
                         <small>Estilização</small>
                     </div>
+                    <div class="tech-item">
+                        <i class="fas fa-code"></i>
+                        <span>C#</span>
+                        <small>Linguagem back-end</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-database"></i>
+                        <span>Entity Framework</span>
+                        <small>ORM para banco de dados</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-server"></i>
+                        <span>SQL Server</span>
+                        <small>Banco de dados relacional</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-microsoft"></i>
+                        <span>Azure</span>
+                        <small>Hospedagem na nuvem</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                        <small>Controle de versão</small>
+                    </div>
                 </div>
             </div>
-            
+
             <div class="info-card">
                 <h2><i class="fas fa-project-diagram"></i> Arquitetura do Sistema</h2>
                 <p>O projeto foi desenvolvido com uma arquitetura modular:</p>
-                
+
                 <ul>
                     <li><strong>Módulo de Jogo:</strong> Gerencia as regras e estado do jogo</li>
                     <li><strong>Módulo de IA:</strong> Implementa o Q-Learning e toma decisões</li>
@@ -351,66 +418,62 @@
                 </ul>
             </div>
         </div>
-        
+
         <!-- Seção Equipe -->
         <div class="info-section" ng-show="vm.isActiveSection('team')">
-    <div class="info-card">
-        <h2><i class="fas fa-users"></i> Nossa Equipe</h2>
-        <p>O projeto foi desenvolvido por estudantes e professores do Grupo de IA da Univille:</p>
+            <div class="info-card">
+                <h2><i class="fas fa-users"></i> Nossa Equipe</h2>
+                <p>O projeto foi desenvolvido por estudantes e professores do Grupo de IA da Univille:</p>
 
-            <div class="team-grid">
-                <!-- Professor Torrens -->
-                <div    class="team-member" 
-                    ng-click="vm.openProfile('torrens')"
-                    tooltip="Clique para ver o currículo Lattes do Professor Torrens"
-                    tooltip-placement="top">
-                    <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('torrens')}">
-                        <img ng-src="assets/images/professor_edson.gif" 
-                            onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'" 
-                            alt="Prof. Dr. Edson Wilson Torrens">
-                        <i class="fas fa-external-link-alt link-icon"></i>
+                <div class="team-grid">
+                    <!-- Professor Torrens -->
+                    <div class="team-member" ng-click="vm.openProfile('torrens')"
+                        tooltip="Clique para ver o currículo Lattes do Professor Torrens" tooltip-placement="top">
+                        <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('torrens')}">
+                            <img ng-src="assets/images/professor_edson.gif"
+                                onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'"
+                                alt="Prof. Dr. Edson Wilson Torrens">
+                            <i class="fas fa-external-link-alt link-icon"></i>
+                        </div>
+                        <h3>Prof. Dr. Edson Wilson Torrens</h3>
+                        <p class="role">Coordenador</p>
+                        <p class="member-bio">Doutor em Ciências Contábeis e Administração pela Universidade
+                            Regional de Blumenau</p>
                     </div>
-                    <h3>Prof. Dr. Edson Wilson Torrens</h3>
-                    <p class="role">Coordenador</p>
-                    <p class="member-bio">Doutor em Ciências Contábeis e Administração pela Universidade Regional de Blumenau</p>
+
+                    <!-- Professor Dumba -->
+                    <div class="team-member" ng-click="vm.openProfile('dumba')"
+                        tooltip="Clique para ver o currículo Lattes do Professor Dumba" tooltip-placement="top">
+                        <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('dumba')}">
+                            <img ng-src="assets/images/professor_laurindo.png"
+                                onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'"
+                                alt="Prof. Msc. Laurindo Dumba">
+                            <i class="fas fa-external-link-alt link-icon"></i>
+                        </div>
+                        <h3>Prof. Laurindo Vilonga Dumba</h3>
+                        <p class="role">Coordenador</p>
+                        <p class="member-bio">Mestrando em Ciência da Computação</p>
+                    </div>
+
+                    <!-- Desenvolvedor Francisco -->
+                    <div class="team-member" ng-click="vm.openProfile('lima')"
+                        tooltip="Clique para ver o perfil no LinkedIn do Francisco" tooltip-placement="top">
+                        <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('lima')}">
+                            <img ng-src="assets/images/dev_francisco.jpg"
+                                onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'"
+                                alt="Francisco Marcello Ribeiro Lima">
+                            <i class="fas fa-external-link-alt link-icon"></i>
+                        </div>
+                        <h3>Francisco Marcello Ribeiro Lima</h3>
+                        <p class="role">Desenvolvedor do Projeto</p>
+                        <p class="member-bio">Estudante de Engenharia de Software</p>
+                    </div>
                 </div>
 
-                <!-- Professor Dumba -->
-                <div class="team-member" 
-                    ng-click="vm.openProfile('dumba')"
-                    tooltip="Clique para ver o currículo Lattes do Professor Dumba"
-                    tooltip-placement="top">
-                    <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('dumba')}">
-                        <img ng-src="assets/images/professor_laurindo.png" 
-                            onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'" 
-                            alt="Prof. Msc. Laurindo Dumba">
-                        <i class="fas fa-external-link-alt link-icon"></i>
-                    </div>
-                    <h3>Prof. Laurindo Vilonga Dumba</h3>
-                    <p class="role">Coordenador</p>
-                    <p class="member-bio">Mestrando em Ciência da Computação</p>
-                </div>
-
-                <!-- Desenvolvedor Francisco -->
-                <div class="team-member" 
-                    ng-click="vm.openProfile('lima')"
-                    tooltip="Clique para ver o perfil no LinkedIn do Francisco"
-                    tooltip-placement="top">
-                    <div class="member-avatar" ng-class="{'fallback-logo': !vm.memberHasImage('lima')}">
-                        <img ng-src="assets/images/dev_francisco.jpg" 
-                            onerror="this.onerror=null;this.src='assets/images/GEPIA_logo.png'" 
-                            alt="Francisco Marcello Ribeiro Lima">
-                        <i class="fas fa-external-link-alt link-icon"></i>
-                    </div>
-                    <h3>Francisco Marcello Ribeiro Lima</h3>
-                    <p class="role">Desenvolvedor do Projeto</p>
-                    <p class="member-bio">Estudante de Engenharia de Software</p>
-                </div>
-            </div>
-            
                 <h2><i class="fas fa-graduation-cap"></i> Colaboração Acadêmica</h2>
-                <p>Este projeto faz parte das iniciativas do Departamento de Informática da Universidade da Região de Joinville, com o objetivo de:</p>
-                
+                <p>Este projeto faz parte das iniciativas do Departamento de Informática da Universidade da Região
+                    de Joinville, com o objetivo de:</p>
+
                 <ul>
                     <li>Popularizar conceitos de IA entre estudantes e entusiastas</li>
                     <li>Criar material didático interativo</li>
@@ -419,6 +482,7 @@
                     <li>Desenvolver soluções práticas e inovadoras</li>
                     <li>Estimular a criatividade e inovação no uso de tecnologias de IA</li>
                 </ul>
+            </div>
         </div>
     </div>
 </div>
