@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/css/*", "/js/*", "/images/*"]
+    "exclude": ["/assets/**", "/assets/docs/*", "/css/*", "/js/*", "/images/*", "/docs/*"]
   },
   "routes": [
     {
@@ -24,6 +24,13 @@
     },
     {
       "route": "/assets/images/*",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
+    {
+      "route": "/assets/docs/*",
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Cache-Control": "public, max-age=86400"
