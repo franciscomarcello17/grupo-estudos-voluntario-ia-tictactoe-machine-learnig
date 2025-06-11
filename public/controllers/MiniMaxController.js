@@ -280,38 +280,123 @@ angular.module('jogoDaVelhaApp')
         return bestMove;
     };
     
-    // Atualiza a visualização da árvore de decisão
-    vm.updateTreeVisualization = function() {
-        let tree = 'Raiz [Jogada atual]\n';
-        const bestMove = vm.findBestMove();
-        
-        // Simula uma árvore de decisão
-        for (let row = 0; row < 3; row++) {
-            for (let col = 0; col < 3; col++) {
-                if (vm.board[row][col] === null) {
-                    const move = String.fromCharCode(97 + col) + (row + 1);
-                    // Dentro do loop em updateTreeVisualization()
-                    vm.board[row][col] = 'O';  // Simula jogada da IA
-                    const score = vm.minimax(vm.board, 0, false);  // Obtém avaliação real
-                    vm.board[row][col] = null;  // Desfaz simulação                    
-                    if (bestMove && bestMove.row === row && bestMove.col === col) {
-                        tree += `└─ <span class="node-selected">${move} [Avaliação: ${score}] ← Melhor jogada</span>\n`;
-                    } else {
-                        tree += `├─ ${move} [Avaliação: ${score}]\n`;
-                    }
-                    
-                    // Adiciona alguns nós filhos de exemplo
-                    if (row === bestMove?.row && col === bestMove?.col) {
-                        tree += `│  ├─ <span class="node-value">Valor: ${score}</span>\n`;
-                        tree += `│  └─ <span class="node-move">Profundidade: 3</span>\n`;
-                    }
-                }
+// No controller, adicione estas propriedades:
+vm.treeData = [];
+vm.expandedNodes = {};
+
+// Substitua a função updateTreeVisualization por esta versão mais completa:
+vm.updateTreeVisualization = function() {
+    vm.treeData = vm.generateTreeData(vm.board, 'O', 0, 3); // Profundidade máxima 3
+    vm.renderTree();
+};
+
+// Função para gerar os dados da árvore
+vm.generateTreeData = function(board, player, depth, maxDepth) {
+    if (depth >= maxDepth) return null;
+    
+    const nodes = [];
+    const nextPlayer = player === 'O' ? 'X' : 'O';
+    
+    for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+            if (board[row][col] === null) {
+                const move = String.fromCharCode(97 + col) + (row + 1);
+                
+                // Simula a jogada
+                board[row][col] = player;
+                const score = vm.minimax(board, depth + 1, player === 'X');
+                const children = depth < maxDepth - 1 ? vm.generateTreeData(board, nextPlayer, depth + 1, maxDepth) : null;
+                
+                // Desfaz a simulação
+                board[row][col] = null;
+                
+                nodes.push({
+                    id: `${move}-${depth}`,
+                    move: move,
+                    player: player,
+                    score: score,
+                    depth: depth,
+                    children: children
+                });
             }
         }
-        
-        vm.treeVisualization = $sce.trustAsHtml(tree);
-    };
+    }
     
+    return nodes.sort((a, b) => b.score - a.score);
+};
+
+// Função para renderizar a árvore
+vm.renderTree = function() {
+    let html = '<div class="tree-root">Raiz [Jogada atual]</div>';
+    html += vm.renderTreeLevel(vm.treeData, 0);
+    vm.treeVisualization = $sce.trustAsHtml(html);
+};
+
+// Função recursiva para renderizar cada nível
+vm.renderTreeLevel = function(nodes, level) {
+    if (!nodes || nodes.length === 0) return '';
+    
+    let html = '<ul class="tree-level">';
+    const isExpanded = (node) => vm.expandedNodes[node.id];
+    
+    nodes.forEach((node, index) => {
+        const isLast = index === nodes.length - 1;
+        const prefix = level > 0 ? '│  '.repeat(level - 1) + (isLast ? '└─ ' : '├─ ') : '';
+        const hasChildren = node.children && node.children.length > 0;
+        
+        let nodeClass = 'tree-node';
+        if (node.player === 'O') nodeClass += ' node-ai';
+        if (node.player === 'X') nodeClass += ' node-player';
+        if (node.score === 1) nodeClass += ' node-win';
+        if (node.score === -1) nodeClass += ' node-loss';
+        
+        html += `<li class="${nodeClass}">`;
+        html += `<span class="node-prefix">${prefix}</span>`;
+        html += `<span class="node-content" data-node-id="${node.id}">`;
+        html += `${node.move} [${node.player}] (Avaliação: ${node.score})`;
+        if (hasChildren) {
+            html += ` <span class="node-toggle">[${isExpanded(node) ? '-' : '+'}]</span>`;
+        }
+        html += '</span>';
+        
+        if (hasChildren && isExpanded(node)) {
+            html += vm.renderTreeLevel(node.children, level + 1);
+        }
+        
+        html += '</li>';
+    });
+    
+    html += '</ul>';
+    return html;
+};
+
+// Função para expandir/recolher nós
+vm.toggleNode = function(nodeId) {
+    vm.expandedNodes[nodeId] = !vm.expandedNodes[nodeId];
+    vm.renderTree();
+};    
+
+vm.handleTreeClick = function(event) {
+    // Verifica se o clique foi em um elemento com a classe node-content ou node-toggle
+    let target = event.target;
+    if (target.classList.contains('node-toggle') || 
+        target.classList.contains('node-content')) {
+        
+        // Se clicou no toggle, pega o elemento pai (node-content)
+        if (target.classList.contains('node-toggle')) {
+            target = target.parentElement;
+        }
+        
+        // Extrai o nodeId do atributo data-node-id
+        const nodeId = target.getAttribute('data-node-id');
+        if (nodeId) {
+            vm.toggleNode(nodeId);
+            // Atualiza a árvore
+            vm.$apply();
+            event.stopPropagation();
+        }
+    }
+};
     // Reinicia o jogo
     vm.resetGame = function() {
         vm.board = [

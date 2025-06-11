@@ -11,21 +11,21 @@
     flex: 2;
     display: flex;
     flex-direction: column;
-    background-color: white;
-    border: 1px solid var(--primary-color);
+    background-color: #0C0C0C; /* Fundo preto do cmd */
+    border: 1px solid #555555;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .cmd-title-bar {
-    background: var(--secondary-color);
-    color: var(--dark-color);
+    background: #000080; /* Azul escuro do título do cmd */
+    color: white;
     padding: 5px 10px;
     display: flex;
     border-radius: 15px 15px 0 0;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 12px;
     height: 30px;
 }
@@ -49,32 +49,32 @@
     font-size: 12px;
     font-weight: bold;
     text-decoration: none;
-    color: var(--dark-color);
-    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    background-color: #555555;
     border-radius: 3px;
 }
 
 .cmd-btn:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: #777777;
 }
 
 .cmd-close:hover {
-    background-color: var(--danger-color);
+    background-color: #FF0000;
     color: white;
 }
 
 .cmd-body {
     flex: 1;
     padding: 10px;
-    background-color: white;
-    color: var(--dark-color);
-    font-family: 'Roboto', sans-serif;
+    background-color: #0C0C0C;
+    color: #CCCCCC;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 14px;
     display: flex;
     flex-direction: column;
     height: calc(100% - 30px);
     border-radius: 0 0 15px 15px;
-    border-top: 1px solid var(--light-color);
+    border-top: 1px solid #555555;
 }
 
 .cmd-output {
@@ -91,11 +91,28 @@
     padding: 3px 0;
 }
 
+/* Cores para diferentes tipos de mensagens */
+.cmd-line.error {
+    color: #FF0000;
+}
+
+.cmd-line.warning {
+    color: #FFFF00;
+}
+
+.cmd-line.info {
+    color: #00BFFF;
+}
+
+.cmd-line.success {
+    color: #00FF00;
+}
+
 .cmd-board {
     margin: 10px 0;
     padding: 10px;
-    background-color: var(--light-color);
-    border: 1px solid var(--primary-color);
+    background-color: #1A1A1A;
+    border: 1px solid #555555;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -105,7 +122,7 @@
     margin: 0;
     font-size: 1.1rem;
     line-height: 1.5;
-    color: var(--dark-color);
+    color: #FFFFFF;
     font-family: 'Consolas', 'Courier New', monospace;
 }
 
@@ -114,12 +131,12 @@
     align-items: center;
     margin-top: auto;
     padding: 8px;
-    background-color: var(--light-color);
+    background-color: #1A1A1A;
     border-radius: 8px;
 }
 
 .cmd-prompt {
-    color: var(--primary-color);
+    color: #00FF00;
     margin-right: 8px;
     white-space: nowrap;
     font-weight: bold;
@@ -129,8 +146,8 @@
     flex: 1;
     background-color: transparent;
     border: none;
-    color: var(--dark-color);
-    font-family: 'Roboto', sans-serif;
+    color: #CCCCCC;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 14px;
     outline: none;
     padding: 5px;
@@ -141,20 +158,20 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--primary-color);
-    background-color: white;
+    border: 1px solid #555555;
+    background-color: #0C0C0C;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .tree-title-bar {
-    background: var(--secondary-color);
-    color: var(--dark-color);
+    background: #000080;
+    color: white;
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 12px;
     height: 30px;
     border-radius: 15px 15px 0 0;
@@ -178,53 +195,100 @@
     cursor: pointer;
     font-size: 12px;
     font-weight: bold;
-    color: var(--dark-color);
-    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    background-color: #555555;
     border-radius: 3px;
 }
 
 .tree-btn:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: #777777;
 }
 
 .tree-close:hover {
-    background-color: var(--danger-color);
+    background-color: #FF0000;
     color: white;
 }
 
 .tree-container {
     flex: 1;
     padding: 10px;
-    background-color: white;
-    color: var(--dark-color);
+    background-color: #0C0C0C;
+    color: #CCCCCC;
     overflow-y: auto;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 13px;
     white-space: pre;
     border-radius: 0 0 15px 15px;
     line-height: 1.5;
 }
 
-.node {
-    margin-left: 20px;
-    color: var(--gray-color);
-}
-
-.node-value {
-    color: var(--primary-color);
+/* Estilos para a árvore expansível */
+.tree-root {
     font-weight: bold;
+    margin-bottom: 5px;
+    color: #CCCCCC;
 }
 
-.node-move {
-    color: var(--secondary-color);
-    font-weight: 500;
+.tree-level {
+    list-style-type: none;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.tree-node {
+    margin: 3px 0;
+    line-height: 1.4;
+    cursor: default;
+}
+
+.node-prefix {
+    color: #555555;
+    font-family: monospace;
+    white-space: pre;
+}
+
+.node-content {
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-block;
+    color: #CCCCCC;
+}
+
+.node-content:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.node-toggle {
+    cursor: pointer;
+    color: #00FF00;
+    font-weight: bold;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+/* Estilos para diferentes tipos de nós */
+.node-ai {
+    color: #00BFFF;
+}
+
+.node-player {
+    color: #FF00FF;
+}
+
+.node-win {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: #00FF00;
+}
+
+.node-loss {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #FF0000;
 }
 
 .node-selected {
-    background-color: var(--secondary-color);
-    color: var(--dark-color);
-    padding: 2px 5px;
-    border-radius: 3px;
+    background-color: #000080;
+    color: white;
     font-weight: bold;
 }
 
@@ -238,67 +302,4 @@
     .cmd-window, .minimax-tree {
         width: 100%;
     }
-}
-
-/* Estilo do tabuleiro do jogo */
-.game-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px auto;
-    max-width: 300px;
-}
-
-.cell {
-    width: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
-    font-size: 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.cell:hover {
-    background-color: var(--light-color);
-    transform: scale(1.05);
-}
-
-.cell.x {
-    color: var(--primary-color);
-}
-
-.cell.o {
-    color: var(--secondary-color);
-}
-
-.game-status {
-    text-align: center;
-    margin: 15px 0;
-    font-size: 1.2rem;
-    color: var(--dark-color);
-    font-weight: 500;
-}
-
-.reset-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-    margin-top: 10px;
-}
-
-.reset-btn:hover {
-    background-color: var(--secondary-color);
-    color: var(--dark-color);
-    transform: scale(1.05);
 }

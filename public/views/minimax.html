@@ -40,9 +40,9 @@
             <div class="tree-title">Árvore de Decisão MiniMax</div>
             <div class="tree-buttons">
                 <div class="tree-btn tree-minimize">_</div>
-                <div class="tree-btn tree-close">×</div>
+                <a class="tree-btn tree-close" href="/treinar">×</a>
             </div>
         </div>
-        <div class="tree-container" ng-bind-html="mm.treeVisualization | trustHtml"></div>
+        <div class="tree-container" ng-bind-html="mm.treeVisualization | trustHtml" ng-click="mm.handleTreeClick($event)"></div>
     </div>
 </div>
