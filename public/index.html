@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="/css/infosPages.css">
     <link rel="stylesheet" href="/css/visualizar.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/minimax.css">
     
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -39,6 +40,7 @@
     <script src="/controllers/TreinarController.js"></script>
     <script src="/controllers/VisualizarController.js"></script>
     <script src="/controllers/SobreController.js"></script>
+    <script src="/controllers/MiniMaxController.js"></script>
     <script src="/services/ApiService.js"></script>
     <script src="/services/efeitosFimPartida.js"></script>
 </head>
@@ -59,6 +61,9 @@
             <nav class="main-nav main-nav-desktop" ng-class="{active: vm.menuAberto}">
                 <a href="/treinar" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/treinar')}">
                     <i class="fas fa-gamepad"></i> Jogar
+                </a>
+                <a href="/minimax" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/minimax')}">
+                    <i class="fas fa-terminal"></i> MiniMax Terminal
                 </a>
                 <a href="/sobre" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/sobre')}">
                     <i class="fas fa-info-circle"></i> Sobre
