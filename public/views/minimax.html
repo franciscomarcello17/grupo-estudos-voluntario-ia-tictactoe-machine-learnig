@@ -5,33 +5,26 @@
             <div class="cmd-buttons">
                 <div class="cmd-btn cmd-minimize">_</div>
                 <div class="cmd-btn cmd-maximize">□</div>
-                <div class="cmd-btn cmd-close">×</div>
+                <a class="cmd-btn cmd-close" href="/treinar">×</a>
             </div>
         </div>
         
         <div class="cmd-body">
+            <div class="cmd-board">
+                <pre class="ascii-board">
+  A   B   C
+1 {{mm.board[0][0] || ' '}} | {{mm.board[0][1] || ' '}} | {{mm.board[0][2] || ' '}}
+-----------
+2 {{mm.board[1][0] || ' '}} | {{mm.board[1][1] || ' '}} | {{mm.board[1][2] || ' '}}
+-----------
+3 {{mm.board[2][0] || ' '}} | {{mm.board[2][1] || ' '}} | {{mm.board[2][2] || ' '}}
+                </pre>
+            </div>
+            
             <div class="cmd-output">
-                <div class="cmd-line">Microsoft Windows [Version 10.0.19045.3803]</div>
-                <div class="cmd-line">(c) Microsoft Corporation. Todos os direitos reservados.</div>
-                <div class="cmd-line"><br></div>
-                <div class="cmd-line">C:\Users\Player&gt; jogo_da_velha --minimax</div>
-                <div class="cmd-line">Bem-vindo ao Jogo da Velha MiniMax Terminal</div>
-                <div class="cmd-line">Digite coordenadas (ex: a1, b2, c3) para jogar</div>
-                <div class="cmd-line">Você é o jogador X</div>
                 <div class="cmd-line" ng-if="mm.gameOver">Jogo terminado! {{mm.winner ? 'Vencedor: ' + mm.winner : 'Empate!'}}</div>
                 <div class="cmd-line" ng-if="mm.gameOver">Digite 'reset' para jogar novamente</div>
                 <div class="cmd-line" ng-repeat="line in mm.terminalLines track by $index">{{line}}</div>
-            </div>
-            
-            <div class="cmd-board">
-                <pre class="ascii-board">
-   A   B   C
-1 {{mm.board[0][0] || ' '}} | {{mm.board[0][1] || ' '}} | {{mm.board[0][2] || ' '}}
-  -----------
-2 {{mm.board[1][0] || ' '}} | {{mm.board[1][1] || ' '}} | {{mm.board[1][2] || ' '}}
-  -----------
-3 {{mm.board[2][0] || ' '}} | {{mm.board[2][1] || ' '}} | {{mm.board[2][2] || ' '}}
-                </pre>
             </div>
             
             <div class="cmd-input">

@@ -13,6 +13,7 @@ angular.module('jogoDaVelhaApp')
     vm.winner = null;
     vm.userInput = '';
     vm.terminalLines = [];
+    vm.showBoard = false; // Novo controle para exibir o tabuleiro
     vm.treeVisualization = $sce.trustAsHtml('Árvore de decisão será exibida aqui após sua jogada...');
     
     // Mapeamento de entrada do usuário para coordenadas
@@ -22,9 +23,23 @@ angular.module('jogoDaVelhaApp')
         'c1': [0, 2], 'c2': [1, 2], 'c3': [2, 2]
     };
     
+    // Função para adicionar linha ao terminal (definida antes de ser usada)
+    vm.addTerminalLine = function(text) {
+        vm.terminalLines.push(text);
+        // Scroll automático para o final
+        setTimeout(() => {
+            const output = document.querySelector('.cmd-output');
+            if (output) output.scrollTop = output.scrollHeight;
+        }, 10);
+    };
+    
     // Inicializa o terminal com mensagem de boas-vindas
-    vm.addTerminalLine('Digite coordenadas (ex: a1, b2, c3) para jogar');
-    vm.addTerminalLine('Você é o jogador X');
+    
+    vm.addTerminalLine('Bem-vindo ao Jogo da Velha com IA MiniMax!');
+    vm.addTerminalLine('Digite as coordenadas (ex: a1, b2, c3) para jogar');
+    vm.addTerminalLine('Digite "help" para ver os comandos disponíveis');
+    vm.addTerminalLine('Digite "cls" para limpar o console e começar');
+
     
     // Manipula a entrada do usuário
     vm.handleInput = function(event) {
@@ -32,10 +47,40 @@ angular.module('jogoDaVelhaApp')
             const input = vm.userInput.toLowerCase().trim();
             
             // Adiciona o comando ao histórico
-            vm.addTerminalLine('C:\\Users\\Player&gt; ' + input);
+            vm.addTerminalLine('C:\\Users\\Player: ' + input);
+            
+            // Comandos do console
+            if (input === 'cls') {
+                vm.terminalLines = [];
+                vm.showBoard = true;
+                vm.addTerminalLine('Console limpo. Jogo iniciado!');
+                vm.addTerminalLine('Você é o jogador X - Faça sua jogada (ex: a1)');
+                vm.userInput = '';
+                return;
+            }
             
             if (input === 'reset') {
                 vm.resetGame();
+                vm.userInput = '';
+                return;
+            }
+            
+            if (input === 'help') {
+                vm.showHelp();
+                vm.userInput = '';
+                return;
+            }
+            
+            if (input === 'debug') {
+                vm.addTerminalLine('Modo debug ativado');
+                vm.addTerminalLine('Tabuleiro atual: ' + JSON.stringify(vm.board));
+                vm.userInput = '';
+                return;
+            }
+            
+            if (!vm.showBoard) {
+                vm.addTerminalLine('Digite "cls" para começar o jogo');
+                vm.userInput = '';
                 return;
             }
             
@@ -57,27 +102,28 @@ angular.module('jogoDaVelhaApp')
                             if (bestMove) {
                                 vm.makeMove(bestMove.row, bestMove.col, 'O');
                             }
-                        }, 500);
+                        }, 700);
                     }
                 } else {
                     vm.addTerminalLine('Posição já ocupada. Tente outra.');
                 }
             } else {
                 vm.addTerminalLine('Entrada inválida. Use formato letra+número (ex: a1, b2, c3)');
+                vm.addTerminalLine('Digite "help" para ver os comandos disponíveis');
             }
             
             vm.userInput = '';
         }
     };
     
-    // Adiciona uma linha ao terminal
-    vm.addTerminalLine = function(text) {
-        vm.terminalLines.push(text);
-        // Scroll automático para o final
-        setTimeout(() => {
-            const output = document.querySelector('.cmd-output');
-            if (output) output.scrollTop = output.scrollHeight;
-        }, 10);
+    // Mostra ajuda
+    vm.showHelp = function() {
+        vm.addTerminalLine('Comandos disponíveis:');
+        vm.addTerminalLine('cls - Limpa o console e inicia o jogo');
+        vm.addTerminalLine('reset - Reinicia o jogo');
+        vm.addTerminalLine('help - Mostra esta ajuda');
+        vm.addTerminalLine('debug - Mostra informações de depuração');
+        vm.addTerminalLine('Coordenadas válidas: a1, a2, a3, b1, b2, b3, c1, c2, c3');
     };
     
     // Realiza uma jogada
@@ -195,7 +241,7 @@ angular.module('jogoDaVelhaApp')
             if (board[a[0]][a[1]] && 
                 board[a[0]][a[1]] === board[b[0]][b[1]] && 
                 board[a[0]][a[1]] === board[c[0]][c[1]]) {
-                return board[a[0]][a[1]] === 'O' ? 10 : -10;
+                return board[a[0]][a[1]] === 'O' ? 1 : -1;
             }
         }
         return 0;
@@ -244,8 +290,10 @@ angular.module('jogoDaVelhaApp')
             for (let col = 0; col < 3; col++) {
                 if (vm.board[row][col] === null) {
                     const move = String.fromCharCode(97 + col) + (row + 1);
-                    const score = Math.floor(Math.random() * 20) - 10;
-                    
+                    // Dentro do loop em updateTreeVisualization()
+                    vm.board[row][col] = 'O';  // Simula jogada da IA
+                    const score = vm.minimax(vm.board, 0, false);  // Obtém avaliação real
+                    vm.board[row][col] = null;  // Desfaz simulação                    
                     if (bestMove && bestMove.row === row && bestMove.col === col) {
                         tree += `└─ <span class="node-selected">${move} [Avaliação: ${score}] ← Melhor jogada</span>\n`;
                     } else {
@@ -274,9 +322,11 @@ angular.module('jogoDaVelhaApp')
         vm.currentPlayer = 'X';
         vm.gameOver = false;
         vm.winner = null;
+        vm.showBoard = true;
         vm.terminalLines = [];
         vm.treeVisualization = $sce.trustAsHtml('Árvore de decisão será exibida aqui após sua jogada...');
         vm.addTerminalLine('Jogo reiniciado. Você é o jogador X');
+        vm.addTerminalLine('Digite coordenadas (ex: a1, b2, c3) para jogar');
     };
 }])
 .filter('trustHtml', ['$sce', function($sce) {
