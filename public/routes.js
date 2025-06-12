@@ -13,6 +13,11 @@ angular.module('jogoDaVelhaApp').config(['$routeProvider', function($routeProvid
             controller: 'TreinarController',
             controllerAs: 'vm'
         })
+        .when('/minimax', {
+            templateUrl: '/views/minimax.html',
+            controller: 'MiniMaxController',
+            controllerAs: 'mm'
+        })
         // .when('/jogar', {
         //     templateUrl: 'views/jogar.html',
         //     controller: 'JogarController',

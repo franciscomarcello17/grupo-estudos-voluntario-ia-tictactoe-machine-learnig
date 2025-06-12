@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="/css/infosPages.css">
     <link rel="stylesheet" href="/css/visualizar.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/minimax.css">
     
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -39,18 +40,24 @@
     <script src="/controllers/TreinarController.js"></script>
     <script src="/controllers/VisualizarController.js"></script>
     <script src="/controllers/SobreController.js"></script>
+    <script src="/controllers/MiniMaxController.js"></script>
     <script src="/services/ApiService.js"></script>
     <script src="/services/efeitosFimPartida.js"></script>
 </head>
-<body>
+<body ng-class="{'minimax-mode': vm.isActive('/minimax')}">
     <div class="app-container">
         <header class="app-header">
             <div class="logo">
                 <a href="/treinar">
                 <img src="/assets/images/logo_cropped.png" alt="Logo Jogo da Velh-IA">
-                <h1 class="logo-text">
-                    <span class="velh">Jogo da Velh</span><span class="ia">-IA</span>
-                </h1>
+                    <h1 class="logo-text">
+                        <span ng-hide="vm.isActive('/minimax')">
+                            <span class="velh">Jogo da Velh</span><span class="ia">-IA</span>
+                        </span>
+                        <a href="/minimax" ng-show="vm.isActive('/minimax')">
+                            <span class="velh">Mini</span><span class="ia">Max</span>
+                        </a>
+                    </h1>
                 </a>
             </div>
             <div class="menu-toggle" ng-click="vm.toggleMenu()">
@@ -58,15 +65,20 @@
             </div>
             <nav class="main-nav main-nav-desktop" ng-class="{active: vm.menuAberto}">
                 <a href="/treinar" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/treinar')}">
-                    <i class="fas fa-gamepad"></i> Jogar
+                    <i class="fas fa-gamepad"></i>
+                    <span ng-show="vm.isActive('/minimax')">Jogo da Velh-IA</span>
+                    <span ng-hide="vm.isActive('/minimax')">Treinar</span>
                 </a>
-                <a href="/sobre" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/sobre')}">
+                <a href="/minimax" ng-click="vm.navigate()" ng-hide="vm.isActive('/minimax')" ng-class="{active: vm.isActive('/minimax')}">
+                    <i class="fas fa-terminal"></i> MiniMax
+                </a>
+                <a href="/sobre" ng-click="vm.navigate()" ng-hide="vm.isActive('/minimax')" ng-class="{active: vm.isActive('/sobre')}">
                     <i class="fas fa-info-circle"></i> Sobre
                 </a>
                 <!-- <a href="/grupo" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/grupo')}">
                     <i class="fas fa-users"></i> GEPIA
                 </a> -->
-                <a href="/visualizar" ng-click="vm.navigate()" ng-class="{active: vm.isActive('/visualizar')}">
+                <a href="/visualizar" ng-click="vm.navigate()" ng-hide="vm.isActive('/minimax')" ng-class="{active: vm.isActive('/visualizar')}">
                     <i class="fas fa-database"></i> Visualizar Dados
                 </a>
             </nav>

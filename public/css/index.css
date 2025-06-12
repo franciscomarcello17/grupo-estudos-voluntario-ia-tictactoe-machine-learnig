@@ -9,6 +9,78 @@
     --header-height: 80px;
 }
 
+/* Estilo MiniMax - Modo Retrô/Tecnológico */
+.minimax-mode .app-container {
+    position: relative;
+    background-color: #000;
+    overflow: hidden; /* Importante para conter o blur */
+}
+
+.minimax-mode .app-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/images/minimax-background.gif');
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px); /* Ajuste o valor para mais/menos blur */
+    opacity: 0.8; /* Opcional: reduz um pouco a opacidade para melhor legibilidade */
+}
+
+/* Ajustes para o conteúdo ficar legível sobre o fundo com blur */
+.minimax-mode .app-main {
+    position: relative;
+    z-index: 1;
+}
+
+.minimax-mode .logo img {
+    display: none;
+}
+
+.minimax-mode .logo-text .velh {
+    color: #1a73e8; /* Azul */
+    text-shadow: 1px 1px 2px #0d47a1;
+}
+
+.minimax-mode .logo-text .ia {
+    color: #ea4335; /* Vermelho */
+    text-shadow: 1px 1px 2px #b71c1c;
+}
+
+.minimax-mode .app-header {
+    background-color: #000;
+    border-bottom: 2px solid #1a73e8;
+}
+
+.minimax-mode .main-nav {
+    background-color: #000;
+    transition: all 15s ease;
+}
+
+.minimax-mode .main-nav a {
+    color: #9aa0a6;
+}
+
+.minimax-mode .main-nav a:hover,
+.minimax-mode .main-nav a.active {
+    background-color: #1a73e8;
+    color: #fff;
+}
+
+.minimax-mode .app-footer {
+    background-color: #000;
+    border-top: 2px solid #ea4335;
+    color: #9aa0a6;
+}
+
+/* Efeito de terminal para o conteúdo MiniMax */
+.minimax-mode .app-main {
+    font-family: 'Courier New', monospace;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -164,3 +236,24 @@ canvas {
     pointer-events: none;
     z-index: 1000;
 }
+
+/* Transicoes para minimax */
+
+/* Transições específicas para o modo MiniMax */
+.minimax-mode .app-container {
+    transition: background-image 1.2s ease;
+}
+
+.minimax-mode .logo-text .velh,
+.minimax-mode .logo-text .ia {
+    transition: color 0.8s ease, text-shadow 0.8s ease;
+}
+
+.minimax-mode .app-header,
+.minimax-mode .app-footer {
+    transition: background-color 0.8s ease, border-color 0.8s ease;
+}
+
+/* .minimax-mode .main-nav a {
+    transition: all 0.8s ease;
+} */

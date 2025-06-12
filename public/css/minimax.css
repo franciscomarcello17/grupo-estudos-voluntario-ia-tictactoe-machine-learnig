@@ -1,0 +1,355 @@
+.minimax-container {
+    display: flex;
+    flex-direction: row;
+    height: calc(85vh - var(--header-height));
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Estilo da janela do CMD */
+.cmd-window {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    background-color: #0C0C0C; /* Fundo preto do cmd */
+    border: 1px solid #555555;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cmd-title-bar {
+    background: #555555; /* Azul escuro do título do cmd */
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    border-radius: 15px 15px 0 0;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12px;
+    height: 30px;
+}
+
+.cmd-title {
+    font-weight: bold;
+}
+
+.cmd-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.cmd-btn {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: #555555;
+    border-radius: 3px;
+}
+
+.cmd-btn:hover {
+    background-color: #777777;
+}
+
+.cmd-close:hover {
+    background-color: #FF0000;
+    color: white;
+}
+
+.cmd-body {
+    flex: 1;
+    padding: 10px;
+    background-color: #0C0C0C;
+    color: #CCCCCC;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 30px);
+    border-radius: 0 0 15px 15px;
+    border-top: 1px solid #555555;
+}
+
+.cmd-output {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.cmd-output::-webkit-scrollbar {
+    width: 8px; /* largura da barra de rolagem vertical */
+}
+
+.cmd-output::-webkit-scrollbar-track {
+    background: #000000; /* trilho da barra - cinza */
+}
+
+.cmd-output::-webkit-scrollbar-thumb {
+    background: #555555; /* parte que se move - preta */
+    border-radius: 2px;
+}
+
+.cmd-output::-webkit-scrollbar-thumb:hover {
+    background: #777777; /* cor ao passar o mouse */
+}
+
+
+.cmd-line {
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-bottom: 5px;
+    padding: 3px 0;
+}
+
+/* Cores para diferentes tipos de mensagens */
+.cmd-line.error {
+    color: #FF0000;
+}
+
+.cmd-line.warning {
+    color: #FFFF00;
+}
+
+.cmd-line.info {
+    color: #00BFFF;
+}
+
+.cmd-line.success {
+    color: #00FF00;
+}
+
+.cmd-board {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #1A1A1A;
+    border: 1px solid #555555;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.ascii-board {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #FFFFFF;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.cmd-input {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    padding: 8px;
+    background-color: #1A1A1A;
+    border-radius: 8px;
+}
+
+.cmd-prompt {
+    color: #00FF00;
+    margin-right: 8px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.cmd-input-field {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #CCCCCC;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+    padding: 5px;
+}
+
+/* Estilo da árvore de decisão */
+.minimax-tree {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #555555;
+    background-color: #0C0C0C;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tree-title-bar {
+    background: #555555;
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12px;
+    height: 30px;
+    border-radius: 15px 15px 0 0;
+}
+
+.tree-title {
+    font-weight: bold;
+}
+
+.tree-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.tree-btn {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: #555555;
+    border-radius: 3px;
+}
+
+.tree-btn:hover {
+    background-color: #777777;
+}
+
+.tree-close:hover {
+    background-color: #FF0000;
+    color: white;
+}
+
+.tree-container {
+    flex: 1;
+    padding: 10px;
+    background-color: #0C0C0C;
+    color: #CCCCCC;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+    white-space: pre;
+    border-radius: 0 0 15px 15px;
+    line-height: 1.5;
+}
+
+/* Estilos para a árvore expansível */
+.tree-root {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #CCCCCC;
+}
+
+.tree-level {
+    list-style-type: none;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.tree-node {
+    margin: 3px 0;
+    line-height: 1.4;
+    cursor: default;
+}
+
+.node-prefix {
+    color: #555555;
+    font-family: monospace;
+    white-space: pre;
+}
+
+.node-content {
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-block;
+    color: #CCCCCC;
+}
+
+.node-content:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.node-toggle {
+    cursor: pointer;
+    color: #00FF00;
+    font-weight: bold;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+/* Estilos para diferentes tipos de nós */
+.node-ai {
+    color: #00BFFF;
+}
+
+.node-player {
+    color: #FF00FF;
+}
+
+.node-win {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: #00FF00;
+}
+
+.node-loss {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #FF0000;
+}
+
+.node-selected {
+    background-color: #000080;
+    color: white;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .minimax-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .cmd-window, .minimax-tree {
+        width: 100%;
+    }
+}
+
+/* Estilo para tooltips ao clicar */
+.click-tooltip {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 100;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.click-tooltip.show {
+    opacity: 1;
+}
+
+/* Posicionamento relativo para os botões */
+.cmd-btn, .tree-btn {
+    position: relative;
+}
+
+.warning-text {
+    color: yellow;
+}
