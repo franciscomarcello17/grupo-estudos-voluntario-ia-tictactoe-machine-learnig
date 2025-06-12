@@ -186,7 +186,7 @@ angular.module('jogoDaVelhaApp').factory('EfeitosFimPartida', function($timeout)
         chuvaDeEmojisTristes: function() {
             const emojis = ["😞", "😔", "😢", "😭", "☹️"];
             const quantidade = 100;
-            const duracaoAnimacao = 3000; // duração da queda em ms (5 segundos)
+            const duracaoAnimacao = 3000; // duração da queda em ms (3 segundos)
 
             for (let i = 0; i < quantidade; i++) {
                 setTimeout(() => {
@@ -206,6 +206,7 @@ angular.module('jogoDaVelhaApp').factory('EfeitosFimPartida', function($timeout)
                     // Força o reflow antes de aplicar a animação
                     void emoji.offsetWidth;
 
+                    // Inicia a animação de queda
                     emoji.style.transform = `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`;
 
                     // Remove o emoji após a animação
