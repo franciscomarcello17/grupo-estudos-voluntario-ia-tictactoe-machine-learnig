@@ -3,9 +3,13 @@
         <div class="cmd-title-bar">
             <div class="cmd-title">MINIMAX TERMINAL - Jogo da Velha</div>
             <div class="cmd-buttons">
-                <div class="cmd-btn cmd-minimize">_</div>
-                <div class="cmd-btn cmd-maximize">□</div>
-                <a class="cmd-btn cmd-close" href="/treinar">×</a>
+                <div class="cmd-btn cmd-minimize" ng-click="mm.showTooltip($event)">_
+                    <span class="click-tooltip">Ação não permitida</span>
+                </div>
+                <div class="cmd-btn cmd-maximize" ng-click="mm.showTooltip($event)">□
+                    <span class="click-tooltip">Ação não permitida</span>
+                </div>
+                <a class="cmd-btn cmd-close" ng-click="mm.closeMinimax()">×</a>
             </div>
         </div>
         
@@ -24,7 +28,7 @@
             <div class="cmd-output">
                 <div class="cmd-line" ng-if="mm.gameOver">Jogo terminado! {{mm.winner ? 'Vencedor: ' + mm.winner : 'Empate!'}}</div>
                 <div class="cmd-line" ng-if="mm.gameOver">Digite 'reset' para jogar novamente</div>
-                <div class="cmd-line" ng-repeat="line in mm.terminalLines track by $index">{{line}}</div>
+                <div class="cmd-line" ng-repeat="line in mm.terminalLines track by $index" ng-bind-html="line | trustHtml">{{line}}</div>
             </div>
             
             <div class="cmd-input">
@@ -35,13 +39,15 @@
         </div>
     </div>
     
-    <div class="minimax-tree">
+    <div class="minimax-tree" ng-style="{ 'display': mm.isTreeHidden ? 'none' : 'block' }">
         <div class="tree-title-bar">
             <div class="tree-title">Árvore de Decisão MiniMax</div>
             <div class="tree-buttons">
-                <div class="tree-btn tree-minimize">_</div>
-                <a class="tree-btn tree-close" href="/treinar">×</a>
+            <div class="tree-btn tree-minimize" ng-click="mm.showTooltip($event)">_
+                <span class="click-tooltip">Ação não permitida</span>
             </div>
+            <div class="tree-btn tree-close" ng-click="mm.hideTree()">×</div>
+        </div>
         </div>
         <div class="tree-container" ng-bind-html="mm.treeVisualization | trustHtml" ng-click="mm.handleTreeClick($event)"></div>
     </div>
