@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cM4qgp4N+tg=",
+  "dgSpecHash": "1oDGwk0s/+I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\franc\\Documents\\GitHub\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj",
+  "projectFilePath": "C:\\Users\\franc\\Documents\\grupo-estudos-voluntario-ia-tictactoe-machine-learnig\\JogoDaVelhaIA.API\\JogoDaVelhaIA.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\franc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\franc\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",

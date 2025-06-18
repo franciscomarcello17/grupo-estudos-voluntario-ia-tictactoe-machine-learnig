@@ -1,0 +1,20 @@
+<div class="app-container">
+  <h1>Jogo da Velh-IA</h1>
+  
+  <app-game-controls
+    (newGame)="startNewGame()"
+    (viewDatabase)="viewDatabase()">
+  </app-game-controls>
+
+  @if (!showDatabase) {
+    <app-game-board
+      [board]="gameState.board"
+      [gameOver]="gameState.gameOver"
+      [winner]="gameState.winner"
+      (cellClick)="onCellClick($event)">
+    </app-game-board>
+  } @else {
+    <app-database-viewer [databaseStates]="databaseStates" />
+    <button (click)="startNewGame()">Voltar ao Jogo</button>
+  }
+</div>

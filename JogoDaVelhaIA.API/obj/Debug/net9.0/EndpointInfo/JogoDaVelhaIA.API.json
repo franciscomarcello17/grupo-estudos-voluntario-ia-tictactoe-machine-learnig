@@ -5,20 +5,10 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Aprendizado": {
-      "get": {
+    "/api/Game/new": {
+      "post": {
         "tags": [
-          "Aprendizado"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Aprendizado"
+          "Game"
         ],
         "responses": {
           "200": {
@@ -27,26 +17,26 @@
         }
       }
     },
-    "/api/Aprendizado/treinar": {
+    "/api/Game/move": {
       "post": {
         "tags": [
-          "Aprendizado"
+          "Game"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
+                "$ref": "#/components/schemas/PlayerMoveRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
+                "$ref": "#/components/schemas/PlayerMoveRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
+                "$ref": "#/components/schemas/PlayerMoveRequest"
               }
             }
           }
@@ -58,10 +48,10 @@
         }
       }
     },
-    "/api/Base/jogadas-base": {
+    "/api/Game/current-state": {
       "get": {
         "tags": [
-          "Base"
+          "Game"
         ],
         "responses": {
           "200": {
@@ -70,30 +60,11 @@
         }
       }
     },
-    "/api/Base/jogar-com-base": {
-      "post": {
+    "/api/Game/database-states": {
+      "get": {
         "tags": [
-          "Base"
+          "Game"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -104,24 +75,38 @@
   },
   "components": {
     "schemas": {
-      "JogadaRequest": {
+      "CurrentGameState": {
         "type": "object",
         "properties": {
-          "estadoTabuleiro": {
+          "board": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isPlayerTurn": {
+            "type": "boolean"
+          },
+          "winner": {
             "type": "string",
             "nullable": true
           },
-          "posicaoEscolhida": {
+          "gameOver": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlayerMoveRequest": {
+        "type": "object",
+        "properties": {
+          "position": {
             "type": "integer",
             "format": "int32"
           },
-          "resultado": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "string",
-            "format": "date-time"
+          "currentState": {
+            "$ref": "#/components/schemas/CurrentGameState"
           }
         },
         "additionalProperties": false

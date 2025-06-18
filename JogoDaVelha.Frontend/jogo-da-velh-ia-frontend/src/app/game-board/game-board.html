@@ -1,0 +1,19 @@
+<div class="board">
+  @for (cell of board; track $index) {
+    <div 
+      [class]="getCellClass(cell)"
+      (click)="onCellClick($index)">
+      {{ cell }}
+    </div>
+  }
+</div>
+
+@if (gameOver) {
+  <div class="game-over-message">
+    @if (winner) {
+      <p>Jogador {{ winner }} venceu!</p>
+    } @else {
+      <p>Empate!</p>
+    }
+  </div>
+}

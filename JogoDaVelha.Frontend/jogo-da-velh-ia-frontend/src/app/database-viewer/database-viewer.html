@@ -1,0 +1,16 @@
+<div class="database-container">
+  <h2>Dados de Aprendizado</h2>
+  
+  <div class="database-states">
+    @for (state of databaseStates; track state.stateHash) {
+      <div class="state-card">
+        <h3>Estado: {{ state.stateHash }}</h3>
+        <p>Tabuleiro: {{ state.boardState }}</p>
+        <p>Vitórias (O): {{ state.wins }}</p>
+        <p>Derrotas (X): {{ state.losses }}</p>
+        <p>Empates: {{ state.draws }}</p>
+        <p>Última atualização: {{ state.lastUpdated | date:'medium' }}</p>
+      </div>
+    }
+  </div>
+</div>

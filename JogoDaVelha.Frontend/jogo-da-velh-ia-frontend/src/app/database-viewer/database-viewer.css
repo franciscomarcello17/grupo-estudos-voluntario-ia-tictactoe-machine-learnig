@@ -1,0 +1,28 @@
+.database-container {
+  margin-top: 20px;
+}
+
+.database-states {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.state-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: left;
+}
+
+.state-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.state-card p {
+  margin: 5px 0;
+  color: #666;
+}

@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
-    "Method": "Get",
-    "RelativePath": "api/Aprendizado",
+    "ContainingType": "JogoDaVelhIA.Controllers.GameController",
+    "Method": "GetCurrentState",
+    "RelativePath": "api/Game/current-state",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,35 +10,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
-    "Method": "Delete",
-    "RelativePath": "api/Aprendizado",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
-    "Method": "Post",
-    "RelativePath": "api/Aprendizado/treinar",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "jogada",
-        "Type": "JogoDaVelhaIA.DTOs.JogadaRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JogoDaVelhaIA.Controllers.BaseController",
-    "Method": "Get",
-    "RelativePath": "api/Base/jogadas-base",
+    "ContainingType": "JogoDaVelhIA.Controllers.GameController",
+    "Method": "GetDatabaseStates",
+    "RelativePath": "api/Game/database-states",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -46,19 +20,29 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "JogoDaVelhaIA.Controllers.BaseController",
-    "Method": "Post",
-    "RelativePath": "api/Base/jogar-com-base",
+    "ContainingType": "JogoDaVelhIA.Controllers.GameController",
+    "Method": "MakeMove",
+    "RelativePath": "api/Game/move",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "jogada",
-        "Type": "JogoDaVelhaIA.DTOs.JogadaRequest",
+        "Name": "request",
+        "Type": "JogoDaVelhIA.Controllers.GameController\u002BPlayerMoveRequest",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhIA.Controllers.GameController",
+    "Method": "NewGame",
+    "RelativePath": "api/Game/new",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]
