@@ -5,20 +5,10 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Aprendizado": {
-      "get": {
+    "/api/Jogo/novo": {
+      "post": {
         "tags": [
-          "Aprendizado"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Aprendizado"
+          "Jogo"
         ],
         "responses": {
           "200": {
@@ -27,26 +17,26 @@
         }
       }
     },
-    "/api/Aprendizado/treinar": {
+    "/api/Jogo/jogar": {
       "post": {
         "tags": [
-          "Aprendizado"
+          "Jogo"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
+                "$ref": "#/components/schemas/JogadaViewModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
+                "$ref": "#/components/schemas/JogadaViewModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
+                "$ref": "#/components/schemas/JogadaViewModel"
               }
             }
           }
@@ -58,10 +48,21 @@
         }
       }
     },
-    "/api/Base/jogadas-base": {
-      "get": {
+    "/api/Jogo/jogar-ia/{partidaId}": {
+      "post": {
         "tags": [
-          "Base"
+          "Jogo"
+        ],
+        "parameters": [
+          {
+            "name": "partidaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -70,30 +71,86 @@
         }
       }
     },
-    "/api/Base/jogar-com-base": {
-      "post": {
+    "/api/Jogo/tabuleiro/{partidaId}": {
+      "get": {
         "tags": [
-          "Base"
+          "Jogo"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/JogadaRequest"
-              }
+        "parameters": [
+          {
+            "name": "partidaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Treinamento/iniciar": {
+      "post": {
+        "tags": [
+          "Treinamento"
+        ],
+        "parameters": [
+          {
+            "name": "episodios",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Treinamento/parametros": {
+      "post": {
+        "tags": [
+          "Treinamento"
+        ],
+        "parameters": [
+          {
+            "name": "taxaAprendizado",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 0,1
+            }
+          },
+          {
+            "name": "fatorDesconto",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 0,9
+            }
+          },
+          {
+            "name": "epsilon",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 0,3
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -104,24 +161,19 @@
   },
   "components": {
     "schemas": {
-      "JogadaRequest": {
+      "JogadaViewModel": {
         "type": "object",
         "properties": {
-          "estadoTabuleiro": {
-            "type": "string",
-            "nullable": true
-          },
-          "posicaoEscolhida": {
+          "partidaId": {
             "type": "integer",
             "format": "int32"
           },
-          "resultado": {
-            "type": "string",
-            "nullable": true
+          "posicao": {
+            "type": "integer",
+            "format": "int32"
           },
-          "data": {
-            "type": "string",
-            "format": "date-time"
+          "simbolo": {
+            "type": "string"
           }
         },
         "additionalProperties": false

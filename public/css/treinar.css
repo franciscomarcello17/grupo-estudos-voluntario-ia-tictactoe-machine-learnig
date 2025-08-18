@@ -363,3 +363,68 @@
 .mini-celula.o {
     color: red;
 }
+
+/* Adicione estas regras ao seu CSS existente */
+
+.training-controls {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #6c757d;
+}
+
+.training-controls h4 {
+    margin-bottom: 1rem;
+    color: #6c757d;
+}
+
+.param-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.param-control label {
+    width: 150px;
+    font-weight: 500;
+}
+
+.param-control input[type="range"] {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.param-control span {
+    width: 40px;
+    text-align: right;
+    font-family: monospace;
+}
+
+.param-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.param-actions .btn {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Melhorias na responsividade */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+    }
+    
+    .control-panel {
+        max-width: 100%;
+        margin-top: 2rem;
+    }
+    
+    .param-actions .btn {
+        flex: 100%;
+    }
+}

@@ -14,173 +14,147 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
         vm.mostrarDicas = false;
         vm.filtroTabuleiro = '';
         vm.filtroResultado = '';
+        vm.partidaId = null;
+        
+        // Parâmetros do Q-Learning
+        vm.parametros = {
+            taxaAprendizado: 0.1,
+            fatorDesconto: 0.9,
+            epsilon: 0.3
+        };
         
         // Inicialização
         vm.init = function() {
-            carregarJogadas();
+            iniciarNovoJogo();
+            carregarEstadosAprendidos();
+            configurarParametros();
         };
         
-        // Carrega as jogadas aprendidas da IA
-        function carregarJogadas() {
+        // Configura os parâmetros iniciais do Q-Learning
+        function configurarParametros() {
+            ApiService.definirParametros(
+                vm.parametros.taxaAprendizado,
+                vm.parametros.fatorDesconto,
+                vm.parametros.epsilon
+            ).catch(function(error) {
+                console.error("Erro ao configurar parâmetros:", error);
+                vm.mensagem = "Erro ao configurar parâmetros da IA";
+            });
+        }
+        
+        // Carrega os estados aprendidos pela IA
+        function carregarEstadosAprendidos() {
             vm.carregandoJogadas = true;
-            ApiService.getAprendizado().then(function(response) {
+            ApiService.getEstadosAprendidos().then(function(response) {
                 vm.jogadasAprendidas = response.data || [];
             }).catch(function(error) {
-                console.error("Erro ao carregar jogadas:", error);
-                vm.mensagem = "Erro ao carregar histórico de jogadas";
+                console.error("Erro ao carregar estados aprendidos:", error);
+                vm.mensagem = "Erro ao carregar histórico de aprendizado";
                 vm.jogadasAprendidas = [];
             }).finally(function() {
                 vm.carregandoJogadas = false;
             });
         }
         
-        // Função principal quando o jogador faz uma jogada
-        vm.jogar = function(posicao) {
-            // Validações básicas
-            if (vm.carregando || vm.tabuleiro[posicao] !== "") return;
-            
-            // Faz a jogada do humano
-            vm.tabuleiro[posicao] = 'X';
-            // Verifica se o humano venceu
-            if (verificarVitoria('X')) {
-                finalizarJogo("Vitoria", posicao);
-                return;
-            }
-            
-            // Verifica empate
-            if (verificarEmpate()) {
-                finalizarJogo("Empate", posicao);
-                return;
-            }
-            
-            // Passa a vez para a IA
+        // Inicia um novo jogo
+        function iniciarNovoJogo() {
             vm.carregando = true;
-            vm.jogadorAtual = 'O';
-            realizarJogadaIA();
-        };
-        
-        // Função que processa a jogada da IA
-        function realizarJogadaIA() {
-            $timeout(function() {
-                ApiService.postJogarComBase(vm.tabuleiro.join(","))
-                    .then(function(response) {
-                        var posicaoIA = response.data.posicaoEscolhida;
-                        // Fallback para jogada aleatória se necessário
-                        if (posicaoIA === -1 || vm.tabuleiro[posicaoIA] !== "") {
-                            posicaoIA = escolherJogadaAleatoria();
-                        }
-                        
-                        // Aplica a jogada da IA
-                        if (posicaoIA !== -1) {
-                            vm.tabuleiro[posicaoIA] = 'O';
-                            
-                            // Verifica o resultado após jogada da IA
-                            if (verificarVitoria('O')) {
-                                finalizarJogo("Derrota", posicaoIA);
-                            } else if (verificarEmpate()) {
-                                finalizarJogo("Empate", posicaoIA);
-                            } else {
-                                vm.jogadorAtual = 'X';
-                            }
-                        }
-                    })
-                    .catch(function(error) {
-                        console.error("Erro na IA:", error);
-                        // Jogada aleatória em caso de erro (outro fallback)
-                        var posicaoIA = escolherJogadaAleatoria();
-                        if (posicaoIA !== -1) {
-                            vm.tabuleiro[posicaoIA] = 'O';
-
-                            // Verifica o resultado após jogada da IA
-                            if (verificarVitoria('O')) {
-                                finalizarJogo("Derrota", posicaoIA);
-                            } else if (verificarEmpate()) {
-                                finalizarJogo("Empate", posicaoIA);
-                            } else {
-                                vm.jogadorAtual = 'X';
-                            }
-                        }
-                    })
-                    .finally(function() {
-                        vm.carregando = false;
-                    });
-            }, 750); // Delay para melhor experiência
-        }
-        
-        // Escolhe uma jogada aleatória para a IA
-        function escolherJogadaAleatoria() {
-            var posicoesVazias = [];
-            for (var i = 0; i < 9; i++) {
-                if (vm.tabuleiro[i] === "") {
-                    posicoesVazias.push(i);
-                }
-            }
-            return posicoesVazias.length > 0 ? 
-                posicoesVazias[Math.floor(Math.random() * posicoesVazias.length)] : 
-                -1;
-        }
-        
-        // Verifica se um jogador venceu
-        function verificarVitoria(jogador) {
-            var linhas = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], // linhas
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], // colunas
-                [0, 4, 8], [2, 4, 6]             // diagonais
-            ];
-            return linhas.some(function(linha) {
-                var linhaCompleta = linha.every(function(posicao) {
-                    return vm.tabuleiro[posicao] === jogador;
-                });
-                
-                if (linhaCompleta) {
-                    vm.celulasVencedoras = linha;
-                    vm.jogadorVencedor = jogador;
-                }
-                
-                return linhaCompleta;
-            });            
-        }
-        
-        // Verifica se o jogo terminou em empate
-        function verificarEmpate() {
-            return !vm.tabuleiro.includes("") && !verificarVitoria('X') && !verificarVitoria('O');
-        }
-        
-        // Finaliza o jogo e registra o resultado
-        function finalizarJogo(resultado, posicao) {
-            vm.ultimaJogada = posicao;
-            vm.mensagem = resultado === "Vitoria" ? "Você venceu!" : 
-                          resultado === "Derrota" ? "IA venceu!" : "Empate!";
-            
-            // Disparar confetes se o jogador vencer
-            if (resultado === "Vitoria") {
-                EfeitosFimPartida.dispararConfetes();
-            } else if (resultado === "Derrota") {
-                EfeitosFimPartida.chuvaDeEmojisTristes();
-            }
-            
-            registrarJogada(resultado);
-            $timeout(vm.resetarJogo, 2000);
-        }
-        
-        // Registra a jogada no backend
-        function registrarJogada(resultado) {
-            ApiService.postTreinar({
-                EstadoTabuleiro: vm.tabuleiro.join(","),
-                PosicaoEscolhida: vm.ultimaJogada,
-                Resultado: resultado,
-                Data: new Date().toISOString() // adiciona a data atual
-            }).then(function() {
-                carregarJogadas();
+            ApiService.iniciarNovoJogo().then(function(response) {
+                vm.partidaId = response.data.partidaId;
+                vm.tabuleiro = ["", "", "", "", "", "", "", "", ""];
+                vm.celulasVencedoras = [];
+                vm.ultimaJogada = null;
+                vm.jogadorAtual = "X";
+                vm.mensagem = "Jogo iniciado. Sua vez!";
             }).catch(function(error) {
-                console.error("Erro ao registrar jogada:", error);
+                console.error("Erro ao iniciar jogo:", error);
+                vm.mensagem = "Erro ao iniciar novo jogo";
+            }).finally(function() {
+                vm.carregando = false;
             });
         }
         
+        // Função principal quando o jogador faz uma jogada
+        vm.jogar = function(posicao) {
+            if (vm.carregando || vm.tabuleiro[posicao] !== "" || vm.jogadorAtual !== "X") {
+                return;
+            }
+            
+            var jogada = {
+                partidaId: vm.partidaId,
+                posicao: posicao,
+                simbolo: 'X'
+            };
+            
+            vm.carregando = true;
+            ApiService.fazerJogada(jogada).then(function(response) {
+                atualizarEstadoJogo(response.data);
+                
+                // Se o jogo não terminou, é vez da IA
+                if (response.data.resultado === ResultadoPartida.EmAndamento) {
+                    jogadaIA();
+                }
+            }).catch(function(error) {
+                console.error("Erro ao fazer jogada:", error);
+                vm.mensagem = "Erro ao processar jogada";
+                vm.carregando = false;
+            });
+        };
+        
+        // Processa a jogada da IA
+        function jogadaIA() {
+            vm.carregando = true;
+            vm.jogadorAtual = 'O';
+            
+            ApiService.fazerJogadaIA(vm.partidaId).then(function(response) {
+                atualizarEstadoJogo(response.data);
+            }).catch(function(error) {
+                console.error("Erro na jogada da IA:", error);
+                vm.mensagem = "Erro na jogada da IA";
+                vm.carregando = false;
+                vm.jogadorAtual = 'X'; // Volta para o jogador humano em caso de erro
+            });
+        }
+        
+        // Atualiza o estado do jogo com os dados da resposta
+        function atualizarEstadoJogo(jogo) {
+            vm.tabuleiro = jogo.tabuleiro;
+            vm.jogadorAtual = jogo.vezDoJogador === 'X' ? 'X' : 'O';
+            
+            if (jogo.resultado !== ResultadoPartida.EmAndamento) {
+                finalizarJogo(jogo.resultado);
+            } else {
+                vm.mensagem = jogo.mensagem;
+                vm.carregando = false;
+            }
+        }
+        
+        // Finaliza o jogo com o resultado
+        function finalizarJogo(resultado) {
+            switch(resultado) {
+                case ResultadoPartida.VitoriaHumano:
+                    vm.mensagem = "Você venceu!";
+                    EfeitosFimPartida.dispararConfetes();
+                    break;
+                case ResultadoPartida.VitoriaIA:
+                    vm.mensagem = "IA venceu!";
+                    EfeitosFimPartida.chuvaDeEmojisTristes();
+                    break;
+                case ResultadoPartida.Empate:
+                    vm.mensagem = "Empate!";
+                    break;
+            }
+            
+            $timeout(function() {
+                iniciarNovoJogo();
+            }, 2000);
+        }
+        
+        // Formata o tabuleiro para exibição
         vm.formatarTabuleiro = function(estado) {
             if (!estado) return '';
             var celulas = estado.split(',');
-
+            
             var html = '<div class="mini-tabuleiro">';
             for (var i = 0; i < 9; i++) {
                 var valor = celulas[i] || '&nbsp;';
@@ -193,32 +167,43 @@ angular.module('jogoDaVelhaApp').controller('TreinarController',
         
         // Reinicia o jogo
         vm.resetarJogo = function() {
-            vm.tabuleiro = ["", "", "", "", "", "", "", "", ""];
-            vm.celulasVencedoras = [];
-            vm.ultimaJogada = null;
-            vm.jogadorAtual = "X";
-            vm.mensagem = "";
-            vm.carregando = false;
+            iniciarNovoJogo();
         };
         
-        // Limpa todo o aprendizado da IA
-        vm.limparIA = function() {
+        // Inicia treinamento da IA
+        vm.iniciarTreinamento = function() {
+            vm.carregando = true;
+            ApiService.iniciarTreinamento(1000).then(function() {
+                vm.mensagem = "Treinamento concluído com sucesso!";
+                carregarEstadosAprendidos();
+            }).catch(function(error) {
+                console.error("Erro no treinamento:", error);
+                vm.mensagem = "Erro durante o treinamento";
+            }).finally(function() {
+                vm.carregando = false;
+            });
+        };
+        
+        // Atualiza parâmetros do Q-Learning
+        vm.atualizarParametros = function() {
+            configurarParametros();
+            vm.mensagem = "Parâmetros atualizados com sucesso!";
+        };
+        
+        // Limpa o aprendizado da IA
+        vm.limparAprendizado = function() {
             if (confirm("Tem certeza que deseja limpar todo o aprendizado da IA?")) {
-                ApiService.deleteAprendizado().then(function() {
-                    vm.jogadasAprendidas = [];
-                    vm.mensagem = "IA resetada com sucesso!";
-                    carregarJogadas();
+                vm.carregando = true;
+                ApiService.limparAprendizado().then(function() {
+                    vm.mensagem = "Aprendizado da IA resetado com sucesso!";
+                    carregarEstadosAprendidos();
                 }).catch(function(error) {
-                    console.error("Erro ao limpar IA:", error);
-                    vm.mensagem = "Erro ao resetar IA";
+                    console.error("Erro ao limpar aprendizado:", error);
+                    vm.mensagem = "Erro ao resetar aprendizado";
+                }).finally(function() {
+                    vm.carregando = false;
                 });
             }
-        };
-        
-        // Exporta os dados de aprendizado
-        vm.exportarDados = function() {
-            // Implementação para exportar dados
-            vm.mensagem = "Dados exportados com sucesso!";
         };
         
         // Inicializa o controller

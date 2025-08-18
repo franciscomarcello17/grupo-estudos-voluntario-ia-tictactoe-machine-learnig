@@ -1,29 +1,45 @@
 angular.module('jogoDaVelhaApp').factory('ApiService', ['$http', function($http) {
-    const baseUrl = 'https://backend-jogodavelhaia-dbbwbcfbgwhjcvgd.brazilsouth-01.azurewebsites.net/api';
+    // const baseUrl = 'https://backend-jogodavelhaia-dbbwbcfbgwhjcvgd.brazilsouth-01.azurewebsites.net/api'; // Substitua pela sua URL
+    const baseUrl = 'https://localhost:7193/api'; // Substitua pela sua URL
     
     return {
-        getAprendizado: function() {
-            return $http.get(baseUrl + '/aprendizado');
+        // Operações de Jogo
+        iniciarNovoJogo: function() {
+            return $http.post(baseUrl + '/jogo/novo');
         },
         
-        postTreinar: function(jogada) {
-            return $http.post(baseUrl + '/aprendizado/treinar', jogada);
+        fazerJogada: function(jogada) {
+            return $http.post(baseUrl + '/jogo/jogar', jogada);
         },
         
-        deleteAprendizado: function() {
-            return $http.delete(baseUrl + '/aprendizado');
+        fazerJogadaIA: function(partidaId) {
+            return $http.post(baseUrl + '/jogo/jogar-ia/' + partidaId);
         },
         
-        getJogadasBase: function() {
-            return $http.get(baseUrl + '/base/jogadas-base');
+        obterTabuleiro: function(partidaId) {
+            return $http.get(baseUrl + '/jogo/tabuleiro/' + partidaId);
         },
         
-        postJogarComBase: function(estadoTabuleiro) {
-            return $http.post(baseUrl + '/base/jogar-com-base', {
-                EstadoTabuleiro: estadoTabuleiro,
-                PosicaoEscolhida: 0,
-                Resultado: ""
+        // Operações de Treinamento
+        iniciarTreinamento: function(episodios) {
+            return $http.post(baseUrl + '/treinamento/iniciar?episodios=' + episodios);
+        },
+        
+        definirParametros: function(taxaAprendizado, fatorDesconto, epsilon) {
+            return $http.post(baseUrl + '/treinamento/parametros', {
+                taxaAprendizado: taxaAprendizado,
+                fatorDesconto: fatorDesconto,
+                epsilon: epsilon
             });
+        },
+        
+        // Operações de Aprendizado
+        getEstadosAprendidos: function() {
+            return $http.get(baseUrl + '/aprendizado/estados');
+        },
+        
+        limparAprendizado: function() {
+            return $http.delete(baseUrl + '/aprendizado/limpar');
         }
     };
 }]);

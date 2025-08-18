@@ -2,7 +2,7 @@
     <div class="game-board">
         <h2>
             <i class="fas fa-graduation-cap"></i> Treinar IA
-            <span class="game-status" ng-class="{'win': vm.mensagem.includes('Vitoria'), 'lose': vm.mensagem.includes('Derrota'), 'draw': vm.mensagem.includes('Empate')}">
+            <span class="game-status" ng-class="{'win': vm.mensagem.includes('venceu'), 'lose': vm.mensagem.includes('venceu'), 'draw': vm.mensagem.includes('Empate')}">
                 {{vm.mensagem}}
             </span>
         </h2>
@@ -15,7 +15,7 @@
                 <i class="fas fa-robot"></i> Vez da IA (O)
             </span>
             <span ng-if="vm.carregando">
-                <i class="fas fa-spinner fa-spin"></i> IA pensando...
+                <i class="fas fa-spinner fa-spin"></i> {{vm.jogadorAtual === 'X' ? 'Processando...' : 'IA pensando...'}}
             </span>
         </div>
         
@@ -24,8 +24,8 @@
                 <div class="cell" 
                      ng-class="{'x': vm.tabuleiro[$index] === 'X',
                                 'o': vm.tabuleiro[$index] === 'O',
-                                'win-cell': vm.celulasVencedoras && vm.celulasVencedoras.includes($index) && vm.jogadorVencedor === 'X',
-                                'lose-cell': vm.celulasVencedoras && vm.celulasVencedoras.includes($index) && vm.jogadorVencedor === 'O'}"
+                                'win-cell': vm.celulasVencedoras && vm.celulasVencedoras.includes($index) && vm.mensagem.includes('Você'),
+                                'lose-cell': vm.celulasVencedoras && vm.celulasVencedoras.includes($index) && vm.mensagem.includes('IA')}"
                      ng-repeat="celula in vm.tabuleiro track by $index" 
                      ng-click="vm.jogar($index)"
                      ng-disabled="vm.carregando || vm.jogadorAtual !== 'X'">
@@ -47,16 +47,51 @@
             <h4><i class="fas fa-info-circle"></i> Como Treinar a IA:</h4>
             <ul>
                 <li>Jogue normalmente como <strong>X</strong></li>
-                <li>A IA aprenderá com suas jogadas</li>
+                <li>A IA aprenderá com suas jogadas usando Q-Learning</li>
                 <li>Quanto mais você jogar, mais inteligente ela ficará</li>
                 <li>Tente padrões diferentes para ensinar novas estratégias</li>
+                <li>Use o botão "Treinar IA" para sessões intensivas de aprendizado</li>
             </ul>
+        </div>
+        
+        <div class="training-controls">
+            <h4><i class="fas fa-cogs"></i> Configurações do Q-Learning</h4>
+            
+            <div class="param-control">
+                <label>Taxa de Aprendizado (α):</label>
+                <input type="range" min="0" max="1" step="0.01" ng-model="vm.parametros.taxaAprendizado">
+                <span>{{vm.parametros.taxaAprendizado | number:2}}</span>
+            </div>
+            
+            <div class="param-control">
+                <label>Fator de Desconto (γ):</label>
+                <input type="range" min="0" max="1" step="0.01" ng-model="vm.parametros.fatorDesconto">
+                <span>{{vm.parametros.fatorDesconto | number:2}}</span>
+            </div>
+            
+            <div class="param-control">
+                <label>Exploração (ε):</label>
+                <input type="range" min="0" max="1" step="0.01" ng-model="vm.parametros.epsilon">
+                <span>{{vm.parametros.epsilon | number:2}}</span>
+            </div>
+            
+            <div class="param-actions">
+                <button class="btn btn-primary" ng-click="vm.atualizarParametros()" ng-disabled="vm.carregando">
+                    <i class="fas fa-save"></i> Aplicar Parâmetros
+                </button>
+                <button class="btn btn-info" ng-click="vm.iniciarTreinamento()" ng-disabled="vm.carregando">
+                    <i class="fas fa-brain"></i> Treinar IA (1000 jogos)
+                </button>
+                <button class="btn btn-danger" ng-click="vm.limparAprendizado()" ng-disabled="vm.carregando">
+                    <i class="fas fa-trash"></i> Limpar Aprendizado
+                </button>
+            </div>
         </div>
     </div>
     
     <div class="control-panel">
         <div class="learned-data">
-            <h4><i class="fas fa-history"></i> Últimas Jogadas Aprendidas</h4>
+            <h4><i class="fas fa-history"></i> Estados Aprendidos</h4>
             
             <div class="data-filters">
                 <input type="text" ng-model="vm.filtroTabuleiro" placeholder="Filtrar por estado...">
@@ -71,17 +106,22 @@
             <div class="learned-moves-container">
                 <div ng-if="vm.jogadasAprendidas.length === 0" class="empty-state">
                     <i class="fas fa-database"></i>
-                    <p>Nenhuma jogada aprendida ainda</p>
+                    <p>Nenhum estado aprendido ainda</p>
+                    <p>Jogue algumas partidas ou inicie o treinamento</p>
                 </div>
                 
-                <div ng-repeat="jogada in vm.jogadasAprendidas | filter:vm.filtroTabuleiro | orderBy:'-data' | filter:vm.filtroResultado | limitTo:5" 
+                <div ng-repeat="estado in vm.jogadasAprendidas | filter:vm.filtroTabuleiro | orderBy:'-dataAtualizacao' | filter:vm.filtroResultado | limitTo:10" 
                      class="learned-move" 
-                     ng-class="{'win': jogada.resultado === 'Vitoria', 'lose': jogada.resultado === 'Derrota', 'draw': jogada.resultado === 'Empate'}">
-                    <div class="move-board" ng-bind-html="vm.formatarTabuleiro(jogada.estadoTabuleiro)"></div>
+                     ng-class="{'win': estado.vitoria, 'lose': estado.derrota, 'draw': estado.empate}">
+                    <div class="move-board" ng-bind-html="vm.formatarTabuleiro(estado.estado)"></div>
                     <div class="move-info">
-                        <p><strong>Posição:</strong> {{jogada.posicaoEscolhida}}</p>
-                        <p><strong>Resultado:</strong> {{jogada.resultado}}</p>
-                        <p><strong>Data:</strong> {{ jogada.data | brasiliaDate }}</p>
+                        <p><strong>Valor Q:</strong> {{estado.valorQ | number:4}}</p>
+                        <p><strong>Resultado:</strong> 
+                            <span ng-if="estado.vitoria">Vitória</span>
+                            <span ng-if="estado.derrota">Derrota</span>
+                            <span ng-if="estado.empate">Empate</span>
+                        </p>
+                        <p><strong>Atualizado:</strong> {{ estado.dataAtualizacao | brasiliaDate:'short' }}</p>
                     </div>
                 </div>
             </div>

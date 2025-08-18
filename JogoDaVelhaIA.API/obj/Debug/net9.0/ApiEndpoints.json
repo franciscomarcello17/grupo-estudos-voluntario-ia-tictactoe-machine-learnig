@@ -1,62 +1,100 @@
 [
   {
-    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
-    "Method": "Get",
-    "RelativePath": "api/Aprendizado",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
-    "Method": "Delete",
-    "RelativePath": "api/Aprendizado",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JogoDaVelhaIA.Controllers.AprendizadoController",
-    "Method": "Post",
-    "RelativePath": "api/Aprendizado/treinar",
+    "ContainingType": "JogoDaVelhIA.API.Controllers.JogoController",
+    "Method": "FazerJogada",
+    "RelativePath": "api/Jogo/jogar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "jogada",
-        "Type": "JogoDaVelhaIA.DTOs.JogadaRequest",
+        "Type": "JogoDaVelhaIA.Models.ViewModels.JogadaViewModel",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "JogoDaVelhaIA.Controllers.BaseController",
-    "Method": "Get",
-    "RelativePath": "api/Base/jogadas-base",
-    "HttpMethod": "GET",
+    "ContainingType": "JogoDaVelhIA.API.Controllers.JogoController",
+    "Method": "FazerJogadaIA",
+    "RelativePath": "api/Jogo/jogar-ia/{partidaId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partidaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhIA.API.Controllers.JogoController",
+    "Method": "NovoJogo",
+    "RelativePath": "api/Jogo/novo",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "JogoDaVelhaIA.Controllers.BaseController",
-    "Method": "Post",
-    "RelativePath": "api/Base/jogar-com-base",
+    "ContainingType": "JogoDaVelhIA.API.Controllers.JogoController",
+    "Method": "ObterTabuleiro",
+    "RelativePath": "api/Jogo/tabuleiro/{partidaId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partidaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhIA.API.Controllers.TreinamentoController",
+    "Method": "IniciarTreinamento",
+    "RelativePath": "api/Treinamento/iniciar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "jogada",
-        "Type": "JogoDaVelhaIA.DTOs.JogadaRequest",
-        "IsRequired": true
+        "Name": "episodios",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JogoDaVelhIA.API.Controllers.TreinamentoController",
+    "Method": "DefinirParametros",
+    "RelativePath": "api/Treinamento/parametros",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taxaAprendizado",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "fatorDesconto",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "epsilon",
+        "Type": "System.Double",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
