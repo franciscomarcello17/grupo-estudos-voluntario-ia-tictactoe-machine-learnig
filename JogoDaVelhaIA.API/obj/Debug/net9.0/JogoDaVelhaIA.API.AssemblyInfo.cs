@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JogoDaVelhaIA.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57bd8371b3f97902aed68529da0ba58b566491a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce6c147291af60ad22786afb0a0e4dad34d1ed4d")]
 [assembly: System.Reflection.AssemblyProductAttribute("JogoDaVelhaIA.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JogoDaVelhaIA.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -46,6 +46,7 @@ namespace JogoDaVelhIA.API.Models.Servicos
         {
             var partida = _context.Partidas
                 .Include(p => p.Historico)
+                .ThenInclude(h => h.EstadoTabuleiro)
                 .FirstOrDefault(p => p.Id == jogada.PartidaId);
 
             if (partida == null)
@@ -62,8 +63,8 @@ namespace JogoDaVelhIA.API.Models.Servicos
                 throw new JogoException("Não é sua vez de jogar.");
 
             // Validar jogada
-            if (estadoAtual[jogada.Posicao] != '\0')
-                throw new JogoException("Posição já ocupada.");
+            if (estadoAtual.Split(',')[jogada.Posicao] != string.Empty)
+            throw new JogoException("Posição já ocupada.");
 
             // Registrar jogada
             var novoEstado = estadoAtual.ToCharArray();
@@ -108,6 +109,7 @@ namespace JogoDaVelhIA.API.Models.Servicos
         {
             var partida = _context.Partidas
                 .Include(p => p.Historico)
+                .ThenInclude(h => h.EstadoTabuleiro)
                 .FirstOrDefault(p => p.Id == partidaId);
 
             if (partida == null)
