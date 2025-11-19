@@ -32,16 +32,33 @@ namespace JogoDaVelhIA.API.Models.Servicos
             _context.Partidas.Add(partida);
             _context.SaveChanges();
 
+            // Usar estado válido e normalizado
+            var tabuleiroInicial = "0,0,0,0,0,0,0,0,0";
+
+            // Criar estado tabuleiro inicial
+            var estadoTabuleiro = ObterOuCriarEstadoTabuleiro(tabuleiroInicial);
+
+            var historico = new HistoricoPartida
+            {
+                PartidaId = partida.Id,
+                EstadoTabuleiroId = estadoTabuleiro.Id,
+                NumeroJogada = 0,
+                PosicaoJogada = -1,
+                SimboloJogador = '\0'
+            };
+
+            _context.HistoricoPartidas.Add(historico);
+            _context.SaveChanges();
+
             return new JogoViewModel
             {
                 PartidaId = partida.Id,
-                Tabuleiro = new string[9],
+                Tabuleiro = tabuleiroInicial.Split(','),
                 VezDoJogador = SimboloJogador.X,
                 Resultado = ResultadoPartida.EmAndamento,
                 Mensagem = "Jogo iniciado. Sua vez!"
             };
         }
-
         public JogoViewModel FazerJogada(JogadaViewModel jogada)
         {
             var partida = _context.Partidas
@@ -55,21 +72,24 @@ namespace JogoDaVelhIA.API.Models.Servicos
             if (partida.Resultado != ResultadoPartida.EmAndamento)
                 throw new JogoException("Partida já finalizada.");
 
-            // Verificar se é a vez do jogador humano
+            // Obter estado atual
             var estadoAtual = ObterEstadoAtualTabuleiro(partida);
-            var simboloAtual = estadoAtual.Count(c => c == 'X' || c == 'O') % 2 == 0 ? 'X' : 'O';
+            var estadoArray = estadoAtual.Split(',');
 
-            if (simboloAtual != jogada.Simbolo)
-                throw new JogoException("Não é sua vez de jogar.");
+            // Verificar se a posição está vazia (usando "0" como string)
+            if (estadoArray[jogada.Posicao] != "0")
+                throw new JogoException("Posição já ocupada.");
 
-            // Validar jogada
-            if (estadoAtual.Split(',')[jogada.Posicao] != string.Empty)
-            throw new JogoException("Posição já ocupada.");
+            // Verificar se é a vez do jogador correto
+            var countJogadas = estadoArray.Count(pos => pos != "0");
+            var simboloEsperado = countJogadas % 2 == 0 ? 'X' : 'O';
 
-            // Registrar jogada
-            var novoEstado = estadoAtual.ToCharArray();
-            novoEstado[jogada.Posicao] = jogada.Simbolo;
-            var novoEstadoString = new string(novoEstado);
+            if (jogada.Simbolo != simboloEsperado)
+                throw new JogoException($"Não é sua vez de jogar. Esperado: {simboloEsperado}");
+
+            // Fazer a jogada
+            estadoArray[jogada.Posicao] = jogada.Simbolo == 'X' ? "X" : "O";
+            var novoEstadoString = string.Join(",", estadoArray);
 
             var estadoTabuleiro = ObterOuCriarEstadoTabuleiro(novoEstadoString);
 
@@ -77,13 +97,12 @@ namespace JogoDaVelhIA.API.Models.Servicos
             {
                 PartidaId = partida.Id,
                 EstadoTabuleiroId = estadoTabuleiro.Id,
-                NumeroJogada = partida.Historico.Count + 1,
+                NumeroJogada = partida.Historico.Count,
                 PosicaoJogada = jogada.Posicao,
                 SimboloJogador = jogada.Simbolo
             };
 
             _context.HistoricoPartidas.Add(historico);
-            _context.SaveChanges();
 
             // Verificar resultado
             var resultado = VerificarResultado(novoEstadoString, jogada.Simbolo);
@@ -93,18 +112,12 @@ namespace JogoDaVelhIA.API.Models.Servicos
                 partida.JogadorVencedor = resultado == ResultadoPartida.VitoriaHumano ? "Humano" :
                                          resultado == ResultadoPartida.VitoriaIA ? "IA" : null;
                 partida.DataFim = DateTime.UtcNow;
-                _context.SaveChanges();
-
-                // Atualizar Q-values se a IA participou
-                if (resultado != ResultadoPartida.Empate)
-                {
-                    AtualizarRecompensasPartida(partida.Id, resultado);
-                }
             }
+
+            _context.SaveChanges();
 
             return ObterEstadoJogo(partida.Id);
         }
-
         public JogoViewModel FazerJogadaIA(int partidaId)
         {
             var partida = _context.Partidas
@@ -124,12 +137,13 @@ namespace JogoDaVelhIA.API.Models.Servicos
             var simboloIA = simboloAtual;
 
             // Obter melhor jogada da IA
-            var posicaoJogada = _qLearningService.ObterMelhorJogada(estadoAtual, simboloIA);
+            var estadoAtualQL = ConverterParaFormatoQLearning(estadoAtual);
+            var posicaoJogada = _qLearningService.ObterMelhorJogada(estadoAtualQL, simboloIA);
 
             // Registrar jogada
-            var novoEstado = estadoAtual.ToCharArray();
-            novoEstado[posicaoJogada] = simboloIA;
-            var novoEstadoString = new string(novoEstado);
+            var estadoArray = estadoAtual.Split(',');
+            estadoArray[posicaoJogada] = simboloIA.ToString();
+            var novoEstadoString = string.Join(",", estadoArray);
 
             var estadoTabuleiro = ObterOuCriarEstadoTabuleiro(novoEstadoString);
 
@@ -183,16 +197,34 @@ namespace JogoDaVelhIA.API.Models.Servicos
             if (partida == null)
                 throw new JogoException("Partida não encontrada.");
 
-            var ultimoEstado = partida.Historico
-                .OrderByDescending(h => h.NumeroJogada)
-                .FirstOrDefault()?.EstadoTabuleiro?.Estado;
+            string ultimoEstado;
 
-            var tabuleiro = ultimoEstado?.Split(',') ?? new string[9];
+            if (!partida.Historico.Any())
+            {
+                // Estado inicial
+                ultimoEstado = "0,0,0,0,0,0,0,0,0";
+            }
+            else
+            {
+                ultimoEstado = partida.Historico
+                    .OrderByDescending(h => h.NumeroJogada)
+                    .FirstOrDefault()?.EstadoTabuleiro?.Estado;
+            }
+
+            // Fazer split corretamente e garantir 9 posições
+            var tabuleiroArray = ultimoEstado?.Split(',') ?? new string[9];
+
+            // Garantir que sempre temos 9 posições
+            if (tabuleiroArray.Length != 9)
+            {
+                tabuleiroArray = new string[9];
+                Array.Fill(tabuleiroArray, "0");
+            }
 
             return new TabuleiroViewModel
             {
                 PartidaId = partida.Id,
-                Posicoes = tabuleiro,
+                Posicoes = tabuleiroArray,
                 Resultado = partida.Resultado,
                 VezDoJogador = partida.Historico.Count % 2 == 0 ? SimboloJogador.X : SimboloJogador.O
             };
@@ -201,7 +233,7 @@ namespace JogoDaVelhIA.API.Models.Servicos
         private string ObterEstadoAtualTabuleiro(Partida partida)
         {
             if (!partida.Historico.Any())
-                return new string('\0', 9);
+                return "0,0,0,0,0,0,0,0,0";
 
             var ultimoEstado = partida.Historico
                 .OrderByDescending(h => h.NumeroJogada)
@@ -212,7 +244,9 @@ namespace JogoDaVelhIA.API.Models.Servicos
 
         private EstadoTabuleiro ObterOuCriarEstadoTabuleiro(string estado)
         {
-            var estadoNormalizado = _qLearningService.NormalizarEstado(estado);
+            // Validar e normalizar o estado antes de salvar
+            var estadoValidado = ValidarEstado(estado);
+            var estadoNormalizado = _qLearningService.NormalizarEstado(estadoValidado);
 
             var estadoTabuleiro = _context.EstadosTabuleiro
                 .FirstOrDefault(e => e.Estado == estadoNormalizado);
@@ -237,46 +271,75 @@ namespace JogoDaVelhIA.API.Models.Servicos
             return estadoTabuleiro;
         }
 
+        private string ValidarEstado(string estado)
+        {
+            // Garantir que o estado tem o formato correto
+            if (string.IsNullOrEmpty(estado))
+                return "0,0,0,0,0,0,0,0,0";
+
+            // Se já está no formato com vírgulas, validar
+            if (estado.Contains(','))
+            {
+                var partes = estado.Split(',');
+                if (partes.Length != 9)
+                    return "0,0,0,0,0,0,0,0,0";
+
+                return estado;
+            }
+
+            // Se está no formato sem vírgulas, converter
+            if (estado.Length == 9)
+            {
+                var array = estado.ToCharArray()
+                    .Select(c => c == ' ' || c == '\0' ? "0" : c.ToString())
+                    .ToArray();
+                return string.Join(",", array);
+            }
+
+            return "0,0,0,0,0,0,0,0,0";
+        }
         private ResultadoPartida VerificarResultado(string estado, char simbolo)
         {
+            // Primeiro, remover as vírgulas para ter uma string contínua
+            var estadoLimpo = estado.Replace(",", "");
+
             // Verificar linhas
             for (int i = 0; i < 9; i += 3)
             {
-                if (estado[i] != '\0' && estado[i] == estado[i + 1] && estado[i] == estado[i + 2])
+                if (estadoLimpo[i] != '0' && estadoLimpo[i] == estadoLimpo[i + 1] && estadoLimpo[i] == estadoLimpo[i + 2])
                 {
-                    return estado[i] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
+                    return estadoLimpo[i] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
                 }
             }
 
             // Verificar colunas
             for (int i = 0; i < 3; i++)
             {
-                if (estado[i] != '\0' && estado[i] == estado[i + 3] && estado[i] == estado[i + 6])
+                if (estadoLimpo[i] != '0' && estadoLimpo[i] == estadoLimpo[i + 3] && estadoLimpo[i] == estadoLimpo[i + 6])
                 {
-                    return estado[i] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
+                    return estadoLimpo[i] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
                 }
             }
 
             // Verificar diagonais
-            if (estado[0] != '\0' && estado[0] == estado[4] && estado[0] == estado[8])
+            if (estadoLimpo[0] != '0' && estadoLimpo[0] == estadoLimpo[4] && estadoLimpo[0] == estadoLimpo[8])
             {
-                return estado[0] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
+                return estadoLimpo[0] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
             }
 
-            if (estado[2] != '\0' && estado[2] == estado[4] && estado[2] == estado[6])
+            if (estadoLimpo[2] != '0' && estadoLimpo[2] == estadoLimpo[4] && estadoLimpo[2] == estadoLimpo[6])
             {
-                return estado[2] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
+                return estadoLimpo[2] == 'X' ? ResultadoPartida.VitoriaHumano : ResultadoPartida.VitoriaIA;
             }
 
-            // Verificar empate
-            if (!estado.Contains('\0'))
+            // Verificar empate - verifica se não há mais "0" (posições vazias)
+            if (!estadoLimpo.Contains('0'))
             {
                 return ResultadoPartida.Empate;
             }
 
             return ResultadoPartida.EmAndamento;
         }
-
         private JogoViewModel ObterEstadoJogo(int partidaId)
         {
             var tabuleiro = ObterTabuleiro(partidaId);
@@ -318,8 +381,33 @@ namespace JogoDaVelhIA.API.Models.Servicos
                                 resultado == ResultadoPartida.VitoriaHumano ? -1 : 0;
                 }
 
-                _qLearningService.AtualizarQValue(estadoAtual, acao, proximoEstado, recompensa);
+                var estadoAtualQL = ConverterParaFormatoQLearning(estadoAtual);
+                var proximoEstadoQL = ConverterParaFormatoQLearning(proximoEstado);
+                _qLearningService.AtualizarQValue(estadoAtualQL, acao, proximoEstadoQL, recompensa);
             }
+        }
+        private char ObterSimboloDaVez(string estado)
+        {
+            var array = estado.Split(',');
+            var countX = array.Count(pos => pos == "X");
+            var countO = array.Count(pos => pos == "O");
+
+            return countX <= countO ? 'X' : 'O';
+        }
+        private string ConverterParaFormatoQLearning(string estadoComVirgulas)
+        {
+            // Converte "0,0,0,X,0,0,0,0,0" para "   X    " (espaços para posições vazias)
+            var array = estadoComVirgulas.Split(',');
+            return string.Join("", array.Select(s => s == "0" ? ' ' : s[0]));
+        }
+
+        private string ConverterParaFormatoJogo(string estadoSemVirgulas)
+        {
+            // Converte "   X    " para "0,0,0,X,0,0,0,0,0"
+            var array = estadoSemVirgulas.ToCharArray()
+                .Select(c => c == ' ' ? "0" : c.ToString())
+                .ToArray();
+            return string.Join(",", array);
         }
     }
 }

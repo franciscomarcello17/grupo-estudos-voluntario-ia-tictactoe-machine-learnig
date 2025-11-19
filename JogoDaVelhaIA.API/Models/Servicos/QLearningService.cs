@@ -3,6 +3,7 @@ using JogoDaVelhIA.API.Models.Enums;
 using JogoDaVelhIA.API.Models.Servicos;
 using JogoDaVelhIA.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace JogoDaVelhIA.API.Models.Servicos
 {
@@ -12,10 +13,12 @@ namespace JogoDaVelhIA.API.Models.Servicos
         private double _taxaAprendizado;
         private double _fatorDesconto;
         private double _epsilon;
+        private readonly ILogger<QLearningService> _logger;
 
-        public QLearningService(ApplicationDbContext context)
+        public QLearningService(ApplicationDbContext context, ILogger<QLearningService> logger)
         {
             _context = context;
+            _logger = logger;
             InicializarParametros();
         }
 
@@ -24,33 +27,36 @@ namespace JogoDaVelhIA.API.Models.Servicos
             _taxaAprendizado = taxaAprendizado;
             _fatorDesconto = fatorDesconto;
             _epsilon = epsilon;
+
+            _logger.LogInformation($"Parâmetros inicializados: Alpha={_taxaAprendizado}, Gamma={_fatorDesconto}, Epsilon={_epsilon}");
         }
 
         public int ObterMelhorJogada(string estadoAtual, char simbolo)
         {
             var random = new Random();
+            var posicoesVazias = ObterPosicoesVazias(estadoAtual);
 
             // Exploração: escolhe uma jogada aleatória com probabilidade epsilon
             if (random.NextDouble() < _epsilon)
             {
-                var posicoesVazias = ObterPosicoesVazias(estadoAtual);
+                _logger.LogDebug($"Exploração: jogada aleatória para estado {estadoAtual}");
                 return posicoesVazias[random.Next(posicoesVazias.Count)];
             }
 
             // Explotação: escolhe a melhor jogada conhecida
             var estadoNormalizado = NormalizarEstado(estadoAtual);
-            var estadoTabuleiro = _context.EstadosTabuleiro
-                .FirstOrDefault(e => e.Estado == estadoNormalizado);
+            var estadoTabuleiro = ObterOuCriarEstado(estadoNormalizado);
 
-            if (estadoTabuleiro == null || estadoTabuleiro.ValorQ == 0)
+            if (estadoTabuleiro.ObterValorQDouble() == 0)
             {
-                var posicoesVazias = ObterPosicoesVazias(estadoAtual);
+                _logger.LogDebug($"Estado {estadoNormalizado} tem Q=0, usando jogada aleatória");
                 return posicoesVazias[random.Next(posicoesVazias.Count)];
             }
 
             // Simular todas as jogadas possíveis e escolher a melhor
             var melhorJogada = -1;
             var melhorValorQ = double.MinValue;
+            var jogadasValidas = new List<(int posicao, double valorQ)>();
 
             for (int i = 0; i < 9; i++)
             {
@@ -61,10 +67,10 @@ namespace JogoDaVelhIA.API.Models.Servicos
                     var novoEstadoString = new string(novoEstado);
                     var estadoNormalizadoNovo = NormalizarEstado(novoEstadoString);
 
-                    var estadoNovoTabuleiro = _context.EstadosTabuleiro
-                        .FirstOrDefault(e => e.Estado == estadoNormalizadoNovo);
+                    var estadoNovoTabuleiro = ObterOuCriarEstado(estadoNormalizadoNovo);
+                    double valorQ = estadoNovoTabuleiro.ObterValorQDouble();
 
-                    double valorQ = estadoNovoTabuleiro?.ObterValorQDouble() ?? 0; // Usando o novo método
+                    jogadasValidas.Add((i, valorQ));
 
                     if (valorQ > melhorValorQ)
                     {
@@ -74,142 +80,237 @@ namespace JogoDaVelhIA.API.Models.Servicos
                 }
             }
 
-            return melhorJogada;
-        }
+            _logger.LogDebug($"Melhor jogada para {estadoAtual}: posição {melhorJogada} com Q={melhorValorQ}");
+            _logger.LogDebug($"Jogadas válidas: {string.Join(", ", jogadasValidas.Select(j => $"{j.posicao}:{j.valorQ}"))}");
 
+            return melhorJogada != -1 ? melhorJogada : posicoesVazias[random.Next(posicoesVazias.Count)];
+        }
 
         public void AtualizarQValue(string estadoAnterior, int acao, string estadoAtual, double recompensa)
         {
-            var estadoAnteriorNormalizado = NormalizarEstado(estadoAnterior);
-            var estadoAtualNormalizado = NormalizarEstado(estadoAtual);
-
-            var estadoAnteriorTabuleiro = _context.EstadosTabuleiro
-                .FirstOrDefault(e => e.Estado == estadoAnteriorNormalizado);
-
-            var estadoAtualTabuleiro = _context.EstadosTabuleiro
-                .FirstOrDefault(e => e.Estado == estadoAtualNormalizado);
-
-            if (estadoAnteriorTabuleiro == null)
+            try
             {
-                estadoAnteriorTabuleiro = new EstadoTabuleiro
+                var estadoAnteriorNormalizado = NormalizarEstado(estadoAnterior);
+                var estadoAtualNormalizado = NormalizarEstado(estadoAtual);
+
+                var estadoAnteriorTabuleiro = ObterOuCriarEstado(estadoAnteriorNormalizado);
+                var estadoAtualTabuleiro = ObterOuCriarEstado(estadoAtualNormalizado);
+
+                double qAtual = estadoAnteriorTabuleiro.ObterValorQDouble();
+                double maxQProximoEstado = estadoAtualTabuleiro.ObterValorQDouble();
+
+                // Fórmula Q-Learning: Q(s,a) ← Q(s,a) + α[r + γ·max(Q(s',a')) - Q(s,a)]
+                double novoQValue = qAtual + _taxaAprendizado * (recompensa + _fatorDesconto * maxQProximoEstado - qAtual);
+
+                estadoAnteriorTabuleiro.DefinirValorQ(novoQValue);
+                estadoAnteriorTabuleiro.DataAtualizacao = DateTime.UtcNow;
+
+                _logger.LogInformation($"Q-Value atualizado: {estadoAnteriorNormalizado} -> {novoQValue:F4} " +
+                                      $"(Q_atual: {qAtual:F4}, Recompensa: {recompensa}, " +
+                                      $"MaxQ_next: {maxQProximoEstado:F4})");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erro ao atualizar Q-Value para estado {estadoAnterior}");
+            }
+        }
+
+        public async Task TreinarIAAsync(int numeroEpisodios)
+        {
+            var random = new Random();
+            var stopwatch = Stopwatch.StartNew();
+            var episodiosComSucesso = 0;
+
+            _logger.LogInformation($"Iniciando treinamento com {numeroEpisodios} episódios");
+
+            try
+            {
+                for (int episodio = 0; episodio < numeroEpisodios; episodio++)
                 {
-                    Estado = estadoAnteriorNormalizado,
+                    try
+                    {
+                        // Iniciar nova partida
+                        var partida = new Partida
+                        {
+                            DataInicio = DateTime.UtcNow,
+                            Resultado = ResultadoPartida.EmAndamento
+                        };
+                        _context.Partidas.Add(partida);
+
+                        string estadoAtual = new string('\0', 9);
+                        var historicoJogadas = new List<(string estado, int acao, char simbolo)>();
+
+                        _logger.LogDebug($"Episódio {episodio}: Iniciando partida");
+
+                        while (true)
+                        {
+                            // Determinar quem joga (X ou O)
+                            char simboloAtual = estadoAtual.Count(c => c == 'X' || c == 'O') % 2 == 0 ? 'X' : 'O';
+
+                            int posicaoJogada;
+                            if (simboloAtual == 'X')
+                            {
+                                // Jogador X (humano simulado) faz jogada aleatória
+                                var posicoesVazias = ObterPosicoesVazias(estadoAtual);
+                                posicaoJogada = posicoesVazias[random.Next(posicoesVazias.Count)];
+                                _logger.LogDebug($"Humano (X) joga na posição {posicaoJogada}");
+                            }
+                            else
+                            {
+                                // IA (O) faz jogada usando Q-Learning
+                                posicaoJogada = ObterMelhorJogada(estadoAtual, 'O');
+                                _logger.LogDebug($"IA (O) joga na posição {posicaoJogada}");
+                            }
+
+                            // Registrar jogada
+                            var novoEstado = estadoAtual.ToCharArray();
+                            novoEstado[posicaoJogada] = simboloAtual;
+                            estadoAtual = new string(novoEstado);
+
+                            historicoJogadas.Add((estadoAtual, posicaoJogada, simboloAtual));
+
+                            _logger.LogDebug($"Estado atual: {FormatarEstado(estadoAtual)}");
+
+                            // Verificar resultado
+                            var resultado = VerificarResultado(estadoAtual);
+                            if (resultado != ResultadoPartida.EmAndamento)
+                            {
+                                partida.Resultado = resultado;
+                                partida.JogadorVencedor = resultado == ResultadoPartida.VitoriaHumano ? "Humano" :
+                                                     resultado == ResultadoPartida.VitoriaIA ? "IA" : null;
+                                partida.DataFim = DateTime.UtcNow;
+
+                                _logger.LogDebug($"Episódio {episodio} finalizado: {resultado}");
+                                break;
+                            }
+                        }
+
+                        // Atualizar Q-values com base no resultado
+                        for (int i = 0; i < historicoJogadas.Count; i++)
+                        {
+                            var (estado, acao, simbolo) = historicoJogadas[i];
+                            string proximoEstado = i < historicoJogadas.Count - 1 ? historicoJogadas[i + 1].estado : estado;
+
+                            double recompensa = 0;
+                            if (i == historicoJogadas.Count - 1) // Última jogada
+                            {
+                                recompensa = partida.Resultado == ResultadoPartida.VitoriaIA ? 1 :
+                                            partida.Resultado == ResultadoPartida.VitoriaHumano ? -1 : 0;
+                            }
+                            else if (simbolo == 'O') // Jogadas da IA que não são finais
+                            {
+                                recompensa = 0.1; // Pequena recompensa por jogadas intermediárias
+                            }
+
+                            if (simbolo == 'O') // Só atualiza Q-values para jogadas da IA
+                            {
+                                AtualizarQValue(estado, acao, proximoEstado, recompensa);
+                            }
+                        }
+
+                        episodiosComSucesso++;
+
+                        // Salvar a cada 100 episódios para melhor performance
+                        if (episodio % 100 == 0 && episodio > 0)
+                        {
+                            await _context.SaveChangesAsync();
+                            _context.ChangeTracker.Clear();
+
+                            _logger.LogInformation($"Episódio {episodio} concluído. " +
+                                                  $"Resultado: {partida.Resultado}. " +
+                                                  $"Estados no banco: {_context.EstadosTabuleiro.Count()}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Erro no episódio {episodio}");
+                    }
+                }
+
+                // Salvar quaisquer alterações restantes
+                await _context.SaveChangesAsync();
+
+                stopwatch.Stop();
+
+                _logger.LogInformation($"Treinamento concluído! " +
+                                      $"Episódios: {episodiosComSucesso}/{numeroEpisodios} " +
+                                      $"Tempo: {stopwatch.Elapsed.TotalMinutes:F2} minutos " +
+                                      $"Estados aprendidos: {_context.EstadosTabuleiro.Count()}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro durante o treinamento da IA");
+                throw;
+            }
+        }
+
+        public string NormalizarEstado(string estado)
+        {
+            try
+            {
+                // Primeiro, normalizar o estado de entrada
+                var estadoNormalizado = estado.Replace("\0", " ").Replace(",", "");
+
+                // Se o estado já está no formato com vírgulas, converter para formato sem vírgulas
+                //if (estado.Contains(','))
+                //{
+                //    estadoNormalizado = string.Join("", estado.Split(',').Select(s => s == "0" ? " " : s));
+                //}
+
+                var tabuleiro = estadoNormalizado.ToCharArray();
+
+                // Garantir que temos exatamente 9 caracteres
+                if (tabuleiro.Length != 9)
+                {
+                    tabuleiro = new char[9];
+                    Array.Fill(tabuleiro, ' ');
+                }
+
+                var simetrias = GerarSimetrias(tabuleiro);
+
+                // Converter cada simetria para string formatada corretamente
+                var simetriasFormatadas = simetrias
+                    .Select(s => string.Join(",", s.Select(c => c == ' ' ? "0" : c.ToString())))
+                    .ToList();
+
+                var estadoCanonico = simetriasFormatadas
+                    .OrderBy(s => s)
+                    .First();
+
+                _logger.LogTrace($"Estado original: {estado} -> Normalizado: {estadoCanonico}");
+
+                return estado;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erro ao normalizar estado: {estado}");
+                // Fallback: retornar estado padrão
+                return "0,0,0,0,0,0,0,0,0";
+            }
+        }
+        private EstadoTabuleiro ObterOuCriarEstado(string estadoNormalizado)
+        {
+            var estado = _context.EstadosTabuleiro
+                .FirstOrDefault(e => e.Estado == estadoNormalizado);
+
+            if (estado == null)
+            {
+                estado = new EstadoTabuleiro
+                {
+                    Estado = estadoNormalizado,
                     Vitoria = false,
                     Derrota = false,
                     Empate = false,
                     DataCriacao = DateTime.UtcNow,
                     DataAtualizacao = DateTime.UtcNow
                 };
-                estadoAnteriorTabuleiro.DefinirValorQ(0); // Usando o novo método
-                _context.EstadosTabuleiro.Add(estadoAnteriorTabuleiro);
+                estado.DefinirValorQ(0);
+                _context.EstadosTabuleiro.Add(estado);
+
+                _logger.LogDebug($"Novo estado criado: {estadoNormalizado}");
             }
 
-            double maxQProximoEstado = estadoAtualTabuleiro?.ObterValorQDouble() ?? 0; // Usando o novo método
-            double qAtual = estadoAnteriorTabuleiro.ObterValorQDouble(); // Usando o novo método
-
-            // Fórmula Q-Learning: Q(s,a) ← Q(s,a) + α[r + γ·max(Q(s',a')) - Q(s,a)]
-            double novoQValue = qAtual + _taxaAprendizado * (recompensa + _fatorDesconto * maxQProximoEstado - qAtual);
-
-            estadoAnteriorTabuleiro.DefinirValorQ(novoQValue); // Usando o novo método
-            estadoAnteriorTabuleiro.DataAtualizacao = DateTime.UtcNow;
-
-            _context.SaveChanges();
-        }
-
-        public async Task TreinarIAAsync(int numeroEpisodios)
-        {
-            var random = new Random();
-
-            for (int episodio = 0; episodio < numeroEpisodios; episodio++)
-            {
-                // Iniciar nova partida
-                var partida = new Partida
-                {
-                    DataInicio = DateTime.UtcNow,
-                    Resultado = ResultadoPartida.EmAndamento
-                };
-                _context.Partidas.Add(partida);
-
-                string estadoAtual = new string('\0', 9);
-                var historicoJogadas = new List<(string estado, int acao, char simbolo)>();
-
-                while (true)
-                {
-                    // Determinar quem joga (X ou O)
-                    char simboloAtual = estadoAtual.Count(c => c == 'X' || c == 'O') % 2 == 0 ? 'X' : 'O';
-
-                    int posicaoJogada;
-                    if (simboloAtual == 'X')
-                    {
-                        // Jogador X (humano simulado) faz jogada aleatória
-                        var posicoesVazias = ObterPosicoesVazias(estadoAtual);
-                        posicaoJogada = posicoesVazias[random.Next(posicoesVazias.Count)];
-                    }
-                    else
-                    {
-                        // IA (O) faz jogada usando Q-Learning
-                        posicaoJogada = ObterMelhorJogada(estadoAtual, 'O');
-                    }
-
-                    // Registrar jogada
-                    var novoEstado = estadoAtual.ToCharArray();
-                    novoEstado[posicaoJogada] = simboloAtual;
-                    estadoAtual = new string(novoEstado);
-
-                    historicoJogadas.Add((estadoAtual, posicaoJogada, simboloAtual));
-
-                    // Verificar resultado
-                    var resultado = VerificarResultado(estadoAtual);
-                    if (resultado != ResultadoPartida.EmAndamento)
-                    {
-                        partida.Resultado = resultado;
-                        partida.JogadorVencedor = resultado == ResultadoPartida.VitoriaHumano ? "Humano" :
-                                                 resultado == ResultadoPartida.VitoriaIA ? "IA" : null;
-                        partida.DataFim = DateTime.UtcNow;
-                        break;
-                    }
-                }
-
-                // Atualizar Q-values com base no resultado
-                for (int i = 0; i < historicoJogadas.Count; i++)
-                {
-                    var (estado, acao, simbolo) = historicoJogadas[i];
-                    string proximoEstado = i < historicoJogadas.Count - 1 ? historicoJogadas[i + 1].estado : estado;
-
-                    double recompensa = 0;
-                    if (i == historicoJogadas.Count - 1) // Última jogada
-                    {
-                        recompensa = partida.Resultado == ResultadoPartida.VitoriaIA ? 1 :
-                                    partida.Resultado == ResultadoPartida.VitoriaHumano ? -1 : 0;
-                    }
-
-                    AtualizarQValue(estado, acao, proximoEstado, recompensa);
-                }
-
-                await _context.SaveChangesAsync();
-
-                if (episodio % 100 == 0)
-                {
-                    Console.WriteLine($"Episódio {episodio} concluído. Resultado: {partida.Resultado}");
-                }
-            }
-        }
-
-        public string NormalizarEstado(string estado)
-        {
-            // Converter para formato padrão: "X,O,,X,,O,,,"
-            var tabuleiro = estado.ToCharArray();
-            var tabuleiroString = string.Join(",", tabuleiro.Select(c => c == '\0' ? "" : c.ToString()));
-
-            // Gerar todas as simetrias possíveis
-            var simetrias = GerarSimetrias(tabuleiro);
-
-            // Selecionar a representação canônica (menor valor hash)
-            var estadoCanonico = simetrias
-                .OrderBy(s => s.GetHashCode())
-                .First();
-
-            return string.Join(",", estadoCanonico.Select(c => c == '\0' ? "" : c.ToString()));
+            return estado;
         }
 
         private List<int> ObterPosicoesVazias(string estado)
@@ -364,6 +465,12 @@ namespace JogoDaVelhIA.API.Models.Servicos
             simetrias.Add(espD2);
 
             return simetrias;
+        }
+
+        private string FormatarEstado(string estado)
+        {
+            var chars = estado.ToCharArray();
+            return $"[{chars[0]}|{chars[1]}|{chars[2]}]\n[{chars[3]}|{chars[4]}|{chars[5]}]\n[{chars[6]}|{chars[7]}|{chars[8]}]";
         }
     }
 }
